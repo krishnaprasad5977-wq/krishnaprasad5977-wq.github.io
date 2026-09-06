@@ -1,8 +1,8 @@
-# krishnaprasad5977-wq.github.io
+# theinfrakraft.github.io
 
 Personal freelance portfolio site for **Krishna Prasad** — MLOps & DevOps Engineer.
 
-**Live site:** https://krishnaprasad5977-wq.github.io
+**Live site:** https://theinfrakraft.github.io
 
 ---
 
@@ -63,7 +63,7 @@ To change the email it sends to — log into web3forms.com and update the form s
 2. Commit and push:
 
 ```bash
-cd ~/Downloads/krishnaprasad5977-wq.github.io
+cd ~/Downloads/theinfrakraft.github.io
 git add index.html
 git commit -m "describe your change"
 git push
