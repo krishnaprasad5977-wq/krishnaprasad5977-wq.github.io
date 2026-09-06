@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krishna Prasad — MLOps & DevOps Engineer</title>
+  <meta name="description" content="Freelance MLOps & DevOps engineer. CI/CD pipelines, AWS infrastructure, Kubernetes, Terraform, website hosting & maintenance.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap">
+  <style>
+    :root {
+      --bg: #080F18;
+      --surface: #0D1B2A;
+      --surface2: #112236;
+      --text: #E8EDF3;
+      --text-muted: #7A90A8;
+      --text-dim: #4A6278;
+      --accent: #00BFA6;
+      --accent-dim: rgba(0,191,166,0.12);
+      --accent-border: rgba(0,191,166,0.3);
+      --divider: rgba(255,255,255,0.06);
+      --tag-bg: rgba(0,191,166,0.1);
+      --tag-text: #00BFA6;
+      --card-border: rgba(255,255,255,0.07);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(8,15,24,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--divider);
+      padding: 0 5%;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-logo span { color: var(--text-muted); font-weight: 400; }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,191,166,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .hero-eyebrow::before { content: '> '; opacity: 0.5; }
+
+    .hero-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .hero-name .accent { color: var(--accent); }
+
+    .hero-role {
+      font-size: 17px;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #080F18;
+      padding: 12px 26px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      font-family: 'IBM Plex Sans', sans-serif;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; }
+
+    .btn-outline {
+      border: 1px solid var(--accent-border);
+      color: var(--accent);
+      padding: 12px 26px;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 14px;
+      text-decoration: none;
+      font-family: 'IBM Plex Sans', sans-serif;
+      transition: background 0.2s;
+    }
+
+    .btn-outline:hover { background: var(--accent-dim); }
+
+    /* Terminal card */
+    .terminal {
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      overflow: hidden;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+    }
+
+    .terminal-bar {
+      background: var(--surface2);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FEBC2E; }
+    .dot-g { background: #28C840; }
+
+    .terminal-title {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-left: 8px;
+    }
+
+    .terminal-body {
+      padding: 20px;
+      line-height: 1.8;
+    }
+
+    .t-prompt { color: var(--accent); }
+    .t-cmd { color: var(--text); }
+    .t-out { color: var(--text-muted); padding-left: 4px; }
+    .t-key { color: #7DD3FC; }
+    .t-val { color: #86EFAC; }
+    .t-comment { color: var(--text-dim); }
+    .t-blank { height: 8px; }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 80px 5%;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--surface); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 28px 24px;
+      transition: border-color 0.2s;
+    }
+
+    .service-card:hover { border-color: var(--accent-border); }
+
+    .service-icon {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 22px;
+      color: var(--accent);
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
+    .service-name {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .service-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .stag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border: 1px solid var(--accent-border);
+      border-radius: 3px;
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 2px 8px;
+      font-weight: 500;
+    }
+
+    /* ── STACK ── */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .stack-group {
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 20px;
+    }
+
+    .stack-group-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--accent-border);
+    }
+
+    .stack-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .stack-chip {
+      background: var(--accent-dim);
+      color: var(--text-muted);
+      border-radius: 3px;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 3px 10px;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--surface); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
+
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 32px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .exp-item:last-child { border-bottom: none; }
+
+    .exp-dates {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      padding-top: 3px;
+      line-height: 1.6;
+    }
+
+    .exp-client {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+
+    .exp-title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 3px;
+    }
+
+    .exp-company {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .exp-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── CERT BADGES ── */
+    .cert-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .cert-badge {
+      background: var(--surface);
+      border: 1px solid var(--accent-border);
+      border-radius: 6px;
+      padding: 14px 20px;
+      min-width: 200px;
+    }
+
+    .cert-badge-name {
+      font-weight: 600;
+      font-size: 13.5px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .cert-badge-issuer {
+      font-size: 12px;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .cert-badge-date {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    /* ── CONTACT ── */
+    .contact-box {
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 48px;
+      max-width: 640px;
+    }
+
+    .contact-intro {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover { color: var(--accent); }
+
+    .contact-link-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      width: 70px;
+      flex-shrink: 0;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--divider);
+      padding: 24px 5%;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    footer span { color: var(--accent); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .terminal { display: none; }
+      .exp-item { grid-template-columns: 1fr; gap: 6px; }
+      .nav-links { display: none; }
+      .contact-box { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">KP<span>.dev</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">services</a></li>
+      <li><a href="#stack">stack</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">Available for freelance work</div>
+        <h1 class="hero-name">Krishna<br><span class="accent">Prasad</span></h1>
+        <div class="hero-role">MLOps · DevSecOps · CloudOps · Release Engineering</div>
+        <p class="hero-desc">
+          6+ years building CI/CD pipelines, cloud infrastructure, and ML deployment platforms.
+          Currently at Sony India (via Neurealm). AWS Certified Solutions Architect.
+          Available for freelance DevOps, cloud setup, and website hosting projects.
+        </p>
+        <div class="hero-ctas">
+          <a href="#services" class="btn-primary">View Services</a>
+          <a href="#contact" class="btn-outline">Get in Touch</a>
+        </div>
+      </div>
+
+      <!-- Terminal -->
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="dot dot-r"></div>
+          <div class="dot dot-y"></div>
+          <div class="dot dot-g"></div>
+          <div class="terminal-title">krishnaprasad ~ profile.sh</div>
+        </div>
+        <div class="terminal-body">
+          <div><span class="t-prompt">$ </span><span class="t-cmd">cat profile.json</span></div>
+          <div class="t-blank"></div>
+          <div><span class="t-comment">{</span></div>
+          <div>&nbsp;&nbsp;<span class="t-key">"name"</span><span class="t-comment">:</span> <span class="t-val">"Krishna Prasad"</span><span class="t-comment">,</span></div>
+          <div>&nbsp;&nbsp;<span class="t-key">"role"</span><span class="t-comment">:</span> <span class="t-val">"MLOps & DevOps Engineer"</span><span class="t-comment">,</span></div>
+          <div>&nbsp;&nbsp;<span class="t-key">"experience"</span><span class="t-comment">:</span> <span class="t-val">"6+ years"</span><span class="t-comment">,</span></div>
+          <div>&nbsp;&nbsp;<span class="t-key">"location"</span><span class="t-comment">:</span> <span class="t-val">"Bangalore / Chennai"</span><span class="t-comment">,</span></div>
+          <div>&nbsp;&nbsp;<span class="t-key">"certified"</span><span class="t-comment">:</span> <span class="t-val">"AWS Solutions Architect"</span><span class="t-comment">,</span></div>
+          <div>&nbsp;&nbsp;<span class="t-key">"stack"</span><span class="t-comment">: [</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-val">"Databricks"</span><span class="t-comment">,</span> <span class="t-val">"Kubernetes"</span><span class="t-comment">,</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-val">"Terraform"</span><span class="t-comment">,</span> <span class="t-val">"Jenkins"</span><span class="t-comment">,</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-val">"AWS"</span><span class="t-comment">,</span> <span class="t-val">"Docker"</span><span class="t-comment">,</span> <span class="t-val">"MLflow"</span></div>
+          <div>&nbsp;&nbsp;<span class="t-comment">],</span></div>
+          <div>&nbsp;&nbsp;<span class="t-key">"available"</span><span class="t-comment">:</span> <span class="t-val">true</span></div>
+          <div><span class="t-comment">}</span></div>
+          <div class="t-blank"></div>
+          <div><span class="t-prompt">$ </span><span class="t-cmd">_</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-inner">
+      <div class="section-eyebrow">// what I offer</div>
+      <h2 class="section-title">Freelance Services</h2>
+      <p class="section-sub">Practical DevOps and cloud work for startups, small teams, and businesses that need reliable infrastructure without a full-time hire.</p>
+
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-icon">⚙</div>
+          <div class="service-name">CI/CD Pipeline Setup</div>
+          <div class="service-desc">Build automated pipelines from scratch — code push to production deploy, with test gates, security checks, and notifications. One-time setup or ongoing maintenance.</div>
+          <div class="service-tags">
+            <span class="stag">Jenkins</span>
+            <span class="stag">GitHub Actions</span>
+            <span class="stag">Azure DevOps</span>
+            <span class="stag">GitLab CI</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">☁</div>
+          <div class="service-name">AWS Cloud Setup</div>
+          <div class="service-desc">Set up your AWS environment the right way — VPC, IAM roles, EC2/ECS/EKS, S3, and security groups. Infrastructure as code with Terraform so everything is repeatable.</div>
+          <div class="service-tags">
+            <span class="stag">AWS</span>
+            <span class="stag">Terraform</span>
+            <span class="stag">EC2</span>
+            <span class="stag">ECS</span>
+            <span class="stag">IAM</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🌐</div>
+          <div class="service-name">Website Hosting & Maintenance</div>
+          <div class="service-desc">Get your website live on AWS — domain setup, SSL certificates, CDN, and monitoring. Monthly maintenance plans available for uptime, backups, and updates.</div>
+          <div class="service-tags">
+            <span class="stag">AWS S3</span>
+            <span class="stag">CloudFront</span>
+            <span class="stag">Route53</span>
+            <span class="stag">SSL</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🐳</div>
+          <div class="service-name">Docker & Kubernetes</div>
+          <div class="service-desc">Containerise your application, set up Kubernetes clusters, write Helm charts, and configure auto-scaling. Move from bare metal or VMs to containers cleanly.</div>
+          <div class="service-tags">
+            <span class="stag">Docker</span>
+            <span class="stag">Kubernetes</span>
+            <span class="stag">Helm</span>
+            <span class="stag">EKS</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🔒</div>
+          <div class="service-name">DevSecOps & Security Scanning</div>
+          <div class="service-desc">Integrate security into your pipeline — SAST, DAST, dependency scanning, and secrets detection. Built-in, not bolted on. Compliance-ready for enterprise clients.</div>
+          <div class="service-tags">
+            <span class="stag">Checkmarx</span>
+            <span class="stag">SonarQube</span>
+            <span class="stag">Qualys</span>
+            <span class="stag">CodeQL</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">📊</div>
+          <div class="service-name">Monitoring & Observability</div>
+          <div class="service-desc">Set up Prometheus and Grafana dashboards for your infrastructure and applications. Know about problems before your users do.</div>
+          <div class="service-tags">
+            <span class="stag">Prometheus</span>
+            <span class="stag">Grafana</span>
+            <span class="stag">CloudWatch</span>
+            <span class="stag">Alerts</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section id="stack">
+    <div class="section-inner">
+      <div class="section-eyebrow">// tools & technologies</div>
+      <h2 class="section-title">Tech Stack</h2>
+      <p class="section-sub">Production-grade tools used daily across real client environments.</p>
+
+      <div class="stack-grid">
+        <div class="stack-group">
+          <div class="stack-group-label">MLOps</div>
+          <div class="stack-items">
+            <span class="stack-chip">Databricks</span>
+            <span class="stack-chip">MLflow</span>
+            <span class="stack-chip">Seldon</span>
+            <span class="stack-chip">Load Testing</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Infra & Containers</div>
+          <div class="stack-items">
+            <span class="stack-chip">Terraform</span>
+            <span class="stack-chip">Ansible</span>
+            <span class="stack-chip">Docker</span>
+            <span class="stack-chip">Kubernetes</span>
+            <span class="stack-chip">Helm</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">CI/CD</div>
+          <div class="stack-items">
+            <span class="stack-chip">Jenkins</span>
+            <span class="stack-chip">Azure DevOps</span>
+            <span class="stack-chip">GitHub Actions</span>
+            <span class="stack-chip">GitLab CI</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Cloud — AWS</div>
+          <div class="stack-items">
+            <span class="stack-chip">EKS</span>
+            <span class="stack-chip">ECS</span>
+            <span class="stack-chip">EC2</span>
+            <span class="stack-chip">S3</span>
+            <span class="stack-chip">IAM</span>
+            <span class="stack-chip">VPC</span>
+            <span class="stack-chip">CDK</span>
+            <span class="stack-chip">CloudFormation</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Security</div>
+          <div class="stack-items">
+            <span class="stack-chip">Checkmarx</span>
+            <span class="stack-chip">Qualys</span>
+            <span class="stack-chip">Invicti</span>
+            <span class="stack-chip">SonarQube</span>
+            <span class="stack-chip">CodeQL</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Languages</div>
+          <div class="stack-items">
+            <span class="stack-chip">Python</span>
+            <span class="stack-chip">Shell</span>
+            <span class="stack-chip">Groovy</span>
+            <span class="stack-chip">Scala</span>
+            <span class="stack-chip">YAML</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-inner">
+      <div class="section-eyebrow">// where I've worked</div>
+      <h2 class="section-title">Experience</h2>
+      <p class="section-sub">6+ years across MLOps, DevSecOps, and cloud engineering in production environments.</p>
+
+      <div class="exp-list">
+
+        <div class="exp-item">
+          <div>
+            <div class="exp-dates">Mar 2026<br>Present</div>
+            <div class="exp-client">Sony India Software Centre</div>
+          </div>
+          <div>
+            <div class="exp-title">MLOps Engineer</div>
+            <div class="exp-company">Neurealm · Bengaluru</div>
+            <div class="exp-desc">ML model validation and deployment at Sony India. Design E2E load tests, build observability for model performance (throughput, latency, error rates), and automate test suites using Databricks, MLflow, and Seldon on AWS.</div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div>
+            <div class="exp-dates">Sep 2025<br>Mar 2026</div>
+            <div class="exp-client">Athena Health</div>
+          </div>
+          <div>
+            <div class="exp-title">Software Release Engineer</div>
+            <div class="exp-company">Neurealm · Chennai</div>
+            <div class="exp-desc">End-to-end release coordination for Athena Health's Rules 2.0 initiative. Built Jenkins/Azure DevOps pipelines, operated Amazon ECS, led Git branching strategy, and established release runbooks to reduce MTTR.</div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div>
+            <div class="exp-dates">Mar 2023<br>Jul 2025</div>
+            <div class="exp-client">Trane Technologies</div>
+          </div>
+          <div>
+            <div class="exp-title">DevSecOps Engineer</div>
+            <div class="exp-company">Horizontal Integration India Pvt Ltd · Chennai</div>
+            <div class="exp-desc">Built DevSecOps practice integrating Checkmarx, Qualys, and Invicti into CI/CD pipelines. Hardened AWS workloads with Terraform IaC, maintained Jenkins/Azure DevOps pipelines, and drove security standards across release cycles.</div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div>
+            <div class="exp-dates">Sep 2020<br>Oct 2021</div>
+          </div>
+          <div>
+            <div class="exp-title">Cloud & DevOps Engineer</div>
+            <div class="exp-company">Adrola Software Technologies · Bengaluru</div>
+            <div class="exp-desc">Built Jenkins pipelines, Terraform IaC, Docker containers, and early Kubernetes adoption. Authored Ansible playbooks and managed AWS EC2, S3, and IAM resources.</div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div>
+            <div class="exp-dates">Aug 2018<br>Sep 2020</div>
+          </div>
+          <div>
+            <div class="exp-title">Associate Engineer — Build & Release</div>
+            <div class="exp-company">WNS Global Services · Visakhapatnam</div>
+            <div class="exp-desc">CI/CD via AWS CodePipeline, CloudFormation and Terraform provisioning, Maven repo management, and Git workflow training for development teams.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Certs -->
+      <div style="margin-top: 48px;">
+        <div class="section-eyebrow" style="margin-bottom:14px">// certifications</div>
+        <div class="cert-row">
+          <div class="cert-badge">
+            <div class="cert-badge-name">AWS Solutions Architect – Associate</div>
+            <div class="cert-badge-issuer">Amazon Web Services</div>
+            <div class="cert-badge-date">Aug 2025 – Aug 2028</div>
+          </div>
+          <div class="cert-badge">
+            <div class="cert-badge-name">GitHub Copilot for Developers</div>
+            <div class="cert-badge-issuer">Microsoft Press / LinkedIn</div>
+            <div class="cert-badge-date">Apr 2026</div>
+          </div>
+          <div class="cert-badge">
+            <div class="cert-badge-name">ML with ChatGPT: Image Classification</div>
+            <div class="cert-badge-issuer">Coursera</div>
+            <div class="cert-badge-date">Apr 2026</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-eyebrow">// let's work together</div>
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="contact-box">
+        <p class="contact-intro">
+          Looking for DevOps help, cloud infrastructure setup, or website hosting on AWS?
+          I take on freelance projects alongside my full-time role. Drop me a message and I'll get back within 24 hours.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:krishnaprasad5977@gmail.com" class="contact-link">
+            <span class="contact-link-label">EMAIL</span>
+            krishnaprasad5977@gmail.com
+          </a>
+          <a href="tel:+918148656971" class="contact-link">
+            <span class="contact-link-label">PHONE</span>
+            +91 8148656971
+          </a>
+          <a href="https://www.linkedin.com/in/krishna-prasad-15b555375/" target="_blank" class="contact-link">
+            <span class="contact-link-label">LINKEDIN</span>
+            linkedin.com/in/krishna-prasad-15b555375
+          </a>
+          <a href="https://github.com/krishnaprasad5977-wq" target="_blank" class="contact-link">
+            <span class="contact-link-label">GITHUB</span>
+            github.com/krishnaprasad5977-wq
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Krishna Prasad</span> · MLOps & DevOps Engineer · Bangalore / Chennai
+  </footer>
+
+</body>
+</html>
