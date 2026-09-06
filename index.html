@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InfraKraft — Websites, Apps & Tech Services</title>
   <meta name="description" content="InfraKraft — Business websites, mobile apps, digital marketing, DevOps setup, and tech tutoring. Based in Bangalore / Chennai. WhatsApp for a free quote.">
+  <meta property="og:title" content="InfraKraft — Websites, Apps & Tech Services">
+  <meta property="og:description" content="Business websites, mobile apps, digital marketing, DevOps, AI, and tech tutoring. Based in Bangalore / Chennai. WhatsApp for a free quote.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://theinfrakraft.github.io">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="InfraKraft — Websites, Apps & Tech Services">
+  <meta name="twitter:description" content="Business websites, apps, DevOps, AI and tech tutoring. Bangalore / Chennai.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap">
   <style>
@@ -38,6 +46,15 @@
     .nav-links a:hover { color: var(--text); }
     .nav-cta { background: var(--accent) !important; color: white !important; padding: 8px 18px; border-radius: 6px; font-weight: 600 !important; }
     .nav-cta:hover { opacity: 0.88; }
+
+    /* HAMBURGER */
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.25s; }
+    .mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--divider); z-index: 99; padding: 16px 5% 20px; flex-direction: column; gap: 4px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; padding: 10px 0; border-bottom: 1px solid var(--divider); }
+    .mobile-menu a:last-child { border-bottom: none; color: var(--accent); font-weight: 700; margin-top: 4px; }
+    @media (max-width: 960px) { .nav-hamburger { display: flex; } }
 
     /* WA FLOAT */
     .wa-float { position: fixed; bottom: 28px; right: 28px; z-index: 200; background: var(--wa); color: white; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 24px; box-shadow: 0 4px 16px rgba(37,211,102,0.4); transition: transform 0.2s; }
@@ -158,21 +175,6 @@
 
     /* EXPERIENCE */
     #experience { background: var(--bg); }
-    .exp-list { display: flex; flex-direction: column; border: 1px solid var(--divider); border-radius: 12px; overflow: hidden; margin-bottom: 32px; }
-    .exp-item { display: grid; grid-template-columns: 160px 1fr; border-bottom: 1px solid var(--divider); }
-    .exp-item:last-child { border-bottom: none; }
-    .exp-left { background: var(--surface); padding: 22px 18px; border-right: 1px solid var(--divider); }
-    .exp-right { padding: 22px 26px; background: var(--surface); }
-    .exp-dates { font-size: 11.5px; font-weight: 600; color: var(--accent); margin-bottom: 3px; }
-    .exp-client { font-size: 11.5px; color: var(--text-light); }
-    .exp-title { font-weight: 600; font-size: 14.5px; margin-bottom: 3px; }
-    .exp-company { font-size: 12.5px; color: var(--text-muted); margin-bottom: 8px; }
-    .exp-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
-    .cert-row { display: flex; flex-wrap: wrap; gap: 10px; }
-    .cert-item { background: var(--surface); border: 1px solid var(--divider); border-radius: 8px; padding: 13px 16px; display: flex; align-items: flex-start; gap: 10px; }
-    .cert-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 4px; }
-    .cert-name { font-weight: 600; font-size: 12.5px; }
-    .cert-issuer { font-size: 11.5px; color: var(--text-light); margin-top: 2px; }
 
     /* FAQ */
     #faq { background: var(--surface); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
@@ -233,11 +235,9 @@
     .hero-audiences { animation: fadeUp 0.7s 0.3s ease both; }
     .hero-ctas { animation: fadeUp 0.7s 0.4s ease both; }
     .hero-stats { animation: fadeUp 0.7s 0.5s ease both; }
-    .hero-card { animation: fadeUp 0.8s 0.3s ease both; }
-
     .cursor { display:inline-block; width:3px; height:1em; background:var(--accent); margin-left:2px; vertical-align:text-bottom; animation: blink 1s step-end infinite; }
 
-    .hero-card { animation: fadeUp 0.8s 0.3s ease both, float 4s 1s ease-in-out infinite; }
+    .hero-card { animation: fadeUp 0.8s 0.3s ease both, float 4s 1.1s ease-in-out infinite; }
 
     /* Scroll reveal */
     .reveal { opacity:0; transform:translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -264,6 +264,10 @@
     /* Gradient shimmer on hero */
     .hero::before { content:''; position:absolute; top:0; left:0; right:0; height:100%; background: radial-gradient(ellipse at 70% 50%, rgba(27,79,216,0.04) 0%, transparent 70%); pointer-events:none; }
     .hero { position:relative; overflow:hidden; }
+
+    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 36px; }
+    @media (max-width: 600px) { .trust-grid { grid-template-columns: 1fr !important; } }
+    @media (max-width: 960px) { .trust-grid { grid-template-columns: repeat(3, 1fr); } }
 
     /* RESPONSIVE */
     @media (max-width: 960px) {
@@ -298,7 +302,29 @@
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
     </ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#services" onclick="closeMobileMenu()">Services</a>
+    <a href="#portfolio" onclick="closeMobileMenu()">Work</a>
+    <a href="#ai-services" onclick="closeMobileMenu()">AI</a>
+    <a href="#tutoring" onclick="closeMobileMenu()">Tutoring</a>
+    <a href="#experience" onclick="closeMobileMenu()">About</a>
+    <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="#contact" onclick="closeMobileMenu()">Get a Quote →</a>
+  </div>
+
+  <script>
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    }
+    function closeMobileMenu() {
+      document.getElementById('mobile-menu').classList.remove('open');
+    }
+  </script>
 
   <a href="https://wa.me/919989128449?text=Hi%2C%20I%20found%20InfraKraft%20and%20I%27m%20interested%20in%20your%20services." class="wa-float" target="_blank" title="Chat on WhatsApp">💬</a>
 
@@ -335,7 +361,7 @@
           <div class="hcs-item"><div class="hcs-icon">📣</div><div class="hcs-name">Digital Marketing</div><div class="hcs-for">Instagram, YouTube</div></div>
           <div class="hcs-item"><div class="hcs-icon">🎓</div><div class="hcs-name">DevOps Tutoring</div><div class="hcs-for">Students & freshers</div></div>
         </div>
-        <div class="hero-card-cert" style="background:var(--accent-light); border:1px solid var(--accent-border); border-radius:8px; padding:11px 14px; display:flex; align-items:center; gap:11px;">
+        <div class="hero-card-cert">
           <div class="cert-icon">🏅</div>
           <div><div class="cert-name">AWS Certified · 6+ Years Experience</div><div class="cert-sub">Available for freelance · Bangalore / Chennai</div></div>
         </div>
@@ -400,7 +426,7 @@
             <div class="service-tags"><span class="stag">Remote</span><span class="stag">Windows</span><span class="stag">Mac</span></div>
           </div>
           <div class="service-card">
-            <div class="service-icon">📱</div>
+            <div class="service-icon">📅</div>
             <div class="service-name">Social Media Management</div>
             <div class="service-desc">Monthly management of your Instagram, Facebook, LinkedIn — content calendar, posts, captions, basic engagement. Build your audience consistently.</div>
             <div class="service-tags"><span class="stag">Instagram</span><span class="stag">Facebook</span><span class="stag">LinkedIn</span></div>
@@ -553,7 +579,7 @@
       <div class="tutor-intro">
         <div>
           <p style="font-size:15px; color:var(--text-muted); line-height:1.8; margin-bottom:20px;">
-            Learn DevOps, cloud, and infrastructure from someone who uses these tools in production every day at Sony &amp; Athena Health — not just a trainer reading slides.
+            Learn DevOps, cloud, and infrastructure from someone who uses these tools in production every day across enterprise and healthcare tech — not just a trainer reading slides.
           </p>
           <div class="tutor-why">
             <div class="tutor-why-title">What you get</div>
@@ -669,7 +695,7 @@
       <div class="section-eyebrow">Credentials</div>
       <h2 class="section-title">Why Trust InfraKraft</h2>
       <p class="section-sub">6+ years of hands-on experience across enterprise tech, healthcare, and cloud engineering — delivered by a certified professional.</p>
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:36px;" class="trust-grid">
+      <div class="trust-grid">
         <div style="background:var(--surface); border:1px solid var(--divider); border-radius:10px; padding:24px; text-align:center;">
           <div style="font-family:'Playfair Display',serif; font-size:36px; font-weight:700; color:var(--accent); line-height:1;">6+</div>
           <div style="font-size:13px; color:var(--text-muted); margin-top:6px;">Years of production experience</div>
@@ -715,7 +741,7 @@
         </div>
         <div class="faq-item">
           <div class="faq-q">What payment methods do you accept?</div>
-          <div class="faq-a">UPI, GPay, PhonePe, or bank transfer. I take 50% advance to start work and the remaining 50% on final delivery. For tutoring, each session is paid before it starts.</div>
+          <div class="faq-a">UPI, GPay, PhonePe, or bank transfer. I take 50% advance to start work and the remaining 50% on final delivery. For tutoring, payment is per course, collected before the course begins.</div>
         </div>
       </div>
     </div>
@@ -744,7 +770,7 @@
               <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="you@example.com" required></div>
             </div>
             <div class="form-row">
-              <div class="form-group"><label>Phone / WhatsApp</label><input type="text" name="phone" placeholder="+91 98765 43210"></div>
+              <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" name="phone" placeholder="+91 98765 43210"></div>
               <div class="form-group">
                 <label>I'm looking for</label>
                 <select name="service">
@@ -760,6 +786,7 @@
                   <option>Custom Web App</option>
                   <option>Cloud &amp; DevOps Setup</option>
                   <option>Security Audit</option>
+                  <option>AI for My Business</option>
                   <option>Tech Tutoring</option>
                   <option>Internship Mentorship</option>
                   <option>Not sure — help me decide</option>
@@ -775,14 +802,19 @@
               e.preventDefault();
               const btn = document.getElementById('form-btn');
               btn.textContent = 'Sending...'; btn.disabled = true;
-              const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(this) });
-              const data = await res.json();
-              if (data.success) {
-                document.getElementById('form-success').hidden = false;
-                this.hidden = true;
-              } else {
+              try {
+                const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(this) });
+                const data = await res.json();
+                if (data.success) {
+                  document.getElementById('form-success').hidden = false;
+                  this.hidden = true;
+                } else {
+                  btn.textContent = 'Send Message'; btn.disabled = false;
+                  alert('Something went wrong. Please WhatsApp me directly.');
+                }
+              } catch (err) {
                 btn.textContent = 'Send Message'; btn.disabled = false;
-                alert('Something went wrong. Please WhatsApp me directly.');
+                alert('Could not send — check your connection or WhatsApp me directly at +91 9989128449.');
               }
             });
           </script>
@@ -818,13 +850,13 @@
   </section>
 
   <footer>
-    <strong>InfraKraft</strong> &nbsp;·&nbsp; Websites · Apps · Cloud · Tutoring &nbsp;·&nbsp; Bangalore / Chennai &nbsp;·&nbsp;
+    <strong>InfraKraft</strong> &nbsp;·&nbsp; Websites · Apps · AI · Marketing · Cloud · Tutoring &nbsp;·&nbsp; Bangalore / Chennai &nbsp;·&nbsp;
     <a href="mailto:krishnaprasad5977@gmail.com">krishnaprasad5977@gmail.com</a>
   </footer>
 
   <script>
     /* ── Scroll reveal ── */
-    const revealEls = document.querySelectorAll('.section-inner > *, .services-grid > *, .portfolio-grid > *, .tutor-grid > *, .steps-grid > *, .faq-grid > *, .exp-list, .cert-row, .audience-block, .tutor-intro, .contact-grid');
+    const revealEls = document.querySelectorAll('.section-inner > *, .services-grid > *, .portfolio-grid > *, .tutor-grid > *, .steps-grid > *, .faq-grid > *, .trust-grid > *, .audience-block, .tutor-intro, .contact-grid');
     revealEls.forEach((el, i) => {
       el.classList.add('reveal');
       if (i % 4 === 1) el.classList.add('reveal-delay-1');
@@ -1053,12 +1085,14 @@
       document.getElementById('ik-input-row').style.display = 'none';
       if (!ikSubmitted) {
         ikSubmitted = true;
-        ikTyping(() => ikAddMsg("✅ Got it! Our agent will reach out to you within a few hours. You can also WhatsApp us directly at +91 9989128449 for a faster response.", 'bot', () => {
+        const waText = encodeURIComponent('Hi, I just used the InfraKraft chat. My details: ' + val + '. Please get back to me.');
+        ikTyping(() => ikAddMsg("✅ Got it! Tap the button below to send this to WhatsApp — our agent will reply within a few hours.", 'bot', () => {
           const c = document.getElementById('ik-options');
           const b = document.createElement('button');
           b.className = 'ik-opt';
-          b.textContent = '💬 Open WhatsApp';
-          b.onclick = () => window.open('https://wa.me/919989128449?text=Hi%2C%20I%20just%20chatted%20on%20InfraKraft%20and%20I%27d%20like%20to%20discuss%20further.', '_blank');
+          b.textContent = '💬 Send to WhatsApp';
+          b.style.background = '#F0FDF4'; b.style.borderColor = 'rgba(37,211,102,0.4)'; b.style.color = '#15803D';
+          b.onclick = () => window.open('https://wa.me/919989128449?text=' + waText, '_blank');
           c.appendChild(b);
         }));
       }
