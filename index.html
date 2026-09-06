@@ -215,6 +215,12 @@
     footer a { color: rgba(255,255,255,0.45); text-decoration: none; }
     footer a:hover { color: white; }
 
+    .ai-card { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:24px; transition:background 0.2s, transform 0.25s; }
+    .ai-card:hover { background:rgba(255,255,255,0.1); transform:translateY(-4px); }
+    .ai-tag { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.7); border-radius:4px; font-size:11px; font-weight:500; padding:3px 9px; }
+    @media (max-width:960px) { .ai-grid { grid-template-columns:1fr 1fr !important; } }
+    @media (max-width:600px) { .ai-grid { grid-template-columns:1fr !important; } }
+
     /* ── ANIMATIONS ── */
     @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
     @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
@@ -286,6 +292,7 @@
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#portfolio">Work</a></li>
+      <li><a href="#ai-services">AI</a></li>
       <li><a href="#tutoring">Tutoring</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
@@ -469,6 +476,71 @@
       <p style="text-align:center; margin-top:28px; font-size:13px; color:var(--text-light);">
         Want to see more? <a href="https://wa.me/919989128449?text=Hi%2C%20can%20I%20see%20more%20of%20your%20work%3F" target="_blank" style="color:var(--accent); text-decoration:none; font-weight:600;">Ask on WhatsApp</a>
       </p>
+    </div>
+  </section>
+
+  <!-- AI SERVICES -->
+  <section id="ai-services" style="background:var(--text); color:white;">
+    <div class="section-inner">
+      <div style="font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:8px;">New · Powered by AI</div>
+      <h2 style="font-family:'Playfair Display',serif; font-size:clamp(24px,3vw,34px); font-weight:700; margin-bottom:12px; letter-spacing:-0.02em; line-height:1.15; color:white;">AI for Your Business</h2>
+      <p style="font-size:15px; color:rgba(255,255,255,0.6); max-width:500px; margin-bottom:48px; line-height:1.75;">Your own AI — trained on your business, your products, your tone. Not a generic chatbot. An assistant that actually knows what you sell and how you work.</p>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;" class="ai-grid">
+        <div class="ai-card">
+          <div style="font-size:28px; margin-bottom:14px;">🤖</div>
+          <div style="font-weight:600; font-size:15px; margin-bottom:8px; color:white;">AI Chatbot for Your Website</div>
+          <div style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.7; margin-bottom:16px;">A chat widget on your website that answers customer questions 24/7 — product details, pricing, booking, FAQs — trained specifically on your business. No generic replies.</div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            <span class="ai-tag">Always On</span><span class="ai-tag">Custom Trained</span><span class="ai-tag">Your Brand Voice</span>
+          </div>
+        </div>
+        <div class="ai-card">
+          <div style="font-size:28px; margin-bottom:14px;">💬</div>
+          <div style="font-weight:600; font-size:15px; margin-bottom:8px; color:white;">WhatsApp AI Assistant</div>
+          <div style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.7; margin-bottom:16px;">AI that replies to your customers on WhatsApp automatically — order queries, appointment confirmations, catalogue requests. Handles the repetitive stuff so you don't have to.</div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            <span class="ai-tag">WhatsApp API</span><span class="ai-tag">Auto-Reply</span><span class="ai-tag">Order Handling</span>
+          </div>
+        </div>
+        <div class="ai-card">
+          <div style="font-size:28px; margin-bottom:14px;">📊</div>
+          <div style="font-weight:600; font-size:15px; margin-bottom:8px; color:white;">AI Business Automation</div>
+          <div style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.7; margin-bottom:16px;">Automate repetitive tasks — customer follow-ups, invoice reminders, lead scoring, report generation. Connect your tools (Google Sheets, CRM, email) and let AI do the routine work.</div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            <span class="ai-tag">Automation</span><span class="ai-tag">Integrations</span><span class="ai-tag">Save Hours/Week</span>
+          </div>
+        </div>
+        <div class="ai-card">
+          <div style="font-size:28px; margin-bottom:14px;">🛍️</div>
+          <div style="font-weight:600; font-size:15px; margin-bottom:8px; color:white;">AI Product Recommender</div>
+          <div style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.7; margin-bottom:16px;">For e-commerce and retail — an AI that recommends products based on what a customer is looking for, their budget, and past behaviour. More conversions, less browsing.</div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            <span class="ai-tag">E-Commerce</span><span class="ai-tag">Personalised</span><span class="ai-tag">Higher Conversions</span>
+          </div>
+        </div>
+        <div class="ai-card">
+          <div style="font-size:28px; margin-bottom:14px;">✍️</div>
+          <div style="font-weight:600; font-size:15px; margin-bottom:8px; color:white;">AI Content & Social Posts</div>
+          <div style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.7; margin-bottom:16px;">AI that writes Instagram captions, Facebook posts, YouTube descriptions, and WhatsApp broadcast messages in your tone — generate a week of content in minutes.</div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            <span class="ai-tag">Instagram</span><span class="ai-tag">YouTube</span><span class="ai-tag">Your Tone</span>
+          </div>
+        </div>
+        <div class="ai-card" style="background:rgba(27,79,216,0.25); border-color:rgba(27,79,216,0.5);">
+          <div style="font-size:28px; margin-bottom:14px;">⚡</div>
+          <div style="font-weight:600; font-size:15px; margin-bottom:8px; color:white;">Custom AI for Your Business</div>
+          <div style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.7; margin-bottom:16px;">Have a specific use case? I'll build a custom AI solution around it — internal knowledge base, document Q&A, AI-powered search, or anything else. Tell me the problem.</div>
+          <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20a%20custom%20AI%20solution%20for%20my%20business." target="_blank" style="display:inline-block; background:var(--accent); color:white; padding:10px 20px; border-radius:6px; font-size:13px; font-weight:600; text-decoration:none;">💬 Discuss Your Idea</a>
+        </div>
+      </div>
+      <div style="margin-top:36px; padding:20px 24px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+        <div style="font-size:22px;">💡</div>
+        <div style="flex:1; min-width:200px;">
+          <div style="font-weight:600; font-size:14px; color:white; margin-bottom:4px;">Not sure what AI can do for your business?</div>
+          <div style="font-size:13px; color:rgba(255,255,255,0.55);">WhatsApp me and describe your business in 2 lines — I'll tell you exactly what's possible and what it would cost.</div>
+        </div>
+        <a href="https://wa.me/919989128449?text=Hi%2C%20I%20want%20to%20know%20how%20AI%20can%20help%20my%20business." target="_blank" style="background:var(--wa); color:white; padding:11px 22px; border-radius:6px; font-size:14px; font-weight:600; text-decoration:none; white-space:nowrap;">💬 Ask on WhatsApp</a>
+      </div>
     </div>
   </section>
 
