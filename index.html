@@ -687,14 +687,27 @@
 
         <div class="contact-form">
           <div class="form-title">Send me your requirements</div>
-          <form action="https://formspree.io/f/krishnaprasad5977@gmail.com" method="POST">
+          <div id="form-success" hidden style="background: rgba(0,191,166,0.1); border: 1px solid var(--accent-border); border-radius: 6px; padding: 20px; text-align: center; margin-bottom: 16px;">
+            <div style="font-size: 24px; margin-bottom: 8px;">✅</div>
+            <div style="font-weight: 600; margin-bottom: 4px;">Message sent!</div>
+            <div style="font-size: 13px; color: var(--text-muted);">I'll get back to you within 24 hours.</div>
+          </div>
+          <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="5965f5c5-0c64-4497-82dc-ec00be9b3379">
+            <input type="hidden" name="subject" value="New enquiry from KP Portfolio Site">
+            <input type="hidden" name="from_name" value="KP Portfolio">
+            <input type="checkbox" name="botcheck" style="display:none">
             <div class="form-group">
               <label>Your Name</label>
               <input type="text" name="name" placeholder="Rajesh Kumar" required>
             </div>
             <div class="form-group">
-              <label>Email or Phone</label>
-              <input type="text" name="contact" placeholder="email or WhatsApp number" required>
+              <label>Email</label>
+              <input type="email" name="email" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+              <label>Phone / WhatsApp</label>
+              <input type="text" name="phone" placeholder="+91 98765 43210">
             </div>
             <div class="form-group">
               <label>Service Needed</label>
@@ -705,7 +718,7 @@
                 <option>Custom Web App</option>
                 <option>AWS Cloud Setup</option>
                 <option>CI/CD Pipeline</option>
-                <option>Monitoring & Alerts</option>
+                <option>Monitoring &amp; Alerts</option>
                 <option>Tech Tutoring</option>
                 <option>Other / Not sure</option>
               </select>
@@ -714,9 +727,30 @@
               <label>Tell me about your project</label>
               <textarea name="message" placeholder="What do you need? Any deadlines or budget in mind?"></textarea>
             </div>
-            <button type="submit" class="form-submit">Send Message</button>
+            <button type="submit" class="form-submit" id="form-btn">Send Message</button>
             <p class="form-note">I'll reply within 24 hours · Or WhatsApp for a faster response</p>
           </form>
+          <script>
+            document.getElementById('contact-form').addEventListener('submit', async function(e) {
+              e.preventDefault();
+              const btn = document.getElementById('form-btn');
+              btn.textContent = 'Sending...';
+              btn.disabled = true;
+              const res = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: new FormData(this)
+              });
+              const data = await res.json();
+              if (data.success) {
+                document.getElementById('form-success').hidden = false;
+                this.hidden = true;
+              } else {
+                btn.textContent = 'Send Message';
+                btn.disabled = false;
+                alert('Something went wrong. Please WhatsApp me directly.');
+              }
+            });
+          </script>
         </div>
 
         <div class="contact-info">
