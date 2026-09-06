@@ -896,5 +896,187 @@
     if (statsEl) statsObserver.observe(statsEl);
   </script>
 
+  <!-- ── HELPDESK CHATBOT ── -->
+  <style>
+    #ik-chat-bubble { position:fixed; bottom:90px; right:28px; z-index:300; }
+    #ik-chat-btn { width:52px; height:52px; border-radius:50%; background:var(--accent); color:white; border:none; font-size:22px; cursor:pointer; box-shadow:0 4px 16px rgba(27,79,216,0.4); transition:transform 0.2s; display:flex; align-items:center; justify-content:center; }
+    #ik-chat-btn:hover { transform:scale(1.08); }
+    #ik-chat-badge { position:absolute; top:-4px; right:-4px; background:#EF4444; color:white; font-size:10px; font-weight:700; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+    #ik-chat-window { position:fixed; bottom:152px; right:28px; z-index:300; width:320px; background:white; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.15); border:1px solid var(--divider); overflow:hidden; display:none; flex-direction:column; max-height:460px; font-family:'Inter',sans-serif; }
+    #ik-chat-window.open { display:flex; animation:fadeUp 0.25s ease; }
+    .ik-header { background:var(--accent); padding:16px 18px; display:flex; align-items:center; gap:12px; }
+    .ik-avatar { width:36px; height:36px; background:rgba(255,255,255,0.2); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+    .ik-header-name { font-weight:600; font-size:14px; color:white; }
+    .ik-header-status { font-size:11px; color:rgba(255,255,255,0.7); }
+    .ik-close { margin-left:auto; background:none; border:none; color:rgba(255,255,255,0.7); font-size:18px; cursor:pointer; padding:2px 6px; }
+    .ik-messages { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:10px; }
+    .ik-msg { max-width:80%; padding:10px 13px; border-radius:12px; font-size:13px; line-height:1.5; }
+    .ik-msg.bot { background:var(--bg); border:1px solid var(--divider); align-self:flex-start; border-bottom-left-radius:4px; color:var(--text); }
+    .ik-msg.user { background:var(--accent); color:white; align-self:flex-end; border-bottom-right-radius:4px; }
+    .ik-options { padding:0 16px 12px; display:flex; flex-direction:column; gap:7px; }
+    .ik-opt { background:var(--bg); border:1px solid var(--divider); border-radius:8px; padding:9px 13px; font-size:12.5px; font-weight:500; cursor:pointer; text-align:left; color:var(--text); transition:background 0.15s, border-color 0.15s; }
+    .ik-opt:hover { background:var(--accent-light); border-color:var(--accent-border); color:var(--accent); }
+    .ik-input-row { padding:12px 14px; border-top:1px solid var(--divider); display:flex; gap:8px; }
+    .ik-input-row input { flex:1; border:1.5px solid var(--divider); border-radius:6px; padding:8px 12px; font-size:13px; font-family:'Inter',sans-serif; outline:none; }
+    .ik-input-row input:focus { border-color:var(--accent); }
+    .ik-send { background:var(--accent); color:white; border:none; border-radius:6px; padding:8px 14px; cursor:pointer; font-size:14px; }
+    .ik-typing { display:flex; gap:4px; align-items:center; padding:4px 0; }
+    .ik-typing span { width:7px; height:7px; background:var(--text-light); border-radius:50%; animation:typingDot 1s infinite; }
+    .ik-typing span:nth-child(2) { animation-delay:0.2s; }
+    .ik-typing span:nth-child(3) { animation-delay:0.4s; }
+    @keyframes typingDot { 0%,60%,100% { transform:translateY(0); } 30% { transform:translateY(-6px); } }
+  </style>
+
+  <div id="ik-chat-bubble">
+    <div id="ik-chat-badge">1</div>
+    <button id="ik-chat-btn" onclick="ikToggle()" title="Chat with us">💬</button>
+  </div>
+
+  <div id="ik-chat-window">
+    <div class="ik-header">
+      <div class="ik-avatar">⚡</div>
+      <div><div class="ik-header-name">InfraKraft Support</div><div class="ik-header-status">Typically replies within a few hours</div></div>
+      <button class="ik-close" onclick="ikToggle()">✕</button>
+    </div>
+    <div class="ik-messages" id="ik-messages"></div>
+    <div class="ik-options" id="ik-options"></div>
+    <div class="ik-input-row" id="ik-input-row" style="display:none;">
+      <input type="text" id="ik-input" placeholder="Type your message..." onkeydown="if(event.key==='Enter')ikSend()">
+      <button class="ik-send" onclick="ikSend()">➤</button>
+    </div>
+  </div>
+
+  <script>
+    const ikFlow = {
+      start: {
+        bot: "👋 Hi! I'm the InfraKraft assistant. What are you looking for?",
+        opts: [
+          { label: "🌐 Website for my business", next: 'website' },
+          { label: "📲 Mobile App", next: 'app' },
+          { label: "🤖 AI for my business", next: 'ai' },
+          { label: "🎓 Tutoring / Learning", next: 'tutoring' },
+          { label: "❓ Something else", next: 'other' }
+        ]
+      },
+      website: {
+        bot: "Great! We build business websites, e-commerce stores, portfolios, and landing pages. Do you have an existing website or is this a new one?",
+        opts: [
+          { label: "New website", next: 'lead' },
+          { label: "Redesign / update existing site", next: 'lead' },
+          { label: "E-commerce store", next: 'lead' }
+        ]
+      },
+      app: {
+        bot: "Nice! We build Android apps for bookings, catalogues, delivery, and more. What's the app for?",
+        opts: [
+          { label: "Booking / appointment app", next: 'lead' },
+          { label: "Product catalogue / shop", next: 'lead' },
+          { label: "Something custom", next: 'lead' }
+        ]
+      },
+      ai: {
+        bot: "Awesome — AI is our newest offering! We can build a chatbot for your website, WhatsApp AI assistant, or custom automation. What's most interesting?",
+        opts: [
+          { label: "AI chatbot for my website", next: 'lead' },
+          { label: "WhatsApp AI assistant", next: 'lead' },
+          { label: "Business automation with AI", next: 'lead' }
+        ]
+      },
+      tutoring: {
+        bot: "We offer 1-on-1 tutoring in Linux, AWS, DevOps, Docker, Kubernetes, and more — online via Google Meet. First session starts with a free 30-min intro call. What topic are you interested in?",
+        opts: [
+          { label: "AWS Cloud", next: 'lead' },
+          { label: "DevOps & CI/CD", next: 'lead' },
+          { label: "Docker & Kubernetes", next: 'lead' },
+          { label: "Interview prep", next: 'lead' }
+        ]
+      },
+      other: {
+        bot: "No problem! Tell me a little about what you need and our team will get back to you.",
+        opts: [],
+        input: true
+      },
+      lead: {
+        bot: "Perfect! Our agent will reach out to you shortly. Could I get your name and the best number to reach you on WhatsApp?",
+        opts: [],
+        input: true,
+        final: true
+      }
+    };
+
+    let ikOpen = false, ikStep = 'start', ikName = '', ikSubmitted = false;
+
+    function ikToggle() {
+      ikOpen = !ikOpen;
+      document.getElementById('ik-chat-window').classList.toggle('open', ikOpen);
+      document.getElementById('ik-chat-badge').style.display = 'none';
+      if (ikOpen && document.getElementById('ik-messages').children.length === 0) {
+        setTimeout(() => ikShow('start'), 300);
+      }
+    }
+
+    function ikShow(step) {
+      ikStep = step;
+      const s = ikFlow[step];
+      ikTyping(() => ikAddMsg(s.bot, 'bot', () => {
+        if (s.opts && s.opts.length) ikShowOpts(s.opts);
+        if (s.input) {
+          document.getElementById('ik-options').innerHTML = '';
+          document.getElementById('ik-input-row').style.display = 'flex';
+          document.getElementById('ik-input').focus();
+        }
+      }));
+    }
+
+    function ikTyping(cb) {
+      const msgs = document.getElementById('ik-messages');
+      const t = document.createElement('div');
+      t.className = 'ik-msg bot ik-typing-wrap';
+      t.innerHTML = '<div class="ik-typing"><span></span><span></span><span></span></div>';
+      msgs.appendChild(t); msgs.scrollTop = msgs.scrollHeight;
+      setTimeout(() => { t.remove(); cb(); }, 900);
+    }
+
+    function ikAddMsg(text, who, cb) {
+      const msgs = document.getElementById('ik-messages');
+      const m = document.createElement('div');
+      m.className = 'ik-msg ' + who;
+      m.textContent = text;
+      msgs.appendChild(m); msgs.scrollTop = msgs.scrollHeight;
+      if (cb) setTimeout(cb, 300);
+    }
+
+    function ikShowOpts(opts) {
+      const c = document.getElementById('ik-options');
+      c.innerHTML = '';
+      opts.forEach(o => {
+        const b = document.createElement('button');
+        b.className = 'ik-opt'; b.textContent = o.label;
+        b.onclick = () => { ikAddMsg(o.label, 'user'); c.innerHTML = ''; setTimeout(() => ikShow(o.next), 400); };
+        c.appendChild(b);
+      });
+    }
+
+    function ikSend() {
+      const inp = document.getElementById('ik-input');
+      const val = inp.value.trim();
+      if (!val) return;
+      ikAddMsg(val, 'user');
+      inp.value = '';
+      document.getElementById('ik-input-row').style.display = 'none';
+      if (!ikSubmitted) {
+        ikSubmitted = true;
+        ikTyping(() => ikAddMsg("✅ Got it! Our agent will reach out to you within a few hours. You can also WhatsApp us directly at +91 9989128449 for a faster response.", 'bot', () => {
+          const c = document.getElementById('ik-options');
+          const b = document.createElement('button');
+          b.className = 'ik-opt';
+          b.textContent = '💬 Open WhatsApp';
+          b.onclick = () => window.open('https://wa.me/919989128449?text=Hi%2C%20I%20just%20chatted%20on%20InfraKraft%20and%20I%27d%20like%20to%20discuss%20further.', '_blank');
+          c.appendChild(b);
+        }));
+      }
+    }
+  </script>
+
 </body>
 </html>
