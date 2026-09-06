@@ -4,24 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InfraKraft — DevOps & Tech Services</title>
-  <meta name="description" content="InfraKraft — Professional DevOps, cloud setup, business websites, app development and tech tutoring. Based in Bangalore/Chennai.">
+  <meta name="description" content="InfraKraft — Professional DevOps, cloud infrastructure, business websites, and tech tutoring. Based in Bangalore/Chennai.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap">
   <style>
     :root {
-      --bg: #080F18;
-      --surface: #0D1B2A;
-      --surface2: #112236;
-      --text: #E8EDF3;
-      --text-muted: #7A90A8;
-      --text-dim: #4A6278;
-      --accent: #00BFA6;
-      --accent-dim: rgba(0,191,166,0.10);
-      --accent-border: rgba(0,191,166,0.28);
-      --divider: rgba(255,255,255,0.06);
-      --card-border: rgba(255,255,255,0.07);
+      --bg: #F8F9FA;
+      --surface: #FFFFFF;
+      --surface2: #F2F4F7;
+      --text: #0F1923;
+      --text-muted: #4B5563;
+      --text-light: #9CA3AF;
+      --accent: #1B4FD8;
+      --accent-light: #EEF2FF;
+      --accent-border: rgba(27,79,216,0.2);
+      --divider: #E5E7EB;
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.08);
       --wa: #25D366;
-      --wa-dim: rgba(37,211,102,0.12);
+      --wa-light: #F0FDF4;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,362 +31,427 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: 15px;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(8,15,24,0.94);
-      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--divider);
-      padding: 0 5%; height: 56px;
+      padding: 0 6%; height: 60px;
       display: flex; align-items: center; justify-content: space-between;
     }
     .nav-logo {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 15px; font-weight: 700; color: var(--accent);
-      text-decoration: none;
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 700; color: var(--text);
+      text-decoration: none; letter-spacing: -0.01em;
     }
-    .nav-logo span { color: var(--text-muted); font-weight: 400; }
-    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
     .nav-links a {
-      font-size: 13px; color: var(--text-muted); text-decoration: none;
-      font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em;
-      transition: color 0.2s;
+      font-size: 13.5px; font-weight: 500; color: var(--text-muted);
+      text-decoration: none; letter-spacing: 0.01em; transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--accent); color: white !important;
+      padding: 8px 20px; border-radius: 6px; font-weight: 600 !important;
+      transition: opacity 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.88; color: white !important; }
 
-    /* WhatsApp floating button */
+    /* WhatsApp float */
     .wa-float {
       position: fixed; bottom: 28px; right: 28px; z-index: 200;
       background: var(--wa); color: white;
-      width: 56px; height: 56px; border-radius: 50%;
+      width: 52px; height: 52px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      text-decoration: none; font-size: 26px;
-      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none; font-size: 24px;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.35);
+      transition: transform 0.2s;
     }
-    .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(37,211,102,0.55); }
+    .wa-float:hover { transform: scale(1.08); }
 
     /* ── HERO ── */
     .hero {
       min-height: 100vh; display: flex; align-items: center;
-      padding: 90px 5% 60px; position: relative; overflow: hidden;
+      padding: 100px 6% 80px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--divider);
     }
-    .hero::before {
-      content: ''; position: absolute; top: -200px; right: -200px;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(0,191,166,0.07) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
+    .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center; }
+
     .hero-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px; font-weight: 600; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 16px;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 5px 14px; border-radius: 20px;
+      margin-bottom: 24px;
     }
-    .hero-name {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(40px, 6vw, 68px); font-weight: 700;
-      line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 14px;
+    .hero-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 5vw, 60px); font-weight: 700;
+      line-height: 1.08; letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 20px;
     }
-    .hero-name .accent { color: var(--accent); }
-    .hero-tagline {
-      font-size: clamp(16px, 2vw, 20px); color: var(--text-muted);
-      font-weight: 400; margin-bottom: 20px; max-width: 620px; line-height: 1.5;
-    }
+    h1 em { font-style: italic; color: var(--accent); }
+
     .hero-desc {
-      font-size: 15px; color: var(--text-muted); line-height: 1.8;
-      margin-bottom: 40px; max-width: 560px;
+      font-size: 16px; color: var(--text-muted); line-height: 1.8;
+      margin-bottom: 36px; max-width: 480px; font-weight: 400;
     }
-    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
 
     .btn-primary {
-      background: var(--accent); color: #080F18;
-      padding: 13px 28px; border-radius: 4px;
+      background: var(--accent); color: white;
+      padding: 13px 28px; border-radius: 6px;
       font-weight: 600; font-size: 14px; text-decoration: none;
-      transition: opacity 0.2s; display: inline-block;
+      transition: opacity 0.2s; display: inline-block; letter-spacing: 0.01em;
     }
     .btn-primary:hover { opacity: 0.88; }
-    .btn-outline {
-      border: 1px solid var(--accent-border); color: var(--accent);
-      padding: 13px 28px; border-radius: 4px;
+    .btn-secondary {
+      background: transparent; color: var(--text);
+      border: 1.5px solid var(--divider);
+      padding: 13px 28px; border-radius: 6px;
       font-weight: 500; font-size: 14px; text-decoration: none;
-      transition: background 0.2s; display: inline-block;
+      transition: border-color 0.2s, background 0.2s; display: inline-block;
     }
-    .btn-outline:hover { background: var(--accent-dim); }
+    .btn-secondary:hover { border-color: var(--text); background: var(--bg); }
     .btn-wa {
-      background: var(--wa-dim); color: var(--wa);
-      border: 1px solid rgba(37,211,102,0.3);
-      padding: 13px 28px; border-radius: 4px;
+      background: var(--wa-light); color: var(--wa);
+      border: 1.5px solid rgba(37,211,102,0.3);
+      padding: 13px 28px; border-radius: 6px;
       font-weight: 600; font-size: 14px; text-decoration: none;
       transition: background 0.2s; display: inline-block;
     }
-    .btn-wa:hover { background: rgba(37,211,102,0.2); }
+    .btn-wa:hover { background: rgba(37,211,102,0.15); }
 
-    .hero-stats {
-      display: flex; gap: 40px; flex-wrap: wrap;
+    .hero-stats { display: flex; gap: 36px; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: var(--text); line-height: 1; }
+    .stat-label { font-size: 12px; color: var(--text-light); margin-top: 4px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+    .stat-divider { width: 1px; background: var(--divider); }
+
+    /* Hero card */
+    .hero-card {
+      background: var(--surface); border: 1px solid var(--divider);
+      border-radius: 16px; padding: 32px;
+      box-shadow: var(--shadow-lg);
     }
-    .stat-item { }
-    .stat-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 28px; font-weight: 700; color: var(--accent);
-      line-height: 1;
+    .hero-card-label {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--text-light); margin-bottom: 20px;
     }
-    .stat-label { font-size: 12px; color: var(--text-dim); margin-top: 4px; letter-spacing: 0.04em; }
+    .hero-card-services { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .hcs-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px; border-radius: 8px; background: var(--bg);
+      border: 1px solid var(--divider);
+    }
+    .hcs-icon { font-size: 18px; width: 32px; text-align: center; }
+    .hcs-name { font-size: 13.5px; font-weight: 500; }
+    .hcs-price { font-size: 12px; color: var(--text-light); margin-left: auto; font-weight: 500; }
+    .hero-card-cert {
+      background: var(--accent-light); border: 1px solid var(--accent-border);
+      border-radius: 8px; padding: 12px 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .cert-icon { font-size: 20px; }
+    .cert-name { font-size: 12.5px; font-weight: 600; color: var(--accent); }
+    .cert-sub { font-size: 11px; color: var(--text-light); margin-top: 1px; }
 
     /* ── SECTION BASE ── */
-    section { padding: 80px 5%; }
+    section { padding: 88px 6%; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
     .section-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
     }
     .section-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(22px, 3vw, 30px); font-weight: 700;
-      margin-bottom: 12px; letter-spacing: -0.02em;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 3vw, 36px); font-weight: 700;
+      margin-bottom: 14px; letter-spacing: -0.02em; line-height: 1.15;
     }
     .section-sub {
-      font-size: 15px; color: var(--text-muted);
-      max-width: 560px; margin-bottom: 44px; line-height: 1.7;
+      font-size: 15.5px; color: var(--text-muted); max-width: 520px;
+      margin-bottom: 52px; line-height: 1.75; font-weight: 400;
     }
 
     /* ── SERVICES ── */
     #services { background: var(--surface); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 18px;
-    }
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
     .service-card {
-      background: var(--bg); border: 1px solid var(--card-border);
-      border-radius: 8px; padding: 28px 24px;
-      transition: border-color 0.2s, transform 0.2s;
+      background: var(--bg); border: 1px solid var(--divider);
+      border-radius: 12px; padding: 28px 24px;
+      transition: box-shadow 0.2s, border-color 0.2s;
       display: flex; flex-direction: column;
     }
-    .service-card:hover { border-color: var(--accent-border); transform: translateY(-2px); }
-    .service-icon { font-size: 28px; margin-bottom: 14px; }
-    .service-name { font-weight: 600; font-size: 16px; margin-bottom: 8px; }
-    .service-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; flex: 1; }
-    .service-price {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px; color: var(--accent); font-weight: 600;
-      margin-bottom: 12px;
-    }
+    .service-card:hover { box-shadow: var(--shadow-lg); border-color: transparent; }
+    .service-icon { font-size: 26px; margin-bottom: 16px; }
+    .service-name { font-weight: 600; font-size: 15.5px; margin-bottom: 8px; color: var(--text); }
+    .service-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; flex: 1; }
+    .service-price { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 14px; }
     .service-tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .stag {
-      background: var(--accent-dim); color: var(--accent);
-      border: 1px solid var(--accent-border); border-radius: 3px;
-      font-size: 11px; font-family: 'JetBrains Mono', monospace;
-      padding: 2px 8px; font-weight: 500;
+      background: var(--accent-light); color: var(--accent);
+      border-radius: 4px; font-size: 11px; font-weight: 500;
+      padding: 3px 9px; letter-spacing: 0.01em;
     }
 
     /* ── PRICING ── */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .pricing-card {
-      background: var(--surface); border: 1px solid var(--card-border);
-      border-radius: 8px; padding: 32px 28px;
-      position: relative; transition: border-color 0.2s;
+      background: var(--surface); border: 1px solid var(--divider);
+      border-radius: 12px; padding: 36px 28px; position: relative;
+      transition: box-shadow 0.2s;
     }
+    .pricing-card:hover { box-shadow: var(--shadow-lg); }
     .pricing-card.featured {
-      border-color: var(--accent-border);
-      background: var(--surface2);
+      background: var(--accent); border-color: var(--accent);
+      color: white;
     }
     .pricing-badge {
-      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--accent); color: #080F18;
-      font-size: 11px; font-weight: 700; font-family: 'JetBrains Mono', monospace;
-      padding: 3px 14px; border-radius: 20px; letter-spacing: 0.08em;
-      white-space: nowrap;
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--text); color: white;
+      font-size: 10px; font-weight: 700; padding: 4px 14px;
+      border-radius: 20px; letter-spacing: 0.1em; white-space: nowrap;
     }
-    .pricing-plan { font-size: 13px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
-    .pricing-price { font-family: 'JetBrains Mono', monospace; font-size: 36px; font-weight: 700; color: var(--text); line-height: 1; margin-bottom: 4px; }
-    .pricing-price span { font-size: 16px; color: var(--text-muted); font-weight: 400; }
-    .pricing-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; margin-top: 8px; line-height: 1.6; }
+    .pricing-plan { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 12px; }
+    .pricing-card.featured .pricing-plan { color: rgba(255,255,255,0.65); }
+    .pricing-price { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+    .pricing-price span { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 400; color: var(--text-light); }
+    .pricing-card.featured .pricing-price span { color: rgba(255,255,255,0.6); }
+    .pricing-desc { font-size: 13px; color: var(--text-muted); margin: 12px 0 24px; line-height: 1.65; }
+    .pricing-card.featured .pricing-desc { color: rgba(255,255,255,0.75); }
+    .pricing-divider { height: 1px; background: var(--divider); margin-bottom: 24px; }
+    .pricing-card.featured .pricing-divider { background: rgba(255,255,255,0.2); }
     .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
-    .pricing-features li { font-size: 13.5px; color: var(--text-muted); display: flex; gap: 10px; align-items: flex-start; }
-    .pricing-features li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .pricing-features li { font-size: 13.5px; color: var(--text-muted); display: flex; gap: 10px; }
+    .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.85); }
+    .pricing-features li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+    .pricing-card.featured .pricing-features li::before { color: white; }
     .pricing-cta {
-      display: block; text-align: center;
-      background: var(--accent-dim); color: var(--accent);
-      border: 1px solid var(--accent-border); border-radius: 4px;
-      padding: 11px; font-size: 14px; font-weight: 600;
-      text-decoration: none; transition: background 0.2s;
+      display: block; text-align: center; border-radius: 6px;
+      padding: 12px; font-size: 14px; font-weight: 600;
+      text-decoration: none; transition: opacity 0.2s;
+      background: var(--accent-light); color: var(--accent);
+      border: 1px solid var(--accent-border);
     }
-    .pricing-card.featured .pricing-cta { background: var(--accent); color: #080F18; border-color: var(--accent); }
-    .pricing-cta:hover { opacity: 0.88; }
+    .pricing-card.featured .pricing-cta { background: white; color: var(--accent); border: none; }
+    .pricing-cta:hover { opacity: 0.85; }
 
     /* ── TUTORING ── */
     #tutoring { background: var(--surface); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
-    .tutor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .tutor-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .tutor-card {
-      background: var(--bg); border: 1px solid var(--card-border);
-      border-radius: 8px; padding: 24px 20px;
-      transition: border-color 0.2s;
+      background: var(--bg); border: 1px solid var(--divider);
+      border-radius: 10px; padding: 24px 20px;
+      transition: box-shadow 0.2s;
     }
-    .tutor-card:hover { border-color: var(--accent-border); }
-    .tutor-level {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px; font-weight: 600; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 10px;
-    }
-    .tutor-topic { font-weight: 600; font-size: 15px; margin-bottom: 8px; }
-    .tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; }
-    .tutor-price { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); font-weight: 600; }
+    .tutor-card:hover { box-shadow: var(--shadow); }
+    .tutor-level { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 10px; }
+    .tutor-topic { font-weight: 600; font-size: 15px; margin-bottom: 8px; color: var(--text); }
+    .tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-bottom: 16px; }
+    .tutor-price { font-size: 13px; font-weight: 600; color: var(--text); }
+    .tutor-price span { color: var(--text-light); font-weight: 400; }
 
     /* ── HOW IT WORKS ── */
-    .steps { display: flex; flex-direction: column; gap: 0; max-width: 700px; }
-    .step { display: grid; grid-template-columns: 48px 1fr; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--divider); align-items: start; }
-    .step:last-child { border-bottom: none; }
+    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .step-card { text-align: center; padding: 8px; }
     .step-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 22px; font-weight: 700; color: var(--accent);
-      line-height: 1; padding-top: 2px;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--accent-light); color: var(--accent);
+      font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
     }
-    .step-title { font-weight: 600; font-size: 15px; margin-bottom: 6px; }
-    .step-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; }
+    .step-title { font-weight: 600; font-size: 15px; margin-bottom: 8px; }
+    .step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
 
     /* ── EXPERIENCE ── */
     #experience { background: var(--surface); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
-    .exp-list { display: flex; flex-direction: column; }
-    .exp-item { display: grid; grid-template-columns: 150px 1fr; gap: 28px; padding: 24px 0; border-bottom: 1px solid var(--divider); }
+    .exp-list { display: flex; flex-direction: column; border: 1px solid var(--divider); border-radius: 12px; overflow: hidden; }
+    .exp-item { display: grid; grid-template-columns: 180px 1fr; gap: 0; border-bottom: 1px solid var(--divider); }
     .exp-item:last-child { border-bottom: none; }
-    .exp-dates { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--accent); padding-top: 3px; line-height: 1.7; }
-    .exp-client { font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+    .exp-left { background: var(--bg); padding: 24px 20px; border-right: 1px solid var(--divider); }
+    .exp-right { padding: 24px 28px; background: var(--surface); }
+    .exp-dates { font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 4px; letter-spacing: 0.02em; }
+    .exp-client { font-size: 12px; color: var(--text-light); }
     .exp-title { font-weight: 600; font-size: 15px; margin-bottom: 3px; }
-    .exp-company { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+    .exp-company { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; }
     .exp-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
 
+    .cert-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+    .cert-item {
+      background: var(--bg); border: 1px solid var(--divider);
+      border-radius: 8px; padding: 14px 18px;
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+    .cert-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 4px; }
+    .cert-name { font-weight: 600; font-size: 13px; }
+    .cert-issuer { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+
     /* ── CONTACT ── */
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-    .contact-form { background: var(--surface); border: 1px solid var(--card-border); border-radius: 8px; padding: 36px; }
-    .form-title { font-weight: 600; font-size: 18px; margin-bottom: 24px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 400px; gap: 48px; align-items: start; }
+    .contact-form { background: var(--surface); border: 1px solid var(--divider); border-radius: 12px; padding: 36px; box-shadow: var(--shadow); }
+    .form-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 24px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-group { margin-bottom: 18px; }
-    .form-group label { display: block; font-size: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 7px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 7px; }
     .form-group input,
     .form-group select,
     .form-group textarea {
-      width: 100%; background: var(--bg);
-      border: 1px solid var(--card-border); border-radius: 4px;
-      padding: 11px 14px; color: var(--text);
-      font-size: 14px; font-family: 'IBM Plex Sans', sans-serif;
-      outline: none; transition: border-color 0.2s;
-      appearance: none;
+      width: 100%; background: var(--bg); border: 1.5px solid var(--divider);
+      border-radius: 6px; padding: 11px 14px; color: var(--text);
+      font-size: 14px; font-family: 'Inter', sans-serif; outline: none;
+      transition: border-color 0.2s; appearance: none;
     }
     .form-group input:focus,
     .form-group select:focus,
-    .form-group textarea:focus { border-color: var(--accent-border); }
+    .form-group textarea:focus { border-color: var(--accent); }
     .form-group textarea { resize: vertical; min-height: 100px; }
-    .form-group select option { background: var(--surface); }
     .form-submit {
-      width: 100%; background: var(--accent); color: #080F18;
-      border: none; border-radius: 4px; padding: 13px;
-      font-size: 15px; font-weight: 600; cursor: pointer;
-      font-family: 'IBM Plex Sans', sans-serif; transition: opacity 0.2s;
+      width: 100%; background: var(--accent); color: white; border: none;
+      border-radius: 6px; padding: 13px; font-size: 15px; font-weight: 600;
+      cursor: pointer; font-family: 'Inter', sans-serif; transition: opacity 0.2s;
     }
     .form-submit:hover { opacity: 0.88; }
-    .form-note { font-size: 12px; color: var(--text-dim); margin-top: 10px; text-align: center; }
+    .form-note { font-size: 12px; color: var(--text-light); text-align: center; margin-top: 10px; }
 
-    .contact-info { display: flex; flex-direction: column; gap: 24px; }
-    .contact-info-title { font-weight: 600; font-size: 18px; margin-bottom: 4px; }
-    .contact-info-sub { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 8px; }
-    .contact-links { display: flex; flex-direction: column; gap: 12px; }
+    .contact-sidebar { display: flex; flex-direction: column; gap: 16px; }
+    .contact-sidebar-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+    .contact-sidebar-sub { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 8px; }
     .contact-link {
-      display: flex; align-items: center; gap: 14px;
-      text-decoration: none; color: var(--text); font-size: 14px;
-      background: var(--surface); border: 1px solid var(--card-border);
-      border-radius: 6px; padding: 13px 16px;
-      transition: border-color 0.2s;
+      display: flex; align-items: center; gap: 14px; text-decoration: none;
+      padding: 14px 16px; border-radius: 8px; border: 1px solid var(--divider);
+      background: var(--surface); transition: border-color 0.2s, box-shadow 0.2s;
+      color: var(--text);
     }
-    .contact-link:hover { border-color: var(--accent-border); color: var(--accent); }
-    .contact-link-label {
-      font-family: 'JetBrains Mono', monospace; font-size: 10px;
-      color: var(--text-dim); width: 64px; flex-shrink: 0; letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .wa-link {
-      background: var(--wa-dim); border-color: rgba(37,211,102,0.25);
-      color: var(--wa);
-    }
-    .wa-link:hover { border-color: var(--wa); }
+    .contact-link:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+    .contact-link-icon { font-size: 18px; width: 28px; text-align: center; flex-shrink: 0; }
+    .contact-link-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
+    .contact-link-val { font-size: 13.5px; font-weight: 500; margin-top: 1px; }
+    .wa-contact { border-color: rgba(37,211,102,0.3); background: var(--wa-light); }
+    .wa-contact:hover { border-color: var(--wa); }
+
+    .payment-box { background: var(--bg); border: 1px solid var(--divider); border-radius: 8px; padding: 18px 20px; }
+    .payment-box-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 8px; }
+    .payment-box-text { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+    /* Success message */
+    #form-success { background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 16px; }
 
     /* ── FOOTER ── */
     footer {
-      border-top: 1px solid var(--divider); padding: 24px 5%;
-      text-align: center; font-size: 12px; color: var(--text-dim);
-      font-family: 'JetBrains Mono', monospace;
+      background: var(--text); color: rgba(255,255,255,0.5);
+      padding: 36px 6%; text-align: center;
+      font-size: 13px;
     }
-    footer span { color: var(--accent); }
+    footer strong { color: white; }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    footer a:hover { color: white; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
+      .hero-inner, .contact-grid { grid-template-columns: 1fr; }
+      .hero-card { display: none; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .pricing-grid, .tutor-grid { grid-template-columns: 1fr 1fr; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      .exp-item { grid-template-columns: 1fr; }
+      .exp-left { border-right: none; border-bottom: 1px solid var(--divider); padding: 16px 20px; }
       .nav-links { display: none; }
-      .contact-grid { grid-template-columns: 1fr; }
-      .exp-item { grid-template-columns: 1fr; gap: 4px; }
-      .hero-stats { gap: 24px; }
+    }
+    @media (max-width: 600px) {
+      .services-grid, .pricing-grid, .tutor-grid, .steps-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a class="nav-logo" href="#">Infra<span>Kraft</span></a>
     <ul class="nav-links">
-      <li><a href="#services">services</a></li>
-      <li><a href="#pricing">pricing</a></li>
-      <li><a href="#tutoring">tutoring</a></li>
-      <li><a href="#experience">experience</a></li>
-      <li><a href="#contact">contact</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#tutoring">Tutoring</a></li>
+      <li><a href="#experience">About</a></li>
+      <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
     </ul>
   </nav>
 
-  <!-- WhatsApp floating button -->
-  <a href="https://wa.me/919989128449?text=Hi%20Krishna%2C%20I%20found%20your%20site%20and%20I%27m%20interested%20in%20your%20services." class="wa-float" target="_blank" title="Chat on WhatsApp">💬</a>
+  <a href="https://wa.me/919989128449?text=Hi%2C%20I%20found%20InfraKraft%20and%20I%27m%20interested%20in%20your%20services." class="wa-float" target="_blank" title="WhatsApp">💬</a>
 
   <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
-      <div class="hero-eyebrow">InfraKraft · Available for freelance work · Bangalore / Chennai</div>
-      <h1 class="hero-name">Infra<span class="accent">Kraft</span></h1>
-      <div class="hero-tagline">DevOps · Cloud · Web · Tutoring</div>
-      <p class="hero-desc">
-        Professional tech services — CI/CD pipelines, AWS cloud infrastructure, business websites, 
-        
-        
-      </p>
-      <div class="hero-ctas">
-        <a href="#contact" class="btn-primary">Hire Me</a>
-        <a href="https://wa.me/919989128449?text=Hi%20Krishna%2C%20I%27m%20interested%20in%20your%20services." class="btn-wa" target="_blank">💬 WhatsApp</a>
-        <a href="#services" class="btn-outline">View Services</a>
+      <div>
+        <div class="hero-eyebrow">Available for freelance work · Bangalore / Chennai</div>
+        <h1>Infrastructure &amp; DevOps <em>that works.</em></h1>
+        <p class="hero-desc">
+          Professional cloud infrastructure, CI/CD pipelines, business websites, and tech tutoring —
+          delivered by an AWS Certified engineer with 6+ years of production experience.
+        </p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn-primary">Get a Free Quote</a>
+          <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20InfraKraft%20services." class="btn-wa" target="_blank">💬 WhatsApp</a>
+          <a href="#services" class="btn-secondary">View Services</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num">6+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-divider"></div>
+          <div>
+            <div class="stat-num">AWS</div>
+            <div class="stat-label">Certified Architect</div>
+          </div>
+          <div class="stat-divider"></div>
+          <div>
+            <div class="stat-num">24h</div>
+            <div class="stat-label">Response Time</div>
+          </div>
+        </div>
       </div>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-num">6+</div>
-          <div class="stat-label">Years Experience</div>
+
+      <div class="hero-card">
+        <div class="hero-card-label">Popular Services</div>
+        <div class="hero-card-services">
+          <div class="hcs-item">
+            <div class="hcs-icon">🌐</div>
+            <div class="hcs-name">Business Website</div>
+            <div class="hcs-price">from ₹5,000</div>
+          </div>
+          <div class="hcs-item">
+            <div class="hcs-icon">☁️</div>
+            <div class="hcs-name">AWS Cloud Setup</div>
+            <div class="hcs-price">from ₹8,000</div>
+          </div>
+          <div class="hcs-item">
+            <div class="hcs-icon">⚙️</div>
+            <div class="hcs-name">CI/CD Pipeline</div>
+            <div class="hcs-price">from ₹6,000</div>
+          </div>
+          <div class="hcs-item">
+            <div class="hcs-icon">📱</div>
+            <div class="hcs-name">Custom Web App</div>
+            <div class="hcs-price">from ₹10,000</div>
+          </div>
         </div>
-        <div class="stat-item">
-          <div class="stat-num">AWS</div>
-          <div class="stat-label">Certified Architect</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">24h</div>
-          <div class="stat-label">Response Time</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">₹</div>
-          <div class="stat-label">Flexible Pricing</div>
+        <div class="hero-card-cert">
+          <div class="cert-icon">🏅</div>
+          <div>
+            <div class="cert-name">AWS Certified Solutions Architect</div>
+            <div class="cert-sub">Associate · Valid 2025–2028</div>
+          </div>
         </div>
       </div>
     </div>
@@ -394,60 +460,87 @@
   <!-- SERVICES -->
   <section id="services">
     <div class="section-inner">
-      <div class="section-eyebrow">// what I build</div>
+      <div class="section-eyebrow">What we offer</div>
       <h2 class="section-title">Services</h2>
-      <p class="section-sub">Practical tech work for businesses, startups, and individuals who need reliable results without a full-time hire.</p>
-
+      <p class="section-sub">End-to-end tech services for businesses and individuals — from a simple website to full cloud infrastructure.</p>
       <div class="services-grid">
-
         <div class="service-card">
           <div class="service-icon">🌐</div>
           <div class="service-name">Business Website</div>
-          <div class="service-desc">Professional website for your business — landing page, company site, portfolio, or product page. Mobile-friendly, fast, and hosted on AWS. Includes domain setup and SSL.</div>
+          <div class="service-desc">Professional website for your business — landing page, company site, portfolio, or product page. Mobile-friendly, fast, and hosted on AWS with SSL.</div>
           <div class="service-price">Starting ₹5,000</div>
           <div class="service-tags"><span class="stag">HTML/CSS</span><span class="stag">AWS S3</span><span class="stag">CloudFront</span><span class="stag">SSL</span></div>
         </div>
-
         <div class="service-card">
           <div class="service-icon">🔧</div>
           <div class="service-name">Website Maintenance</div>
-          <div class="service-desc">Monthly maintenance plan — content updates, uptime monitoring, backups, security patches, and performance checks. Never worry about your site going down.</div>
+          <div class="service-desc">Monthly plan — content updates, uptime monitoring, backups, and security patches. Never worry about your site going down again.</div>
           <div class="service-price">₹1,500 / month</div>
-          <div class="service-tags"><span class="stag">Monitoring</span><span class="stag">Backups</span><span class="stag">Updates</span><span class="stag">Support</span></div>
+          <div class="service-tags"><span class="stag">Monitoring</span><span class="stag">Backups</span><span class="stag">Updates</span></div>
         </div>
-
         <div class="service-card">
           <div class="service-icon">📱</div>
           <div class="service-name">Custom Web App</div>
-          <div class="service-desc">Small business tools, booking systems, dashboards, automation portals — custom-built for your exact needs. From idea to live app, end to end.</div>
+          <div class="service-desc">Booking systems, dashboards, automation portals — built to your exact requirements. From idea to live app, end to end.</div>
           <div class="service-price">Starting ₹10,000</div>
           <div class="service-tags"><span class="stag">Python</span><span class="stag">Flask</span><span class="stag">AWS</span><span class="stag">Docker</span></div>
         </div>
-
         <div class="service-card">
           <div class="service-icon">☁️</div>
           <div class="service-name">AWS Cloud Setup</div>
-          <div class="service-desc">Set up your AWS environment properly — VPC, EC2, S3, IAM, ECS. Infrastructure as code with Terraform. Secure, scalable, and cost-optimised from day one.</div>
+          <div class="service-desc">Set up your AWS environment properly — VPC, EC2, S3, IAM, ECS. Terraform IaC included. Secure, scalable, and cost-optimised from day one.</div>
           <div class="service-price">Starting ₹8,000</div>
-          <div class="service-tags"><span class="stag">Terraform</span><span class="stag">EC2</span><span class="stag">S3</span><span class="stag">IAM</span><span class="stag">VPC</span></div>
+          <div class="service-tags"><span class="stag">Terraform</span><span class="stag">EC2</span><span class="stag">S3</span><span class="stag">IAM</span></div>
         </div>
-
         <div class="service-card">
           <div class="service-icon">⚙️</div>
-          <div class="service-name">CI/CD Pipeline Setup</div>
+          <div class="service-name">CI/CD Pipeline</div>
           <div class="service-desc">Automate your deployments — code push to production with test gates, security checks, and notifications. Works with GitHub, GitLab, Bitbucket.</div>
           <div class="service-price">Starting ₹6,000</div>
           <div class="service-tags"><span class="stag">Jenkins</span><span class="stag">GitHub Actions</span><span class="stag">Azure DevOps</span></div>
         </div>
-
         <div class="service-card">
           <div class="service-icon">📊</div>
           <div class="service-name">Monitoring & Alerts</div>
-          <div class="service-desc">Set up Prometheus and Grafana dashboards for your servers and apps. Get alerted before your users notice a problem. Includes CloudWatch setup for AWS.</div>
+          <div class="service-desc">Prometheus and Grafana dashboards for your servers and apps. Get alerted before your users notice a problem. Includes CloudWatch for AWS.</div>
           <div class="service-price">Starting ₹4,000</div>
           <div class="service-tags"><span class="stag">Prometheus</span><span class="stag">Grafana</span><span class="stag">CloudWatch</span></div>
         </div>
-
+        <div class="service-card">
+          <div class="service-icon">📣</div>
+          <div class="service-name">Digital Marketing</div>
+          <div class="service-desc">Google Ads setup, SEO basics, social media profile optimisation (LinkedIn, Instagram), and Google Business listing — get found online fast.</div>
+          <div class="service-price">Starting ₹3,000</div>
+          <div class="service-tags"><span class="stag">SEO</span><span class="stag">Google Ads</span><span class="stag">GMB</span><span class="stag">Social</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📲</div>
+          <div class="service-name">Mobile App (Android)</div>
+          <div class="service-desc">Simple Android or cross-platform mobile apps for your business — booking, catalogue, contact forms, push notifications. Built with Flutter or React Native.</div>
+          <div class="service-price">Starting ₹12,000</div>
+          <div class="service-tags"><span class="stag">Flutter</span><span class="stag">React Native</span><span class="stag">Android</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎓</div>
+          <div class="service-name">Internship Mentorship</div>
+          <div class="service-desc">Hands-on mentorship for students doing DevOps / Cloud internships. Real project guidance, resume review, LinkedIn profile, and interview prep. Flexible schedule.</div>
+          <div class="service-price">₹500 / session</div>
+          <div class="service-tags"><span class="stag">DevOps</span><span class="stag">AWS</span><span class="stag">Resume Review</span><span class="stag">Interview Prep</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🛒</div>
+          <div class="service-name">E-Commerce Store</div>
+          <div class="service-desc">Online store for your products — product listings, payment gateway (Razorpay / UPI), order management, and mobile-friendly design. Ready to sell in days.</div>
+          <div class="service-price">Starting ₹8,000</div>
+          <div class="service-tags"><span class="stag">Razorpay</span><span class="stag">UPI</span><span class="stag">Product Catalogue</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔐</div>
+          <div class="service-name">Security Audit & Fixes</div>
+          <div class="service-desc">Review your website or app for security issues — SSL, broken auth, exposed credentials, outdated dependencies — and patch them. One-time audit + report.</div>
+          <div class="service-price">Starting ₹4,000</div>
+          <div class="service-tags"><span class="stag">OWASP</span><span class="stag">SSL</span><span class="stag">SonarQube</span><span class="stag">IAM</span></div>
+        </div>
       </div>
     </div>
   </section>
@@ -455,62 +548,59 @@
   <!-- PRICING -->
   <section id="pricing">
     <div class="section-inner">
-      <div class="section-eyebrow">// simple, transparent</div>
+      <div class="section-eyebrow">Simple, transparent</div>
       <h2 class="section-title">Pricing Plans</h2>
-      <p class="section-sub">Pick a plan or get a custom quote. No hidden fees — what you see is what you pay.</p>
-
+      <p class="section-sub">Pick a plan or get a custom quote. No hidden fees.</p>
       <div class="pricing-grid">
-
         <div class="pricing-card">
           <div class="pricing-plan">Starter</div>
           <div class="pricing-price">₹5,000 <span>one-time</span></div>
-          <div class="pricing-desc">Great for a simple business landing page or basic cloud setup.</div>
+          <div class="pricing-desc">A single-page business website with AWS hosting and SSL setup.</div>
+          <div class="pricing-divider"></div>
           <ul class="pricing-features">
             <li>Single-page business website</li>
-            <li>AWS hosting + SSL setup</li>
-            <li>Mobile responsive design</li>
+            <li>AWS hosting + SSL</li>
+            <li>Mobile responsive</li>
             <li>1 round of revisions</li>
-            <li>Delivery in 5–7 days</li>
+            <li>Delivered in 5–7 days</li>
           </ul>
-          <a href="https://wa.me/919989128449?text=Hi%20Krishna%2C%20I%27m%20interested%20in%20the%20Starter%20plan." class="pricing-cta" target="_blank">Get Started</a>
+          <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20the%20Starter%20plan." class="pricing-cta" target="_blank">Get Started</a>
         </div>
-
         <div class="pricing-card featured">
           <div class="pricing-badge">MOST POPULAR</div>
           <div class="pricing-plan">Business</div>
           <div class="pricing-price">₹15,000 <span>one-time</span></div>
-          <div class="pricing-desc">Full website or web app with backend, AWS infrastructure, and 1 month support.</div>
+          <div class="pricing-desc">Full website or web app with AWS infrastructure and 1 month support.</div>
+          <div class="pricing-divider"></div>
           <ul class="pricing-features">
             <li>Multi-page website or web app</li>
-            <li>AWS setup with Terraform IaC</li>
+            <li>AWS setup with Terraform</li>
             <li>CI/CD pipeline included</li>
             <li>Monitoring + alerts</li>
             <li>3 rounds of revisions</li>
             <li>1 month free support</li>
-            <li>Delivery in 10–14 days</li>
+            <li>Delivered in 10–14 days</li>
           </ul>
-          <a href="https://wa.me/919989128449?text=Hi%20Krishna%2C%20I%27m%20interested%20in%20the%20Business%20plan." class="pricing-cta" target="_blank">Get Started</a>
+          <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20the%20Business%20plan." class="pricing-cta" target="_blank">Get Started</a>
         </div>
-
         <div class="pricing-card">
           <div class="pricing-plan">Retainer</div>
           <div class="pricing-price">₹8,000 <span>/ month</span></div>
           <div class="pricing-desc">Ongoing DevOps and infrastructure support for your growing business.</div>
+          <div class="pricing-divider"></div>
           <ul class="pricing-features">
-            <li>Up to 20 hours/month support</li>
+            <li>Up to 20 hours / month</li>
             <li>Website & server maintenance</li>
             <li>Pipeline updates & fixes</li>
             <li>Security patching</li>
             <li>Priority response</li>
             <li>Monthly status report</li>
           </ul>
-          <a href="https://wa.me/919989128449?text=Hi%20Krishna%2C%20I%27m%20interested%20in%20the%20Retainer%20plan." class="pricing-cta" target="_blank">Get Started</a>
+          <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20the%20Retainer%20plan." class="pricing-cta" target="_blank">Get Started</a>
         </div>
-
       </div>
-
-      <p style="text-align:center; color: var(--text-dim); font-size: 13px; margin-top: 28px;">
-        Need something custom? <a href="https://wa.me/919989128449" target="_blank" style="color: var(--accent); text-decoration: none;">Send me your requirements</a> and I'll send a quote within 24 hours.
+      <p style="text-align:center; color: var(--text-light); font-size: 13px; margin-top: 28px;">
+        Need something custom? <a href="https://wa.me/919989128449" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 500;">Send your requirements</a> and get a quote within 24 hours.
       </p>
     </div>
   </section>
@@ -518,58 +608,49 @@
   <!-- TUTORING -->
   <section id="tutoring">
     <div class="section-inner">
-      <div class="section-eyebrow">// learn from a practitioner</div>
+      <div class="section-eyebrow">Learn from a practitioner</div>
       <h2 class="section-title">Tech Tutoring</h2>
-      <p class="section-sub">One-on-one sessions online. Learn from someone who uses these tools in production every day — not just theory.</p>
-
+      <p class="section-sub">One-on-one online sessions. Learn tools used in production every day — not just theory.</p>
       <div class="tutor-grid">
-
         <div class="tutor-card">
           <div class="tutor-level">Beginner → Intermediate</div>
           <div class="tutor-topic">Linux & Shell Scripting</div>
-          <div class="tutor-desc">Learn the command line from scratch — navigation, file management, shell scripting, and automation. Great for anyone moving into tech.</div>
-          <div class="tutor-price">₹500 / hour</div>
+          <div class="tutor-desc">Command line from scratch — navigation, file management, scripting, and automation.</div>
+          <div class="tutor-price">₹500 <span>/ hour</span></div>
         </div>
-
         <div class="tutor-card">
           <div class="tutor-level">Beginner → Intermediate</div>
           <div class="tutor-topic">AWS Cloud Fundamentals</div>
-          <div class="tutor-desc">EC2, S3, IAM, VPC, and more. Hands-on labs in your own AWS account. Covers everything you need for the AWS Cloud Practitioner or Solutions Architect exam.</div>
-          <div class="tutor-price">₹600 / hour</div>
+          <div class="tutor-desc">EC2, S3, IAM, VPC with hands-on labs. Covers AWS Cloud Practitioner & Solutions Architect exam prep.</div>
+          <div class="tutor-price">₹600 <span>/ hour</span></div>
         </div>
-
         <div class="tutor-card">
           <div class="tutor-level">Intermediate</div>
           <div class="tutor-topic">DevOps & CI/CD</div>
-          <div class="tutor-desc">Git, Jenkins, GitHub Actions, Docker, and Kubernetes. Build real pipelines. Ideal for developers wanting to move into DevOps or SRE roles.</div>
-          <div class="tutor-price">₹700 / hour</div>
+          <div class="tutor-desc">Git, Jenkins, GitHub Actions, Docker, and Kubernetes. Build real pipelines from scratch.</div>
+          <div class="tutor-price">₹700 <span>/ hour</span></div>
         </div>
-
         <div class="tutor-card">
           <div class="tutor-level">Intermediate → Advanced</div>
-          <div class="tutor-topic">Terraform & Infrastructure as Code</div>
-          <div class="tutor-desc">Write Terraform to provision real AWS infrastructure. Modules, state management, workspaces, and CI/CD integration. Project-based learning.</div>
-          <div class="tutor-price">₹700 / hour</div>
+          <div class="tutor-topic">Terraform & IaC</div>
+          <div class="tutor-desc">Write Terraform to provision real AWS infrastructure. Modules, state management, and CI/CD integration.</div>
+          <div class="tutor-price">₹700 <span>/ hour</span></div>
         </div>
-
         <div class="tutor-card">
           <div class="tutor-level">Intermediate → Advanced</div>
           <div class="tutor-topic">Docker & Kubernetes</div>
-          <div class="tutor-desc">Containerise applications, write Kubernetes manifests, deploy to EKS, and manage production workloads. Hands-on with your real project.</div>
-          <div class="tutor-price">₹800 / hour</div>
+          <div class="tutor-desc">Containerise applications, deploy to EKS, configure auto-scaling. Hands-on with your real project.</div>
+          <div class="tutor-price">₹800 <span>/ hour</span></div>
         </div>
-
         <div class="tutor-card">
           <div class="tutor-level">Interview Prep</div>
           <div class="tutor-topic">DevOps Interview Coaching</div>
-          <div class="tutor-desc">Mock interviews, common DevOps questions, resume review, and hands-on problem solving. Helped engineers crack jobs at top companies.</div>
-          <div class="tutor-price">₹600 / hour</div>
+          <div class="tutor-desc">Mock interviews, common questions, resume review, and hands-on problem solving.</div>
+          <div class="tutor-price">₹600 <span>/ hour</span></div>
         </div>
-
       </div>
-
-      <div style="text-align: center; margin-top: 36px;">
-        <a href="https://wa.me/919989128449?text=Hi%20Krishna%2C%20I%27m%20interested%20in%20tutoring%20sessions." class="btn-wa" target="_blank">💬 Book a Session on WhatsApp</a>
+      <div style="text-align:center; margin-top:36px;">
+        <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20tutoring%20sessions." class="btn-wa" target="_blank">💬 Book a Session on WhatsApp</a>
       </div>
     </div>
   </section>
@@ -577,38 +658,29 @@
   <!-- HOW IT WORKS -->
   <section id="how">
     <div class="section-inner">
-      <div class="section-eyebrow">// simple process</div>
+      <div class="section-eyebrow">Simple process</div>
       <h2 class="section-title">How It Works</h2>
-      <p class="section-sub">From first message to delivered work — straightforward every step of the way.</p>
-
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">01</div>
-          <div>
-            <div class="step-title">Tell me what you need</div>
-            <div class="step-desc">Drop me a WhatsApp or fill the contact form. Describe your project — what you want, your timeline, and your budget. No technical knowledge needed.</div>
-          </div>
+      <p class="section-sub">From first message to delivered work — four straightforward steps.</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-title">Tell me what you need</div>
+          <div class="step-desc">Drop a WhatsApp or fill the contact form. No technical knowledge needed — just describe what you want.</div>
         </div>
-        <div class="step">
-          <div class="step-num">02</div>
-          <div>
-            <div class="step-title">Get a quote in 24 hours</div>
-            <div class="step-desc">I'll review your requirements and send a clear quote — scope, timeline, cost, and payment terms. No surprises later.</div>
-          </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-title">Get a quote in 24 hours</div>
+          <div class="step-desc">Clear quote with scope, timeline, and cost. No surprises later.</div>
         </div>
-        <div class="step">
-          <div class="step-num">03</div>
-          <div>
-            <div class="step-title">I build it, you review</div>
-            <div class="step-desc">Work begins after a 50% advance. I keep you updated throughout. You review and give feedback — revisions included in the plan.</div>
-          </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-title">I build it, you review</div>
+          <div class="step-desc">Work begins after 50% advance. Regular updates throughout. Revisions included.</div>
         </div>
-        <div class="step">
-          <div class="step-num">04</div>
-          <div>
-            <div class="step-title">Delivered & handed over</div>
-            <div class="step-desc">Final delivery after balance payment. Full handover with documentation, credentials, and a walkthrough call so you're never stuck.</div>
-          </div>
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <div class="step-title">Delivered & handed over</div>
+          <div class="step-desc">Full handover with documentation, credentials, and a walkthrough call.</div>
         </div>
       </div>
     </div>
@@ -617,61 +689,53 @@
   <!-- EXPERIENCE -->
   <section id="experience">
     <div class="section-inner">
-      <div class="section-eyebrow">// where I've worked</div>
-      <h2 class="section-title">Professional Background</h2>
-      <p class="section-sub">Real production experience — not just certifications.</p>
-
+      <div class="section-eyebrow">Professional background</div>
+      <h2 class="section-title">Experience</h2>
+      <p class="section-sub">Real production experience across MLOps, DevSecOps, and cloud engineering.</p>
       <div class="exp-list">
         <div class="exp-item">
-          <div>
+          <div class="exp-left">
             <div class="exp-dates">Mar 2026 – Present</div>
             <div class="exp-client">Sony India Software Centre</div>
           </div>
-          <div>
-            <div class="exp-title">MLOps Engineer</div>
-            <div class="exp-company">Neurealm · Bengaluru</div>
+          <div class="exp-right">
+            <div class="exp-title">MLOps Engineer — Neurealm</div>
             <div class="exp-desc">ML model validation and deployment using Databricks, MLflow, and Seldon on AWS. E2E load testing, observability, and production incident response.</div>
           </div>
         </div>
         <div class="exp-item">
-          <div>
+          <div class="exp-left">
             <div class="exp-dates">Sep 2025 – Mar 2026</div>
             <div class="exp-client">Athena Health</div>
           </div>
-          <div>
-            <div class="exp-title">Software Release Engineer</div>
-            <div class="exp-company">Neurealm · Chennai</div>
-            <div class="exp-desc">End-to-end release engineering for healthcare rules logic. Jenkins/Azure DevOps pipelines, Amazon ECS operations, Git strategy, and MTTR reduction.</div>
+          <div class="exp-right">
+            <div class="exp-title">Software Release Engineer — Neurealm</div>
+            <div class="exp-desc">End-to-end release engineering for healthcare rules logic. Jenkins/Azure DevOps pipelines, Amazon ECS, Git strategy, MTTR reduction.</div>
           </div>
         </div>
         <div class="exp-item">
-          <div>
+          <div class="exp-left">
             <div class="exp-dates">Mar 2023 – Jul 2025</div>
             <div class="exp-client">Trane Technologies</div>
           </div>
-          <div>
-            <div class="exp-title">DevSecOps Engineer</div>
-            <div class="exp-company">Horizontal Integration · Chennai</div>
-            <div class="exp-desc">Built DevSecOps practice — Checkmarx, Qualys, Invicti in CI/CD pipelines. Terraform IaC on AWS, Jenkins/Azure DevOps pipelines, and security standards across teams.</div>
+          <div class="exp-right">
+            <div class="exp-title">DevSecOps Engineer — Horizontal Integration</div>
+            <div class="exp-desc">Built DevSecOps practice — Checkmarx, Qualys, Invicti in CI/CD. Terraform IaC on AWS, Jenkins/Azure DevOps pipelines, security standards across teams.</div>
           </div>
         </div>
       </div>
-
-      <div style="margin-top: 40px;">
-        <div class="section-eyebrow" style="margin-bottom: 14px">// certifications</div>
-        <div style="display: flex; flex-wrap: wrap; gap: 14px;">
-          <div style="background: var(--surface); border: 1px solid var(--accent-border); border-radius: 6px; padding: 14px 20px;">
-            <div style="font-weight: 600; font-size: 13.5px;">AWS Certified Solutions Architect – Associate</div>
-            <div style="font-size: 12px; color: var(--accent); font-family: 'JetBrains Mono', monospace; margin-top: 3px;">Amazon Web Services · Valid 2025–2028</div>
-          </div>
-          <div style="background: var(--surface); border: 1px solid var(--card-border); border-radius: 6px; padding: 14px 20px;">
-            <div style="font-weight: 600; font-size: 13.5px;">GitHub Copilot for Developers</div>
-            <div style="font-size: 12px; color: var(--accent); font-family: 'JetBrains Mono', monospace; margin-top: 3px;">Microsoft Press / LinkedIn · Apr 2026</div>
-          </div>
-          <div style="background: var(--surface); border: 1px solid var(--card-border); border-radius: 6px; padding: 14px 20px;">
-            <div style="font-weight: 600; font-size: 13.5px;">ML with ChatGPT: Image Classification</div>
-            <div style="font-size: 12px; color: var(--accent); font-family: 'JetBrains Mono', monospace; margin-top: 3px;">Coursera · Apr 2026</div>
-          </div>
+      <div class="cert-row">
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div><div class="cert-name">AWS Certified Solutions Architect – Associate</div><div class="cert-issuer">Amazon Web Services · Valid 2025–2028</div></div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div><div class="cert-name">GitHub Copilot for Developers</div><div class="cert-issuer">Microsoft Press / LinkedIn · Apr 2026</div></div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div><div class="cert-name">ML with ChatGPT: Image Classification</div><div class="cert-issuer">Coursera · Apr 2026</div></div>
         </div>
       </div>
     </div>
@@ -680,117 +744,114 @@
   <!-- CONTACT -->
   <section id="contact">
     <div class="section-inner">
-      <div class="section-eyebrow">// let's work together</div>
-      <h2 class="section-title">Get in Touch</h2>
-
+      <div class="section-eyebrow">Get in touch</div>
+      <h2 class="section-title">Let's Work Together</h2>
       <div class="contact-grid">
-
         <div class="contact-form">
-          <div class="form-title">Send me your requirements</div>
-          <div id="form-success" hidden style="background: rgba(0,191,166,0.1); border: 1px solid var(--accent-border); border-radius: 6px; padding: 20px; text-align: center; margin-bottom: 16px;">
-            <div style="font-size: 24px; margin-bottom: 8px;">✅</div>
-            <div style="font-weight: 600; margin-bottom: 4px;">Message sent!</div>
-            <div style="font-size: 13px; color: var(--text-muted);">I'll get back to you within 24 hours.</div>
+          <div class="form-title">Send Your Requirements</div>
+          <div id="form-success" hidden>
+            <div style="font-size:24px; margin-bottom:8px">✅</div>
+            <div style="font-weight:600; margin-bottom:4px">Message sent!</div>
+            <div style="font-size:13px; color:var(--text-muted)">I'll get back to you within 24 hours.</div>
           </div>
           <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="5965f5c5-0c64-4497-82dc-ec00be9b3379">
             <input type="hidden" name="subject" value="New enquiry from InfraKraft">
             <input type="hidden" name="from_name" value="InfraKraft">
             <input type="checkbox" name="botcheck" style="display:none">
-            <div class="form-group">
-              <label>Your Name</label>
-              <input type="text" name="name" placeholder="Rajesh Kumar" required>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" name="name" placeholder="Rajesh Kumar" required>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="you@example.com" required>
+              </div>
             </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input type="email" name="email" placeholder="you@example.com" required>
-            </div>
-            <div class="form-group">
-              <label>Phone / WhatsApp</label>
-              <input type="text" name="phone" placeholder="+91 98765 43210">
-            </div>
-            <div class="form-group">
-              <label>Service Needed</label>
-              <select name="service">
-                <option value="">Select a service...</option>
-                <option>Business Website</option>
-                <option>Website Maintenance</option>
-                <option>Custom Web App</option>
-                <option>AWS Cloud Setup</option>
-                <option>CI/CD Pipeline</option>
-                <option>Monitoring &amp; Alerts</option>
-                <option>Tech Tutoring</option>
-                <option>Other / Not sure</option>
-              </select>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Phone / WhatsApp</label>
+                <input type="text" name="phone" placeholder="+91 98765 43210">
+              </div>
+              <div class="form-group">
+                <label>Service Needed</label>
+                <select name="service">
+                  <option value="">Select...</option>
+                  <option>Business Website</option>
+                  <option>Website Maintenance</option>
+                  <option>Custom Web App</option>
+                  <option>Mobile App (Android)</option>
+                  <option>E-Commerce Store</option>
+                  <option>AWS Cloud Setup</option>
+                  <option>CI/CD Pipeline</option>
+                  <option>Monitoring &amp; Alerts</option>
+                  <option>Digital Marketing</option>
+                  <option>Security Audit</option>
+                  <option>Tech Tutoring</option>
+                  <option>Internship Mentorship</option>
+                  <option>Other / Not sure</option>
+                </select>
+              </div>
             </div>
             <div class="form-group">
               <label>Tell me about your project</label>
               <textarea name="message" placeholder="What do you need? Any deadlines or budget in mind?"></textarea>
             </div>
             <button type="submit" class="form-submit" id="form-btn">Send Message</button>
-            <p class="form-note">I'll reply within 24 hours · Or WhatsApp for a faster response</p>
+            <p class="form-note">I'll reply within 24 hours · WhatsApp for faster response</p>
           </form>
           <script>
             document.getElementById('contact-form').addEventListener('submit', async function(e) {
               e.preventDefault();
               const btn = document.getElementById('form-btn');
-              btn.textContent = 'Sending...';
-              btn.disabled = true;
-              const res = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                body: new FormData(this)
-              });
+              btn.textContent = 'Sending...'; btn.disabled = true;
+              const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(this) });
               const data = await res.json();
               if (data.success) {
                 document.getElementById('form-success').hidden = false;
                 this.hidden = true;
               } else {
-                btn.textContent = 'Send Message';
-                btn.disabled = false;
+                btn.textContent = 'Send Message'; btn.disabled = false;
                 alert('Something went wrong. Please WhatsApp me directly.');
               }
             });
           </script>
         </div>
 
-        <div class="contact-info">
+        <div class="contact-sidebar">
           <div>
-            <div class="contact-info-title">Prefer to talk directly?</div>
-            <div class="contact-info-sub">WhatsApp is the fastest way to reach me. For detailed project briefs, use the form or email.</div>
+            <div class="contact-sidebar-title">Prefer to talk directly?</div>
+            <div class="contact-sidebar-sub">WhatsApp is the fastest way to reach me. I typically respond within a few hours.</div>
           </div>
-          <div class="contact-links">
-            <a href="https://wa.me/919989128449?text=Hi%20Krishna%2C%20I%27m%20interested%20in%20your%20services." class="contact-link wa-link" target="_blank">
-              <span class="contact-link-label">WHATSAPP</span>
-              +91 9989128449
-            </a>
-            <a href="mailto:krishnaprasad5977@gmail.com" class="contact-link">
-              <span class="contact-link-label">EMAIL</span>
-              krishnaprasad5977@gmail.com
-            </a>
-            <a href="tel:+919989128449" class="contact-link">
-              <span class="contact-link-label">CALL</span>
-              +91 9989128449
-            </a>
-            <a href="https://www.linkedin.com/in/krishna-prasad-15b555375/" target="_blank" class="contact-link">
-              <span class="contact-link-label">LINKEDIN</span>
-              linkedin.com/in/krishna-prasad-15b555375
-            </a>
-          </div>
-          <div style="background: var(--surface); border: 1px solid var(--card-border); border-radius: 8px; padding: 20px;">
-            <div style="font-size: 13px; color: var(--text-muted); line-height: 1.7;">
-              <strong style="color: var(--text); display: block; margin-bottom: 8px;">Payment</strong>
-              UPI · Bank Transfer · PhonePe · GPay<br>
-              50% advance to start · Balance on delivery
-            </div>
+          <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20InfraKraft%20services." class="contact-link wa-contact" target="_blank">
+            <div class="contact-link-icon">💬</div>
+            <div><div class="contact-link-label">WhatsApp</div><div class="contact-link-val">+91 9989128449</div></div>
+          </a>
+          <a href="mailto:krishnaprasad5977@gmail.com" class="contact-link">
+            <div class="contact-link-icon">✉️</div>
+            <div><div class="contact-link-label">Email</div><div class="contact-link-val">krishnaprasad5977@gmail.com</div></div>
+          </a>
+          <a href="tel:+919989128449" class="contact-link">
+            <div class="contact-link-icon">📞</div>
+            <div><div class="contact-link-label">Call</div><div class="contact-link-val">+91 9989128449</div></div>
+          </a>
+          <a href="https://www.linkedin.com/in/krishna-prasad-15b555375/" target="_blank" class="contact-link">
+            <div class="contact-link-icon">💼</div>
+            <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-val">linkedin.com/in/krishna-prasad-15b555375</div></div>
+          </a>
+          <div class="payment-box">
+            <div class="payment-box-title">Payment</div>
+            <div class="payment-box-text">UPI · Bank Transfer · PhonePe · GPay<br>50% advance to start · balance on delivery</div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
   <footer>
-    <span>InfraKraft</span> · DevOps & Tech Services · Bangalore / Chennai · krishnaprasad5977@gmail.com
+    <strong>InfraKraft</strong> &nbsp;·&nbsp; DevOps &amp; Tech Services &nbsp;·&nbsp; Bangalore / Chennai &nbsp;·&nbsp;
+    <a href="mailto:krishnaprasad5977@gmail.com">krishnaprasad5977@gmail.com</a>
   </footer>
 
 </body>
