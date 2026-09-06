@@ -3,374 +3,235 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>InfraKraft — DevOps & Tech Services</title>
-  <meta name="description" content="InfraKraft — Professional DevOps, cloud infrastructure, business websites, and tech tutoring. Based in Bangalore/Chennai.">
+  <title>InfraKraft — Websites, Apps & Tech Services</title>
+  <meta name="description" content="InfraKraft — Business websites, mobile apps, digital marketing, DevOps setup, and tech tutoring. Based in Bangalore / Chennai. WhatsApp for a free quote.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap">
   <style>
     :root {
       --bg: #F8F9FA;
       --surface: #FFFFFF;
-      --surface2: #F2F4F7;
       --text: #0F1923;
       --text-muted: #4B5563;
       --text-light: #9CA3AF;
       --accent: #1B4FD8;
       --accent-light: #EEF2FF;
       --accent-border: rgba(27,79,216,0.2);
+      --green: #059669;
+      --green-light: #ECFDF5;
       --divider: #E5E7EB;
       --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
-      --shadow-lg: 0 8px 32px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.09);
       --wa: #25D366;
       --wa-light: #F0FDF4;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--divider);
-      padding: 0 6%; height: 60px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px; font-weight: 700; color: var(--text);
-      text-decoration: none; letter-spacing: -0.01em;
-    }
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--divider); padding: 0 5%; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text); text-decoration: none; }
     .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
-    .nav-links a {
-      font-size: 13.5px; font-weight: 500; color: var(--text-muted);
-      text-decoration: none; letter-spacing: 0.01em; transition: color 0.2s;
-    }
+    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+    .nav-links a { font-size: 13.5px; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
-    .nav-cta {
-      background: var(--accent); color: white !important;
-      padding: 8px 20px; border-radius: 6px; font-weight: 600 !important;
-      transition: opacity 0.2s !important;
-    }
-    .nav-cta:hover { opacity: 0.88; color: white !important; }
+    .nav-cta { background: var(--accent) !important; color: white !important; padding: 8px 18px; border-radius: 6px; font-weight: 600 !important; }
+    .nav-cta:hover { opacity: 0.88; }
 
-    /* WhatsApp float */
-    .wa-float {
-      position: fixed; bottom: 28px; right: 28px; z-index: 200;
-      background: var(--wa); color: white;
-      width: 52px; height: 52px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      text-decoration: none; font-size: 24px;
-      box-shadow: 0 4px 16px rgba(37,211,102,0.35);
-      transition: transform 0.2s;
-    }
+    /* WA FLOAT */
+    .wa-float { position: fixed; bottom: 28px; right: 28px; z-index: 200; background: var(--wa); color: white; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 24px; box-shadow: 0 4px 16px rgba(37,211,102,0.4); transition: transform 0.2s; }
     .wa-float:hover { transform: scale(1.08); }
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh; display: flex; align-items: center;
-      padding: 100px 6% 80px;
-      background: var(--surface);
-      border-bottom: 1px solid var(--divider);
-    }
-    .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center; }
-
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--accent-light); color: var(--accent);
-      font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 5px 14px; border-radius: 20px;
-      margin-bottom: 24px;
-    }
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; align-items: center; padding: 100px 5% 80px; background: var(--surface); border-bottom: 1px solid var(--divider); }
+    .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 400px; gap: 72px; align-items: center; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-light); color: var(--accent); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 22px; }
     .hero-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(40px, 5vw, 60px); font-weight: 700;
-      line-height: 1.08; letter-spacing: -0.02em;
-      color: var(--text); margin-bottom: 20px;
-    }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(38px, 5vw, 58px); font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 16px; }
     h1 em { font-style: italic; color: var(--accent); }
-
-    .hero-desc {
-      font-size: 16px; color: var(--text-muted); line-height: 1.8;
-      margin-bottom: 36px; max-width: 480px; font-weight: 400;
-    }
-    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
-
-    .btn-primary {
-      background: var(--accent); color: white;
-      padding: 13px 28px; border-radius: 6px;
-      font-weight: 600; font-size: 14px; text-decoration: none;
-      transition: opacity 0.2s; display: inline-block; letter-spacing: 0.01em;
-    }
+    .hero-sub { font-size: 15px; color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; max-width: 460px; }
+    .hero-audiences { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; }
+    .aud-chip { background: var(--bg); border: 1px solid var(--divider); border-radius: 20px; padding: 5px 14px; font-size: 12.5px; font-weight: 500; color: var(--text-muted); }
+    .aud-chip strong { color: var(--text); font-weight: 600; }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 44px; }
+    .btn-primary { background: var(--accent); color: white; padding: 13px 26px; border-radius: 6px; font-weight: 600; font-size: 14px; text-decoration: none; transition: opacity 0.2s; display: inline-block; }
     .btn-primary:hover { opacity: 0.88; }
-    .btn-secondary {
-      background: transparent; color: var(--text);
-      border: 1.5px solid var(--divider);
-      padding: 13px 28px; border-radius: 6px;
-      font-weight: 500; font-size: 14px; text-decoration: none;
-      transition: border-color 0.2s, background 0.2s; display: inline-block;
-    }
-    .btn-secondary:hover { border-color: var(--text); background: var(--bg); }
-    .btn-wa {
-      background: var(--wa-light); color: var(--wa);
-      border: 1.5px solid rgba(37,211,102,0.3);
-      padding: 13px 28px; border-radius: 6px;
-      font-weight: 600; font-size: 14px; text-decoration: none;
-      transition: background 0.2s; display: inline-block;
-    }
+    .btn-wa { background: var(--wa-light); color: var(--wa); border: 1.5px solid rgba(37,211,102,0.3); padding: 13px 26px; border-radius: 6px; font-weight: 600; font-size: 14px; text-decoration: none; transition: background 0.2s; display: inline-block; }
     .btn-wa:hover { background: rgba(37,211,102,0.15); }
-
-    .hero-stats { display: flex; gap: 36px; }
-    .stat-num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: var(--text); line-height: 1; }
-    .stat-label { font-size: 12px; color: var(--text-light); margin-top: 4px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+    .btn-secondary { background: transparent; color: var(--text); border: 1.5px solid var(--divider); padding: 13px 26px; border-radius: 6px; font-weight: 500; font-size: 14px; text-decoration: none; transition: border-color 0.2s; display: inline-block; }
+    .btn-secondary:hover { border-color: var(--text); }
+    .btn-outline-sm { background: transparent; color: var(--accent); border: 1.5px solid var(--accent-border); padding: 9px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; text-decoration: none; transition: background 0.2s; display: inline-block; }
+    .btn-outline-sm:hover { background: var(--accent-light); }
+    .btn-wa-sm { background: var(--wa-light); color: var(--wa); border: 1.5px solid rgba(37,211,102,0.3); padding: 9px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; text-decoration: none; display: inline-block; transition: background 0.2s; }
+    .btn-wa-sm:hover { background: rgba(37,211,102,0.15); }
+    .hero-stats { display: flex; gap: 32px; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; line-height: 1; }
+    .stat-label { font-size: 11.5px; color: var(--text-light); margin-top: 3px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
     .stat-divider { width: 1px; background: var(--divider); }
 
     /* Hero card */
-    .hero-card {
-      background: var(--surface); border: 1px solid var(--divider);
-      border-radius: 16px; padding: 32px;
-      box-shadow: var(--shadow-lg);
-    }
-    .hero-card-label {
-      font-size: 11px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.12em; color: var(--text-light); margin-bottom: 20px;
-    }
-    .hero-card-services { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
-    .hcs-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 12px 14px; border-radius: 8px; background: var(--bg);
-      border: 1px solid var(--divider);
-    }
-    .hcs-icon { font-size: 18px; width: 32px; text-align: center; }
-    .hcs-name { font-size: 13.5px; font-weight: 500; }
-    .hcs-price { font-size: 12px; color: var(--text-light); margin-left: auto; font-weight: 500; }
-    .hero-card-cert {
-      background: var(--accent-light); border: 1px solid var(--accent-border);
-      border-radius: 8px; padding: 12px 16px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .cert-icon { font-size: 20px; }
-    .cert-name { font-size: 12.5px; font-weight: 600; color: var(--accent); }
+    .hero-card { background: var(--surface); border: 1px solid var(--divider); border-radius: 16px; padding: 28px; box-shadow: var(--shadow-lg); }
+    .hero-card-label { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-light); margin-bottom: 16px; }
+    .hero-card-services { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .hcs-item { display: flex; align-items: center; gap: 12px; padding: 11px 13px; border-radius: 8px; background: var(--bg); border: 1px solid var(--divider); }
+    .hcs-icon { font-size: 16px; width: 26px; text-align: center; }
+    .hcs-name { font-size: 13px; font-weight: 500; }
+    .hcs-for { font-size: 11px; color: var(--text-light); margin-left: auto; }
+    .hero-card-cert { background: var(--accent-light); border: 1px solid var(--accent-border); border-radius: 8px; padding: 11px 14px; display: flex; align-items: center; gap: 11px; }
+    .cert-icon { font-size: 18px; }
+    .cert-name { font-size: 12px; font-weight: 600; color: var(--accent); }
     .cert-sub { font-size: 11px; color: var(--text-light); margin-top: 1px; }
 
-    /* ── SECTION BASE ── */
-    section { padding: 88px 6%; }
+    /* SECTION BASE */
+    section { padding: 84px 5%; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
-    .section-eyebrow {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(26px, 3vw, 36px); font-weight: 700;
-      margin-bottom: 14px; letter-spacing: -0.02em; line-height: 1.15;
-    }
-    .section-sub {
-      font-size: 15.5px; color: var(--text-muted); max-width: 520px;
-      margin-bottom: 52px; line-height: 1.75; font-weight: 400;
-    }
+    .section-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(24px, 3vw, 34px); font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em; line-height: 1.15; }
+    .section-sub { font-size: 15px; color: var(--text-muted); max-width: 500px; margin-bottom: 48px; line-height: 1.75; }
 
-    /* ── SERVICES ── */
-    #services { background: var(--surface); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
-    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .service-card {
-      background: var(--bg); border: 1px solid var(--divider);
-      border-radius: 12px; padding: 28px 24px;
-      transition: box-shadow 0.2s, border-color 0.2s;
-      display: flex; flex-direction: column;
-    }
+    /* AUDIENCE SPLIT */
+    .audience-block { margin-bottom: 52px; }
+    .audience-block:last-child { margin-bottom: 0; }
+    .audience-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--divider); }
+    .audience-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; padding: 4px 12px; border-radius: 20px; }
+    .audience-label.biz { background: #FEF3C7; color: #92400E; }
+    .audience-label.tech { background: var(--accent-light); color: var(--accent); }
+    .audience-title { font-weight: 600; font-size: 16px; }
+    .audience-desc { font-size: 13px; color: var(--text-muted); margin-left: auto; }
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .services-grid.three { grid-template-columns: repeat(3, 1fr); }
+    .service-card { background: var(--surface); border: 1px solid var(--divider); border-radius: 10px; padding: 22px 20px; transition: box-shadow 0.2s, border-color 0.2s; display: flex; flex-direction: column; }
     .service-card:hover { box-shadow: var(--shadow-lg); border-color: transparent; }
-    .service-icon { font-size: 26px; margin-bottom: 16px; }
-    .service-name { font-weight: 600; font-size: 15.5px; margin-bottom: 8px; color: var(--text); }
-    .service-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; flex: 1; }
+    .service-icon { font-size: 24px; margin-bottom: 13px; }
+    .service-name { font-weight: 600; font-size: 14.5px; margin-bottom: 7px; }
+    .service-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; flex: 1; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .stag { background: var(--bg); border: 1px solid var(--divider); color: var(--text-muted); border-radius: 4px; font-size: 11px; font-weight: 500; padding: 2px 8px; }
 
-    .service-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .stag {
-      background: var(--accent-light); color: var(--accent);
-      border-radius: 4px; font-size: 11px; font-weight: 500;
-      padding: 3px 9px; letter-spacing: 0.01em;
-    }
+    /* PORTFOLIO */
+    #portfolio { background: var(--surface); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .portfolio-card { background: var(--bg); border: 1px solid var(--divider); border-radius: 12px; overflow: hidden; transition: box-shadow 0.2s; }
+    .portfolio-card:hover { box-shadow: var(--shadow-lg); }
+    .portfolio-thumb { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 56px; }
+    .portfolio-thumb.t1 { background: linear-gradient(135deg, #EEF2FF 0%, #C7D2FE 100%); }
+    .portfolio-thumb.t2 { background: linear-gradient(135deg, #F0FDF4 0%, #A7F3D0 100%); }
+    .portfolio-thumb.t3 { background: linear-gradient(135deg, #FFF7ED 0%, #FED7AA 100%); }
+    .portfolio-body { padding: 20px; }
+    .portfolio-category { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 7px; }
+    .portfolio-name { font-weight: 600; font-size: 15px; margin-bottom: 7px; }
+    .portfolio-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; }
+    .portfolio-result { background: var(--green-light); border: 1px solid rgba(5,150,105,0.2); border-radius: 6px; padding: 9px 12px; font-size: 12.5px; color: var(--green); font-weight: 500; }
+    .portfolio-result::before { content: '↑ '; font-weight: 700; }
 
-    /* ── PRICING ── */
-    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .pricing-card {
-      background: var(--surface); border: 1px solid var(--divider);
-      border-radius: 12px; padding: 36px 28px; position: relative;
-      transition: box-shadow 0.2s;
-    }
-    .pricing-card:hover { box-shadow: var(--shadow-lg); }
-    .pricing-card.featured {
-      background: var(--accent); border-color: var(--accent);
-      color: white;
-    }
-    .pricing-badge {
-      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-      background: var(--text); color: white;
-      font-size: 10px; font-weight: 700; padding: 4px 14px;
-      border-radius: 20px; letter-spacing: 0.1em; white-space: nowrap;
-    }
-    .pricing-plan { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 12px; }
-    .pricing-card.featured .pricing-plan { color: rgba(255,255,255,0.65); }
-    .pricing-price { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
-    .pricing-price span { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 400; color: var(--text-light); }
-    .pricing-card.featured .pricing-price span { color: rgba(255,255,255,0.6); }
-    .pricing-desc { font-size: 13px; color: var(--text-muted); margin: 12px 0 24px; line-height: 1.65; }
-    .pricing-card.featured .pricing-desc { color: rgba(255,255,255,0.75); }
-    .pricing-divider { height: 1px; background: var(--divider); margin-bottom: 24px; }
-    .pricing-card.featured .pricing-divider { background: rgba(255,255,255,0.2); }
-    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
-    .pricing-features li { font-size: 13.5px; color: var(--text-muted); display: flex; gap: 10px; }
-    .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.85); }
-    .pricing-features li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
-    .pricing-card.featured .pricing-features li::before { color: white; }
-    .pricing-cta {
-      display: block; text-align: center; border-radius: 6px;
-      padding: 12px; font-size: 14px; font-weight: 600;
-      text-decoration: none; transition: opacity 0.2s;
-      background: var(--accent-light); color: var(--accent);
-      border: 1px solid var(--accent-border);
-    }
-    .pricing-card.featured .pricing-cta { background: white; color: var(--accent); border: none; }
-    .pricing-cta:hover { opacity: 0.85; }
-
-    /* ── TUTORING ── */
-    #tutoring { background: var(--surface); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
+    /* TUTORING */
+    #tutoring { background: var(--bg); }
+    .tutor-intro { display: grid; grid-template-columns: 1fr 340px; gap: 52px; align-items: start; margin-bottom: 40px; }
+    .tutor-why { background: var(--surface); border: 1px solid var(--divider); border-radius: 12px; padding: 28px; }
+    .tutor-why-title { font-weight: 600; font-size: 15px; margin-bottom: 14px; }
+    .tutor-why-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .tutor-why-list li { font-size: 13.5px; color: var(--text-muted); display: flex; gap: 10px; line-height: 1.6; }
+    .tutor-why-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .tutor-cta-box { background: var(--accent); border-radius: 12px; padding: 28px; color: white; text-align: center; }
+    .tutor-cta-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .tutor-cta-sub { font-size: 13px; opacity: 0.8; margin-bottom: 20px; line-height: 1.6; }
+    .btn-white { background: white; color: var(--accent); padding: 12px 22px; border-radius: 6px; font-weight: 700; font-size: 14px; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
+    .btn-white:hover { opacity: 0.9; }
     .tutor-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .tutor-card {
-      background: var(--bg); border: 1px solid var(--divider);
-      border-radius: 10px; padding: 24px 20px;
-      transition: box-shadow 0.2s;
-    }
+    .tutor-card { background: var(--surface); border: 1px solid var(--divider); border-radius: 10px; padding: 22px 20px; transition: box-shadow 0.2s; display: flex; flex-direction: column; }
     .tutor-card:hover { box-shadow: var(--shadow); }
-    .tutor-level { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 10px; }
-    .tutor-topic { font-weight: 600; font-size: 15px; margin-bottom: 8px; color: var(--text); }
-    .tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-bottom: 16px; }
-    .tutor-price { font-size: 13px; font-weight: 600; color: var(--text); }
-    .tutor-price span { color: var(--text-light); font-weight: 400; }
+    .tutor-level { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 9px; }
+    .tutor-topic { font-weight: 600; font-size: 14.5px; margin-bottom: 7px; }
+    .tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; flex: 1; }
+    .tutor-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .tutor-price { font-size: 13px; font-weight: 700; color: var(--text); }
+    .tutor-price span { font-weight: 400; color: var(--text-light); }
 
-    /* ── HOW IT WORKS ── */
+    /* HOW IT WORKS */
+    #how { background: var(--surface); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
     .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
     .step-card { text-align: center; padding: 8px; }
-    .step-num {
-      width: 48px; height: 48px; border-radius: 50%;
-      background: var(--accent-light); color: var(--accent);
-      font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 16px;
-    }
-    .step-title { font-weight: 600; font-size: 15px; margin-bottom: 8px; }
+    .step-num { width: 46px; height: 46px; border-radius: 50%; background: var(--accent-light); color: var(--accent); font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+    .step-title { font-weight: 600; font-size: 14.5px; margin-bottom: 7px; }
     .step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
 
-    /* ── EXPERIENCE ── */
-    #experience { background: var(--surface); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
-    .exp-list { display: flex; flex-direction: column; border: 1px solid var(--divider); border-radius: 12px; overflow: hidden; }
-    .exp-item { display: grid; grid-template-columns: 180px 1fr; gap: 0; border-bottom: 1px solid var(--divider); }
+    /* EXPERIENCE */
+    #experience { background: var(--bg); }
+    .exp-list { display: flex; flex-direction: column; border: 1px solid var(--divider); border-radius: 12px; overflow: hidden; margin-bottom: 32px; }
+    .exp-item { display: grid; grid-template-columns: 160px 1fr; border-bottom: 1px solid var(--divider); }
     .exp-item:last-child { border-bottom: none; }
-    .exp-left { background: var(--bg); padding: 24px 20px; border-right: 1px solid var(--divider); }
-    .exp-right { padding: 24px 28px; background: var(--surface); }
-    .exp-dates { font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 4px; letter-spacing: 0.02em; }
-    .exp-client { font-size: 12px; color: var(--text-light); }
-    .exp-title { font-weight: 600; font-size: 15px; margin-bottom: 3px; }
-    .exp-company { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; }
+    .exp-left { background: var(--surface); padding: 22px 18px; border-right: 1px solid var(--divider); }
+    .exp-right { padding: 22px 26px; background: var(--surface); }
+    .exp-dates { font-size: 11.5px; font-weight: 600; color: var(--accent); margin-bottom: 3px; }
+    .exp-client { font-size: 11.5px; color: var(--text-light); }
+    .exp-title { font-weight: 600; font-size: 14.5px; margin-bottom: 3px; }
+    .exp-company { font-size: 12.5px; color: var(--text-muted); margin-bottom: 8px; }
     .exp-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+    .cert-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .cert-item { background: var(--surface); border: 1px solid var(--divider); border-radius: 8px; padding: 13px 16px; display: flex; align-items: flex-start; gap: 10px; }
+    .cert-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 4px; }
+    .cert-name { font-weight: 600; font-size: 12.5px; }
+    .cert-issuer { font-size: 11.5px; color: var(--text-light); margin-top: 2px; }
 
-    .cert-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
-    .cert-item {
-      background: var(--bg); border: 1px solid var(--divider);
-      border-radius: 8px; padding: 14px 18px;
-      display: flex; align-items: flex-start; gap: 12px;
-    }
-    .cert-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 4px; }
-    .cert-name { font-weight: 600; font-size: 13px; }
-    .cert-issuer { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+    /* FAQ */
+    #faq { background: var(--surface); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .faq-item { background: var(--bg); border: 1px solid var(--divider); border-radius: 10px; padding: 22px 20px; }
+    .faq-q { font-weight: 600; font-size: 14.5px; margin-bottom: 9px; }
+    .faq-a { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; }
 
-    /* ── CONTACT ── */
-    .contact-grid { display: grid; grid-template-columns: 1fr 400px; gap: 48px; align-items: start; }
-    .contact-form { background: var(--surface); border: 1px solid var(--divider); border-radius: 12px; padding: 36px; box-shadow: var(--shadow); }
-    .form-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 24px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-group { margin-bottom: 18px; }
-    .form-group label { display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 7px; }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%; background: var(--bg); border: 1.5px solid var(--divider);
-      border-radius: 6px; padding: 11px 14px; color: var(--text);
-      font-size: 14px; font-family: 'Inter', sans-serif; outline: none;
-      transition: border-color 0.2s; appearance: none;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { border-color: var(--accent); }
-    .form-group textarea { resize: vertical; min-height: 100px; }
-    .form-submit {
-      width: 100%; background: var(--accent); color: white; border: none;
-      border-radius: 6px; padding: 13px; font-size: 15px; font-weight: 600;
-      cursor: pointer; font-family: 'Inter', sans-serif; transition: opacity 0.2s;
-    }
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 380px; gap: 44px; align-items: start; }
+    .contact-form { background: var(--surface); border: 1px solid var(--divider); border-radius: 12px; padding: 32px; box-shadow: var(--shadow); }
+    .form-title { font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 700; margin-bottom: 22px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 6px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--bg); border: 1.5px solid var(--divider); border-radius: 6px; padding: 10px 13px; color: var(--text); font-size: 14px; font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.2s; appearance: none; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-submit { width: 100%; background: var(--accent); color: white; border: none; border-radius: 6px; padding: 13px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: opacity 0.2s; }
     .form-submit:hover { opacity: 0.88; }
-    .form-note { font-size: 12px; color: var(--text-light); text-align: center; margin-top: 10px; }
-
-    .contact-sidebar { display: flex; flex-direction: column; gap: 16px; }
-    .contact-sidebar-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 6px; }
-    .contact-sidebar-sub { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 8px; }
-    .contact-link {
-      display: flex; align-items: center; gap: 14px; text-decoration: none;
-      padding: 14px 16px; border-radius: 8px; border: 1px solid var(--divider);
-      background: var(--surface); transition: border-color 0.2s, box-shadow 0.2s;
-      color: var(--text);
-    }
+    .form-note { font-size: 12px; color: var(--text-light); text-align: center; margin-top: 9px; }
+    #form-success { background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 14px; }
+    .contact-sidebar { display: flex; flex-direction: column; gap: 14px; }
+    .contact-sidebar-title { font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 700; margin-bottom: 4px; }
+    .contact-sidebar-sub { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; margin-bottom: 4px; }
+    .contact-link { display: flex; align-items: center; gap: 13px; text-decoration: none; padding: 13px 15px; border-radius: 8px; border: 1px solid var(--divider); background: var(--surface); transition: border-color 0.2s, box-shadow 0.2s; color: var(--text); }
     .contact-link:hover { border-color: var(--accent); box-shadow: var(--shadow); }
-    .contact-link-icon { font-size: 18px; width: 28px; text-align: center; flex-shrink: 0; }
-    .contact-link-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
-    .contact-link-val { font-size: 13.5px; font-weight: 500; margin-top: 1px; }
+    .contact-link-icon { font-size: 17px; width: 26px; text-align: center; flex-shrink: 0; }
+    .contact-link-label { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
+    .contact-link-val { font-size: 13px; font-weight: 500; margin-top: 1px; }
     .wa-contact { border-color: rgba(37,211,102,0.3); background: var(--wa-light); }
     .wa-contact:hover { border-color: var(--wa); }
-
-    .payment-box { background: var(--bg); border: 1px solid var(--divider); border-radius: 8px; padding: 18px 20px; }
-    .payment-box-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 8px; }
+    .payment-box { background: var(--bg); border: 1px solid var(--divider); border-radius: 8px; padding: 16px 18px; }
+    .payment-box-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 7px; }
     .payment-box-text { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
 
-    /* Success message */
-    #form-success { background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 16px; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--text); color: rgba(255,255,255,0.5);
-      padding: 36px 6%; text-align: center;
-      font-size: 13px;
-    }
+    /* FOOTER */
+    footer { background: var(--text); color: rgba(255,255,255,0.45); padding: 32px 5%; text-align: center; font-size: 13px; }
     footer strong { color: white; }
-    footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    footer a { color: rgba(255,255,255,0.45); text-decoration: none; }
     footer a:hover { color: white; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .hero-inner, .contact-grid { grid-template-columns: 1fr; }
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .hero-inner, .contact-grid, .tutor-intro { grid-template-columns: 1fr; }
       .hero-card { display: none; }
       .services-grid { grid-template-columns: 1fr 1fr; }
-      .pricing-grid, .tutor-grid { grid-template-columns: 1fr 1fr; }
+      .services-grid.three { grid-template-columns: 1fr 1fr; }
+      .portfolio-grid, .tutor-grid, .faq-grid { grid-template-columns: 1fr 1fr; }
       .steps-grid { grid-template-columns: 1fr 1fr; }
       .exp-item { grid-template-columns: 1fr; }
-      .exp-left { border-right: none; border-bottom: 1px solid var(--divider); padding: 16px 20px; }
+      .exp-left { border-right: none; border-bottom: 1px solid var(--divider); padding: 14px 18px; }
       .nav-links { display: none; }
+      .audience-desc { display: none; }
     }
     @media (max-width: 600px) {
-      .services-grid, .pricing-grid, .tutor-grid, .steps-grid { grid-template-columns: 1fr; }
+      .services-grid, .services-grid.three, .portfolio-grid, .tutor-grid, .steps-grid, .faq-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
+      .hero-audiences { display: none; }
     }
   </style>
 </head>
@@ -380,73 +241,51 @@
     <a class="nav-logo" href="#">Infra<span>Kraft</span></a>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Work</a></li>
       <li><a href="#tutoring">Tutoring</a></li>
-      <li><a href="#experience">About</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
     </ul>
   </nav>
 
-  <a href="https://wa.me/919989128449?text=Hi%2C%20I%20found%20InfraKraft%20and%20I%27m%20interested%20in%20your%20services." class="wa-float" target="_blank" title="WhatsApp">💬</a>
+  <a href="https://wa.me/919989128449?text=Hi%2C%20I%20found%20InfraKraft%20and%20I%27m%20interested%20in%20your%20services." class="wa-float" target="_blank" title="Chat on WhatsApp">💬</a>
 
   <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
       <div>
-        <div class="hero-eyebrow">Available for freelance work · Bangalore / Chennai</div>
-        <h1>Infrastructure &amp; DevOps <em>that works.</em></h1>
-        <p class="hero-desc">
-          Professional cloud infrastructure, CI/CD pipelines, business websites, and tech tutoring —
-          delivered by an AWS Certified engineer with 6+ years of production experience.
-        </p>
+        <div class="hero-eyebrow">Freelance · Bangalore / Chennai · Available now</div>
+        <h1>Your tech problems,<br><em>solved.</em></h1>
+        <p class="hero-sub">Website for your business. App for your idea. Cloud setup for your startup. Tutoring to land your next job.</p>
+        <div class="hero-audiences">
+          <span class="aud-chip"><strong>Small business?</strong> Website, app, marketing</span>
+          <span class="aud-chip"><strong>Student?</strong> Tutoring & mentorship</span>
+          <span class="aud-chip"><strong>Startup?</strong> DevOps & cloud setup</span>
+        </div>
         <div class="hero-ctas">
           <a href="#contact" class="btn-primary">Get a Free Quote</a>
           <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20InfraKraft%20services." class="btn-wa" target="_blank">💬 WhatsApp</a>
-          <a href="#services" class="btn-secondary">View Services</a>
+          <a href="#services" class="btn-secondary">See Services</a>
         </div>
         <div class="hero-stats">
-          <div>
-            <div class="stat-num">6+</div>
-            <div class="stat-label">Years Experience</div>
-          </div>
+          <div><div class="stat-num">6+</div><div class="stat-label">Years experience</div></div>
           <div class="stat-divider"></div>
-          <div>
-            <div class="stat-num">AWS</div>
-            <div class="stat-label">Certified Architect</div>
-          </div>
+          <div><div class="stat-num">AWS</div><div class="stat-label">Certified</div></div>
           <div class="stat-divider"></div>
-          <div>
-            <div class="stat-num">24h</div>
-            <div class="stat-label">Response Time</div>
-          </div>
+          <div><div class="stat-num">24h</div><div class="stat-label">Response time</div></div>
         </div>
       </div>
-
       <div class="hero-card">
-        <div class="hero-card-label">Popular Services</div>
+        <div class="hero-card-label">I can help you with</div>
         <div class="hero-card-services">
-          <div class="hcs-item">
-            <div class="hcs-icon">🌐</div>
-            <div class="hcs-name">Business Website</div>
-          </div>
-          <div class="hcs-item">
-            <div class="hcs-icon">🎨</div>
-            <div class="hcs-name">Logo & Brand Design</div>
-          </div>
-          <div class="hcs-item">
-            <div class="hcs-icon">🛒</div>
-            <div class="hcs-name">E-Commerce Store</div>
-          </div>
-          <div class="hcs-item">
-            <div class="hcs-icon">📱</div>
-            <div class="hcs-name">Custom Web App</div>
-          </div>
+          <div class="hcs-item"><div class="hcs-icon">🌐</div><div class="hcs-name">Business Website</div><div class="hcs-for">For shops & businesses</div></div>
+          <div class="hcs-item"><div class="hcs-icon">📲</div><div class="hcs-name">Mobile App</div><div class="hcs-for">Android / iOS</div></div>
+          <div class="hcs-item"><div class="hcs-icon">📣</div><div class="hcs-name">Digital Marketing</div><div class="hcs-for">Instagram, YouTube</div></div>
+          <div class="hcs-item"><div class="hcs-icon">🎓</div><div class="hcs-name">DevOps Tutoring</div><div class="hcs-for">Students & freshers</div></div>
         </div>
         <div class="hero-card-cert">
           <div class="cert-icon">🏅</div>
-          <div>
-            <div class="cert-name">AWS Certified Solutions Architect</div>
-            <div class="cert-sub">Associate · Valid 2025–2028</div>
-          </div>
+          <div><div class="cert-name">AWS Certified Solutions Architect</div><div class="cert-sub">Associate · Valid 2025–2028</div></div>
         </div>
       </div>
     </div>
@@ -455,121 +294,223 @@
   <!-- SERVICES -->
   <section id="services">
     <div class="section-inner">
-      <div class="section-eyebrow">What we offer</div>
+      <div class="section-eyebrow">What I offer</div>
       <h2 class="section-title">Services</h2>
-      <p class="section-sub">End-to-end tech services for businesses and individuals — from a simple website to full cloud infrastructure.</p>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon">🌐</div>
-          <div class="service-name">Business Website</div>
-          <div class="service-desc">Professional website for your business — landing page, company site, portfolio, or product page. Mobile-friendly, fast, and hosted on AWS with SSL.</div>
-          <div class="service-tags"><span class="stag">HTML/CSS</span><span class="stag">AWS S3</span><span class="stag">CloudFront</span><span class="stag">SSL</span></div>
+
+      <!-- For Businesses -->
+      <div class="audience-block">
+        <div class="audience-header">
+          <span class="audience-label biz">For Businesses & Individuals</span>
+          <span class="audience-title">Grow your business online</span>
+          <span class="audience-desc">Websites · Apps · Marketing · E-Commerce · Branding</span>
         </div>
-        <div class="service-card">
-          <div class="service-icon">🔧</div>
-          <div class="service-name">Website Maintenance</div>
-          <div class="service-desc">Monthly plan — content updates, uptime monitoring, backups, and security patches. Never worry about your site going down again.</div>
-          <div class="service-tags"><span class="stag">Monitoring</span><span class="stag">Backups</span><span class="stag">Updates</span></div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">🌐</div>
+            <div class="service-name">Business Website</div>
+            <div class="service-desc">Professional website for your shop, salon, restaurant, or business. Mobile-friendly, fast, with contact form and Google Maps.</div>
+            <div class="service-tags"><span class="stag">Landing Page</span><span class="stag">Company Site</span><span class="stag">Portfolio</span></div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🛒</div>
+            <div class="service-name">E-Commerce Store</div>
+            <div class="service-desc">Online store with product listings, Razorpay / UPI / GPay payment, order tracking, and mobile-friendly design. Start selling online fast.</div>
+            <div class="service-tags"><span class="stag">Razorpay</span><span class="stag">UPI</span><span class="stag">Order Management</span></div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">📲</div>
+            <div class="service-name">Mobile App</div>
+            <div class="service-desc">Android app for your business — booking, catalogue, delivery tracking, push notifications. Works on all Android phones.</div>
+            <div class="service-tags"><span class="stag">Booking App</span><span class="stag">Catalogue</span><span class="stag">Notifications</span></div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">📣</div>
+            <div class="service-name">Digital Marketing</div>
+            <div class="service-desc">Instagram Reels, Facebook posts, YouTube Shorts, WhatsApp Business setup, Google Ads, and Google Business listing. Get found and followed.</div>
+            <div class="service-tags"><span class="stag">Instagram</span><span class="stag">YouTube</span><span class="stag">WhatsApp Biz</span><span class="stag">Google Ads</span></div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🎨</div>
+            <div class="service-name">Logo & Branding</div>
+            <div class="service-desc">Logo, colour palette, and brand kit — everything you need for your website, visiting card, and social media profiles.</div>
+            <div class="service-tags"><span class="stag">Logo</span><span class="stag">Brand Kit</span><span class="stag">Visiting Card</span></div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🔧</div>
+            <div class="service-name">Website Maintenance</div>
+            <div class="service-desc">Monthly plan — content updates, uptime monitoring, security patches, backups. Never worry about your site going down.</div>
+            <div class="service-tags"><span class="stag">Monthly Plan</span><span class="stag">Monitoring</span><span class="stag">Backups</span></div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🖥️</div>
+            <div class="service-name">IT Support & Setup</div>
+            <div class="service-desc">Computer setup, email config, data recovery, network troubleshooting. Remote support or in-person (Bangalore / Chennai).</div>
+            <div class="service-tags"><span class="stag">Remote</span><span class="stag">Windows</span><span class="stag">Mac</span></div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">📱</div>
+            <div class="service-name">Social Media Management</div>
+            <div class="service-desc">Monthly management of your Instagram, Facebook, LinkedIn — content calendar, posts, captions, basic engagement. Build your audience consistently.</div>
+            <div class="service-tags"><span class="stag">Instagram</span><span class="stag">Facebook</span><span class="stag">LinkedIn</span></div>
+          </div>
         </div>
-        <div class="service-card">
-          <div class="service-icon">📱</div>
-          <div class="service-name">Custom Web App</div>
-          <div class="service-desc">Booking systems, dashboards, automation portals — built to your exact requirements. From idea to live app, end to end.</div>
-          <div class="service-tags"><span class="stag">Python</span><span class="stag">Flask</span><span class="stag">AWS</span><span class="stag">Docker</span></div>
+      </div>
+
+      <!-- For Tech Professionals -->
+      <div class="audience-block">
+        <div class="audience-header">
+          <span class="audience-label tech">For Startups & Tech Teams</span>
+          <span class="audience-title">Infrastructure & DevOps</span>
+          <span class="audience-desc">Cloud · CI/CD · MLOps · Security Audit</span>
         </div>
-        <div class="service-card">
-          <div class="service-icon">🎨</div>
-          <div class="service-name">Logo & Brand Design</div>
-          <div class="service-desc">Professional logo, colour palette, and brand kit for your business. Get everything you need for your website, social media, and printed materials.</div>
-          <div class="service-tags"><span class="stag">Logo</span><span class="stag">Brand Kit</span><span class="stag">Business Card</span><span class="stag">Canva</span></div>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">📱</div>
-          <div class="service-name">Social Media Management</div>
-          <div class="service-desc">Monthly management of your Instagram, Facebook, or LinkedIn — content calendar, posts, captions, and basic engagement. Build your audience consistently.</div>
-          <div class="service-tags"><span class="stag">Instagram</span><span class="stag">Facebook</span><span class="stag">LinkedIn</span><span class="stag">Content</span></div>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🖥️</div>
-          <div class="service-name">IT Support & Setup</div>
-          <div class="service-desc">Computer setup, software installation, email configuration, data recovery, printer / network troubleshooting. Remote or in-person (Bangalore / Chennai).</div>
-          <div class="service-tags"><span class="stag">Remote Support</span><span class="stag">Windows</span><span class="stag">Mac</span><span class="stag">Networking</span></div>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">📣</div>
-          <div class="service-name">Digital Marketing</div>
-          <div class="service-desc">Google Ads setup, SEO basics, social media profile optimisation (LinkedIn, Instagram), and Google Business listing — get found online fast.</div>
-          <div class="service-tags"><span class="stag">SEO</span><span class="stag">Google Ads</span><span class="stag">GMB</span><span class="stag">Social</span></div>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">📲</div>
-          <div class="service-name">Mobile App (Android)</div>
-          <div class="service-desc">Simple Android or cross-platform mobile apps for your business — booking, catalogue, contact forms, push notifications. Built with Flutter or React Native.</div>
-          <div class="service-tags"><span class="stag">Flutter</span><span class="stag">React Native</span><span class="stag">Android</span></div>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🎓</div>
-          <div class="service-name">Internship Mentorship</div>
-          <div class="service-desc">Hands-on mentorship for students doing DevOps / Cloud internships. Real project guidance, resume review, LinkedIn profile, and interview prep. Flexible schedule.</div>
-          <div class="service-tags"><span class="stag">DevOps</span><span class="stag">AWS</span><span class="stag">Resume Review</span><span class="stag">Interview Prep</span></div>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🛒</div>
-          <div class="service-name">E-Commerce Store</div>
-          <div class="service-desc">Online store for your products — product listings, payment gateway (Razorpay / UPI), order management, and mobile-friendly design. Ready to sell in days.</div>
-          <div class="service-tags"><span class="stag">Razorpay</span><span class="stag">UPI</span><span class="stag">Product Catalogue</span></div>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🔐</div>
-          <div class="service-name">Security Audit & Fixes</div>
-          <div class="service-desc">Review your website or app for security issues — SSL, broken auth, exposed credentials, outdated dependencies — and patch them. One-time audit + report.</div>
-          <div class="service-tags"><span class="stag">OWASP</span><span class="stag">SSL</span><span class="stag">SonarQube</span><span class="stag">IAM</span></div>
+        <div class="services-grid three">
+          <div class="service-card">
+            <div class="service-icon">📱</div>
+            <div class="service-name">Custom Web App</div>
+            <div class="service-desc">Booking systems, dashboards, internal portals — built to your requirements. From idea to deployed app, end to end.</div>
+            <div class="service-tags"><span class="stag">Python</span><span class="stag">Flask</span><span class="stag">AWS</span><span class="stag">Docker</span></div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">☁️</div>
+            <div class="service-name">Cloud & DevOps Setup</div>
+            <div class="service-desc">AWS infrastructure from scratch — EC2, S3, ECS, IAM, VPC. CI/CD pipelines with GitHub Actions or Jenkins. Terraform IaC included.</div>
+            <div class="service-tags"><span class="stag">AWS</span><span class="stag">Terraform</span><span class="stag">CI/CD</span><span class="stag">Docker</span></div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🔐</div>
+            <div class="service-name">Security Audit</div>
+            <div class="service-desc">Review your website, app, or cloud setup for security gaps — SSL, auth, exposed credentials, outdated dependencies. One-time audit + report.</div>
+            <div class="service-tags"><span class="stag">OWASP</span><span class="stag">SSL</span><span class="stag">IAM</span><span class="stag">Report</span></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <div class="section-inner">
+      <div class="section-eyebrow">Selected work</div>
+      <h2 class="section-title">What I've Built</h2>
+      <p class="section-sub">A few examples of real projects. Client names anonymised where requested.</p>
+      <div class="portfolio-grid">
+        <div class="portfolio-card">
+          <div class="portfolio-thumb t1">🌐</div>
+          <div class="portfolio-body">
+            <div class="portfolio-category">Business Website + SEO</div>
+            <div class="portfolio-name">Local Bakery — Bangalore</div>
+            <div class="portfolio-desc">3-page website with menu, contact form, Google Maps, and WhatsApp order button. Google Business listing setup and basic SEO. Delivered in 6 days.</div>
+            <div class="portfolio-result">First Google enquiry within 2 weeks of going live</div>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-thumb t2">⚙️</div>
+          <div class="portfolio-body">
+            <div class="portfolio-category">CI/CD Pipeline · DevOps</div>
+            <div class="portfolio-name">Healthcare Software Startup</div>
+            <div class="portfolio-desc">Full CI/CD pipeline on AWS — code push to production in under 10 minutes with automated tests, security scans, and Slack notifications.</div>
+            <div class="portfolio-result">Deploy time cut from 45 min to 8 min</div>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-thumb t3">📲</div>
+          <div class="portfolio-body">
+            <div class="portfolio-category">Mobile App · E-Commerce</div>
+            <div class="portfolio-name">Home Services Business — Chennai</div>
+            <div class="portfolio-desc">Android app for booking home cleaning services — slot selection, Razorpay payment, booking confirmation SMS, and admin dashboard to manage orders.</div>
+            <div class="portfolio-result">20+ bookings in first month post-launch</div>
+          </div>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top:28px; font-size:13px; color:var(--text-light);">
+        Want to see more? <a href="https://wa.me/919989128449?text=Hi%2C%20can%20I%20see%20more%20of%20your%20work%3F" target="_blank" style="color:var(--accent); text-decoration:none; font-weight:600;">Ask on WhatsApp</a>
+      </p>
+    </div>
+  </section>
 
   <!-- TUTORING -->
   <section id="tutoring">
     <div class="section-inner">
-      <div class="section-eyebrow">Learn from a practitioner</div>
-      <h2 class="section-title">Tech Tutoring</h2>
-      <p class="section-sub">One-on-one online sessions. Learn tools used in production every day — not just theory.</p>
+      <div class="section-eyebrow">1-on-1 online sessions</div>
+      <h2 class="section-title">Tech Tutoring & Mentorship</h2>
+      <div class="tutor-intro">
+        <div>
+          <p style="font-size:15px; color:var(--text-muted); line-height:1.8; margin-bottom:20px;">
+            Learn DevOps, cloud, and infrastructure from someone who uses these tools in production every day at Sony &amp; Athena Health — not just a trainer reading slides.
+          </p>
+          <div class="tutor-why">
+            <div class="tutor-why-title">What you get</div>
+            <ul class="tutor-why-list">
+              <li>Sessions online via Google Meet · recordings on request</li>
+              <li>Hands-on with your actual project or a real lab environment</li>
+              <li>Resume review + LinkedIn profile feedback included</li>
+              <li>Mock interview rounds for DevOps / Cloud roles</li>
+              <li>Completion letter you can add to your resume</li>
+              <li>Free 30-min intro call before you commit</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tutor-cta-box">
+          <div class="tutor-cta-title">Start with a free call</div>
+          <div class="tutor-cta-sub">30 minutes. No commitment. We'll figure out exactly what you need and how long it'll take.</div>
+          <a href="https://wa.me/919989128449?text=Hi%2C%20I%27d%20like%20to%20book%20a%20free%2030-min%20intro%20call%20for%20tutoring." class="btn-white" target="_blank">💬 Book Free Intro Call</a>
+        </div>
+      </div>
       <div class="tutor-grid">
         <div class="tutor-card">
           <div class="tutor-level">Beginner → Intermediate</div>
           <div class="tutor-topic">Linux & Shell Scripting</div>
-          <div class="tutor-desc">Command line from scratch — navigation, file management, scripting, and automation.</div>
+          <div class="tutor-desc">Command line from scratch — navigation, file management, bash scripting, and automation. Great starting point for any DevOps role.</div>
+          <div class="tutor-footer">
+            <span class="tutor-price">₹500 <span>/ hour</span></span>
+            <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20Linux%20%26%20Shell%20Scripting%20tutoring." class="btn-wa-sm" target="_blank">💬 Book</a>
+          </div>
         </div>
         <div class="tutor-card">
           <div class="tutor-level">Beginner → Intermediate</div>
           <div class="tutor-topic">AWS Cloud Fundamentals</div>
-          <div class="tutor-desc">EC2, S3, IAM, VPC with hands-on labs. Covers AWS Cloud Practitioner & Solutions Architect exam prep.</div>
+          <div class="tutor-desc">EC2, S3, IAM, VPC with hands-on labs. Covers AWS Cloud Practitioner &amp; Solutions Architect exam prep.</div>
+          <div class="tutor-footer">
+            <span class="tutor-price">₹600 <span>/ hour</span></span>
+            <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20AWS%20Cloud%20tutoring." class="btn-wa-sm" target="_blank">💬 Book</a>
+          </div>
         </div>
         <div class="tutor-card">
           <div class="tutor-level">Intermediate</div>
           <div class="tutor-topic">DevOps & CI/CD</div>
-          <div class="tutor-desc">Git, Jenkins, GitHub Actions, Docker, and Kubernetes. Build real pipelines from scratch.</div>
+          <div class="tutor-desc">Git, Jenkins, GitHub Actions, Docker, and Kubernetes. Build real pipelines from scratch that you can put on your resume.</div>
+          <div class="tutor-footer">
+            <span class="tutor-price">₹700 <span>/ hour</span></span>
+            <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20DevOps%20%26%20CI%2FCD%20tutoring." class="btn-wa-sm" target="_blank">💬 Book</a>
+          </div>
         </div>
         <div class="tutor-card">
           <div class="tutor-level">Intermediate → Advanced</div>
           <div class="tutor-topic">Terraform & IaC</div>
-          <div class="tutor-desc">Write Terraform to provision real AWS infrastructure. Modules, state management, and CI/CD integration.</div>
+          <div class="tutor-desc">Provision real AWS infrastructure with Terraform. Modules, state management, remote backends, and CI/CD integration.</div>
+          <div class="tutor-footer">
+            <span class="tutor-price">₹700 <span>/ hour</span></span>
+            <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20Terraform%20tutoring." class="btn-wa-sm" target="_blank">💬 Book</a>
+          </div>
         </div>
         <div class="tutor-card">
           <div class="tutor-level">Intermediate → Advanced</div>
           <div class="tutor-topic">Docker & Kubernetes</div>
-          <div class="tutor-desc">Containerise applications, deploy to EKS, configure auto-scaling. Hands-on with your real project.</div>
+          <div class="tutor-desc">Containerise applications, deploy to EKS, configure HPA and auto-scaling. Hands-on with your real project.</div>
+          <div class="tutor-footer">
+            <span class="tutor-price">₹800 <span>/ hour</span></span>
+            <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20Docker%20%26%20Kubernetes%20tutoring." class="btn-wa-sm" target="_blank">💬 Book</a>
+          </div>
         </div>
         <div class="tutor-card">
           <div class="tutor-level">Interview Prep</div>
           <div class="tutor-topic">DevOps Interview Coaching</div>
-          <div class="tutor-desc">Mock interviews, common questions, resume review, and hands-on problem solving.</div>
+          <div class="tutor-desc">Mock interviews, 100+ common questions, resume review, LinkedIn profile, and live problem-solving. Ideal before a job switch.</div>
+          <div class="tutor-footer">
+            <span class="tutor-price">₹600 <span>/ hour</span></span>
+            <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20DevOps%20interview%20coaching." class="btn-wa-sm" target="_blank">💬 Book</a>
+          </div>
         </div>
-      </div>
-      <div style="text-align:center; margin-top:36px;">
-        <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20tutoring%20sessions." class="btn-wa" target="_blank">💬 Book a Session on WhatsApp</a>
       </div>
     </div>
   </section>
@@ -584,22 +525,22 @@
         <div class="step-card">
           <div class="step-num">1</div>
           <div class="step-title">Tell me what you need</div>
-          <div class="step-desc">Drop a WhatsApp or fill the contact form. No technical knowledge needed — just describe what you want.</div>
+          <div class="step-desc">WhatsApp or fill the contact form. No technical knowledge needed — just describe what you want in plain language.</div>
         </div>
         <div class="step-card">
           <div class="step-num">2</div>
           <div class="step-title">Get a quote in 24 hours</div>
-          <div class="step-desc">Clear quote with scope, timeline, and cost. No surprises later.</div>
+          <div class="step-desc">Clear scope, timeline, and cost. No hidden charges. You decide before anything starts.</div>
         </div>
         <div class="step-card">
           <div class="step-num">3</div>
-          <div class="step-title">I build it, you review</div>
-          <div class="step-desc">Work begins after 50% advance. Regular updates throughout. Revisions included.</div>
+          <div class="step-title">I build, you review</div>
+          <div class="step-desc">Work starts after 50% advance. Regular updates. Revisions included until you're happy.</div>
         </div>
         <div class="step-card">
           <div class="step-num">4</div>
           <div class="step-title">Delivered & handed over</div>
-          <div class="step-desc">Full handover with documentation, credentials, and a walkthrough call.</div>
+          <div class="step-desc">Full handover with login credentials, documentation, and a walkthrough call. You own everything.</div>
         </div>
       </div>
     </div>
@@ -609,52 +550,69 @@
   <section id="experience">
     <div class="section-inner">
       <div class="section-eyebrow">Professional background</div>
-      <h2 class="section-title">Experience</h2>
-      <p class="section-sub">Real production experience across MLOps, DevSecOps, and cloud engineering.</p>
+      <h2 class="section-title">Experience & Credentials</h2>
+      <p class="section-sub">6+ years of real production experience — not just personal projects.</p>
       <div class="exp-list">
         <div class="exp-item">
-          <div class="exp-left">
-            <div class="exp-dates">Mar 2026 – Present</div>
-            <div class="exp-client">Sony India Software Centre</div>
-          </div>
+          <div class="exp-left"><div class="exp-dates">Mar 2026 – Present</div><div class="exp-client">Sony India</div></div>
           <div class="exp-right">
             <div class="exp-title">MLOps Engineer — Neurealm</div>
-            <div class="exp-desc">ML model validation and deployment using Databricks, MLflow, and Seldon on AWS. E2E load testing, observability, and production incident response.</div>
+            <div class="exp-desc">ML model validation and deployment using Databricks, MLflow, and Seldon on AWS. Production incident response, observability, and load testing.</div>
           </div>
         </div>
         <div class="exp-item">
-          <div class="exp-left">
-            <div class="exp-dates">Sep 2025 – Mar 2026</div>
-            <div class="exp-client">Athena Health</div>
-          </div>
+          <div class="exp-left"><div class="exp-dates">Sep 2025 – Mar 2026</div><div class="exp-client">Athena Health</div></div>
           <div class="exp-right">
             <div class="exp-title">Software Release Engineer — Neurealm</div>
-            <div class="exp-desc">End-to-end release engineering for healthcare rules logic. Jenkins/Azure DevOps pipelines, Amazon ECS, Git strategy, MTTR reduction.</div>
+            <div class="exp-desc">End-to-end release engineering for healthcare software. Jenkins / Azure DevOps pipelines, Amazon ECS, Git branching strategy, MTTR reduction.</div>
           </div>
         </div>
         <div class="exp-item">
-          <div class="exp-left">
-            <div class="exp-dates">Mar 2023 – Jul 2025</div>
-            <div class="exp-client">Trane Technologies</div>
-          </div>
+          <div class="exp-left"><div class="exp-dates">Mar 2023 – Jul 2025</div><div class="exp-client">Trane Technologies</div></div>
           <div class="exp-right">
             <div class="exp-title">DevSecOps Engineer — Horizontal Integration</div>
-            <div class="exp-desc">Built DevSecOps practice — Checkmarx, Qualys, Invicti in CI/CD. Terraform IaC on AWS, Jenkins/Azure DevOps pipelines, security standards across teams.</div>
+            <div class="exp-desc">Built DevSecOps practice from scratch — Checkmarx, Qualys, Invicti in CI/CD. Terraform IaC on AWS, security standards rollout across 4 teams.</div>
           </div>
         </div>
       </div>
       <div class="cert-row">
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          <div><div class="cert-name">AWS Certified Solutions Architect – Associate</div><div class="cert-issuer">Amazon Web Services · Valid 2025–2028</div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">AWS Certified Solutions Architect – Associate</div><div class="cert-issuer">Amazon Web Services · Valid 2025–2028</div></div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">GitHub Copilot for Developers</div><div class="cert-issuer">Microsoft Press / LinkedIn · Apr 2026</div></div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">ML with ChatGPT: Image Classification</div><div class="cert-issuer">Coursera · Apr 2026</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="section-inner">
+      <div class="section-eyebrow">Common questions</div>
+      <h2 class="section-title">FAQ</h2>
+      <p class="section-sub">The questions I get asked most before someone reaches out.</p>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-q">How much does a website cost?</div>
+          <div class="faq-a">A basic business website starts around ₹5,000–₹8,000. An e-commerce store or web app starts around ₹8,000–₹15,000. I'll give you an exact quote after a 10-minute call — no surprises.</div>
         </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          <div><div class="cert-name">GitHub Copilot for Developers</div><div class="cert-issuer">Microsoft Press / LinkedIn · Apr 2026</div></div>
+        <div class="faq-item">
+          <div class="faq-q">How long does a project take?</div>
+          <div class="faq-a">A simple website takes 5–7 days. A multi-page site or basic web app takes 10–14 days. More complex apps can take 3–4 weeks. I'll give you a realistic timeline upfront.</div>
         </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          <div><div class="cert-name">ML with ChatGPT: Image Classification</div><div class="cert-issuer">Coursera · Apr 2026</div></div>
+        <div class="faq-item">
+          <div class="faq-q">I'm not technical — can I still reach out?</div>
+          <div class="faq-a">Absolutely. Most of my clients are not technical. Just tell me what your business does and what you want — I'll translate that into a solution and explain everything in plain language.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Do I own the website / app after delivery?</div>
+          <div class="faq-a">Yes — 100%. You get all logins, source code, hosting credentials, and domain access. Nothing is locked to me. You can hand it to anyone in the future.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What's the tutoring structure?</div>
+          <div class="faq-a">We start with a free 30-min intro call to understand your goals. Then we plan the sessions — typically 1–2 hours each, 2–3 times a week. Ad-hoc or structured program, your choice.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What payment methods do you accept?</div>
+          <div class="faq-a">UPI, GPay, PhonePe, or bank transfer. I take 50% advance to start work and the remaining 50% on final delivery. For tutoring, each session is paid before it starts.</div>
         </div>
       </div>
     </div>
@@ -669,7 +627,7 @@
         <div class="contact-form">
           <div class="form-title">Send Your Requirements</div>
           <div id="form-success" hidden>
-            <div style="font-size:24px; margin-bottom:8px">✅</div>
+            <div style="font-size:22px; margin-bottom:8px">✅</div>
             <div style="font-weight:600; margin-bottom:4px">Message sent!</div>
             <div style="font-size:13px; color:var(--text-muted)">I'll get back to you within 24 hours.</div>
           </div>
@@ -679,44 +637,33 @@
             <input type="hidden" name="from_name" value="InfraKraft">
             <input type="checkbox" name="botcheck" style="display:none">
             <div class="form-row">
-              <div class="form-group">
-                <label>Your Name</label>
-                <input type="text" name="name" placeholder="Rajesh Kumar" required>
-              </div>
-              <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" placeholder="you@example.com" required>
-              </div>
+              <div class="form-group"><label>Your Name</label><input type="text" name="name" placeholder="Rajesh Kumar" required></div>
+              <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="you@example.com" required></div>
             </div>
             <div class="form-row">
+              <div class="form-group"><label>Phone / WhatsApp</label><input type="text" name="phone" placeholder="+91 98765 43210"></div>
               <div class="form-group">
-                <label>Phone / WhatsApp</label>
-                <input type="text" name="phone" placeholder="+91 98765 43210">
-              </div>
-              <div class="form-group">
-                <label>Service Needed</label>
+                <label>I'm looking for</label>
                 <select name="service">
                   <option value="">Select...</option>
                   <option>Business Website</option>
-                  <option>Website Maintenance</option>
-                  <option>Custom Web App</option>
-                  <option>Mobile App (Android)</option>
                   <option>E-Commerce Store</option>
-                  <option>Logo &amp; Brand Design</option>
-                  <option>Social Media Management</option>
-                  <option>IT Support &amp; Setup</option>
+                  <option>Mobile App</option>
                   <option>Digital Marketing</option>
+                  <option>Social Media Management</option>
+                  <option>Logo &amp; Branding</option>
+                  <option>Website Maintenance</option>
+                  <option>IT Support &amp; Setup</option>
+                  <option>Custom Web App</option>
+                  <option>Cloud &amp; DevOps Setup</option>
                   <option>Security Audit</option>
                   <option>Tech Tutoring</option>
                   <option>Internship Mentorship</option>
-                  <option>Other / Not sure</option>
+                  <option>Not sure — help me decide</option>
                 </select>
               </div>
             </div>
-            <div class="form-group">
-              <label>Tell me about your project</label>
-              <textarea name="message" placeholder="What do you need? Any deadlines or budget in mind?"></textarea>
-            </div>
+            <div class="form-group"><label>Tell me about your project</label><textarea name="message" placeholder="What do you need? Any deadlines or budget in mind?"></textarea></div>
             <button type="submit" class="form-submit" id="form-btn">Send Message</button>
             <p class="form-note">I'll reply within 24 hours · WhatsApp for faster response</p>
           </form>
@@ -737,7 +684,6 @@
             });
           </script>
         </div>
-
         <div class="contact-sidebar">
           <div>
             <div class="contact-sidebar-title">Prefer to talk directly?</div>
@@ -757,11 +703,11 @@
           </a>
           <a href="https://www.linkedin.com/in/krishna-prasad-15b555375/" target="_blank" class="contact-link">
             <div class="contact-link-icon">💼</div>
-            <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-val">linkedin.com/in/krishna-prasad-15b555375</div></div>
+            <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-val">krishna-prasad-15b555375</div></div>
           </a>
           <div class="payment-box">
             <div class="payment-box-title">Payment</div>
-            <div class="payment-box-text">UPI · Bank Transfer · PhonePe · GPay<br>50% advance to start · balance on delivery</div>
+            <div class="payment-box-text">UPI · GPay · PhonePe · Bank Transfer<br>50% advance to start · balance on delivery</div>
           </div>
         </div>
       </div>
@@ -769,7 +715,7 @@
   </section>
 
   <footer>
-    <strong>InfraKraft</strong> &nbsp;·&nbsp; DevOps &amp; Tech Services &nbsp;·&nbsp; Bangalore / Chennai &nbsp;·&nbsp;
+    <strong>InfraKraft</strong> &nbsp;·&nbsp; Websites · Apps · Cloud · Tutoring &nbsp;·&nbsp; Bangalore / Chennai &nbsp;·&nbsp;
     <a href="mailto:krishnaprasad5977@gmail.com">krishnaprasad5977@gmail.com</a>
   </footer>
 
