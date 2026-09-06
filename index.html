@@ -215,6 +215,50 @@
     footer a { color: rgba(255,255,255,0.45); text-decoration: none; }
     footer a:hover { color: white; }
 
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+    @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
+
+    .hero-eyebrow { animation: fadeIn 0.6s ease both; }
+    h1 { animation: fadeUp 0.7s 0.1s ease both; }
+    .hero-sub { animation: fadeUp 0.7s 0.2s ease both; }
+    .hero-audiences { animation: fadeUp 0.7s 0.3s ease both; }
+    .hero-ctas { animation: fadeUp 0.7s 0.4s ease both; }
+    .hero-stats { animation: fadeUp 0.7s 0.5s ease both; }
+    .hero-card { animation: fadeUp 0.8s 0.3s ease both; }
+
+    .cursor { display:inline-block; width:3px; height:1em; background:var(--accent); margin-left:2px; vertical-align:text-bottom; animation: blink 1s step-end infinite; }
+
+    .hero-card { animation: fadeUp 0.8s 0.3s ease both, float 4s 1s ease-in-out infinite; }
+
+    /* Scroll reveal */
+    .reveal { opacity:0; transform:translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-delay-1 { transition-delay:0.1s; }
+    .reveal-delay-2 { transition-delay:0.2s; }
+    .reveal-delay-3 { transition-delay:0.3s; }
+    .reveal-delay-4 { transition-delay:0.4s; }
+
+    /* Card lift on hover */
+    .service-card { transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease; }
+    .service-card:hover { transform: translateY(-4px); }
+    .portfolio-card { transition: box-shadow 0.25s ease, transform 0.25s ease; }
+    .portfolio-card:hover { transform: translateY(-4px); }
+    .tutor-card { transition: box-shadow 0.25s ease, transform 0.25s ease; }
+    .tutor-card:hover { transform: translateY(-3px); }
+
+    /* Counter animation */
+    .stat-num { transition: all 0.3s; }
+
+    /* Nav scroll effect */
+    nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+
+    /* Gradient shimmer on hero */
+    .hero::before { content:''; position:absolute; top:0; left:0; right:0; height:100%; background: radial-gradient(ellipse at 70% 50%, rgba(27,79,216,0.04) 0%, transparent 70%); pointer-events:none; }
+    .hero { position:relative; overflow:hidden; }
+
     /* RESPONSIVE */
     @media (max-width: 960px) {
       .hero-inner, .contact-grid, .tutor-intro { grid-template-columns: 1fr; }
@@ -255,7 +299,7 @@
     <div class="hero-inner">
       <div>
         <div class="hero-eyebrow">Freelance · Bangalore / Chennai · Available now</div>
-        <h1>Your tech problems,<br><em>solved.</em></h1>
+        <h1>Your tech problems,<br><em><span id="typed-word">solved.</span><span id="typed-cursor" class="cursor"></span></em></h1>
         <p class="hero-sub">Website for your business. App for your idea. Cloud setup for your startup. Tutoring to land your next job.</p>
         <div class="hero-audiences">
           <span class="aud-chip"><strong>Small business?</strong> Website, app, marketing</span>
@@ -268,11 +312,11 @@
           <a href="#services" class="btn-secondary">See Services</a>
         </div>
         <div class="hero-stats">
-          <div><div class="stat-num">6+</div><div class="stat-label">Years experience</div></div>
+          <div><div class="stat-num" data-count="6" data-suffix="+">6+</div><div class="stat-label">Years experience</div></div>
           <div class="stat-divider"></div>
           <div><div class="stat-num">AWS</div><div class="stat-label">Certified</div></div>
           <div class="stat-divider"></div>
-          <div><div class="stat-num">24h</div><div class="stat-label">Response time</div></div>
+          <div><div class="stat-num" data-count="24" data-suffix="h">24h</div><div class="stat-label">Response time</div></div>
         </div>
       </div>
       <div class="hero-card">
@@ -718,6 +762,67 @@
     <strong>InfraKraft</strong> &nbsp;·&nbsp; Websites · Apps · Cloud · Tutoring &nbsp;·&nbsp; Bangalore / Chennai &nbsp;·&nbsp;
     <a href="mailto:krishnaprasad5977@gmail.com">krishnaprasad5977@gmail.com</a>
   </footer>
+
+  <script>
+    /* ── Scroll reveal ── */
+    const revealEls = document.querySelectorAll('.section-inner > *, .services-grid > *, .portfolio-grid > *, .tutor-grid > *, .steps-grid > *, .faq-grid > *, .exp-list, .cert-row, .audience-block, .tutor-intro, .contact-grid');
+    revealEls.forEach((el, i) => {
+      el.classList.add('reveal');
+      if (i % 4 === 1) el.classList.add('reveal-delay-1');
+      if (i % 4 === 2) el.classList.add('reveal-delay-2');
+      if (i % 4 === 3) el.classList.add('reveal-delay-3');
+    });
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── Nav scroll shadow ── */
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    /* ── Typing effect on hero ── */
+    const words = ['solved.', 'delivered.', 'launched.', 'simplified.'];
+    const typed = document.getElementById('typed-word');
+    const cursor = document.getElementById('typed-cursor');
+    let wi = 0, ci = 0, deleting = false;
+    function type() {
+      const word = words[wi];
+      if (!deleting) {
+        typed.textContent = word.slice(0, ++ci);
+        if (ci === word.length) { setTimeout(() => { deleting = true; type(); }, 1800); return; }
+      } else {
+        typed.textContent = word.slice(0, --ci);
+        if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
+      }
+      setTimeout(type, deleting ? 60 : 100);
+    }
+    if (typed) setTimeout(type, 900);
+
+    /* ── Stat counter animation ── */
+    function animateCount(el, target, suffix) {
+      let start = 0, step = target / 40;
+      const tick = () => {
+        start = Math.min(start + step, target);
+        el.textContent = Math.floor(start) + suffix;
+        if (start < target) requestAnimationFrame(tick);
+      };
+      tick();
+    }
+    const statsObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          document.querySelectorAll('.stat-num[data-count]').forEach(el => {
+            animateCount(el, parseInt(el.dataset.count), el.dataset.suffix || '');
+          });
+          statsObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    const statsEl = document.querySelector('.hero-stats');
+    if (statsEl) statsObserver.observe(statsEl);
+  </script>
 
 </body>
 </html>
