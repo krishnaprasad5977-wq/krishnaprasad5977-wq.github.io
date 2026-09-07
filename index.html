@@ -1111,12 +1111,32 @@
             <p class="form-note">I'll reply within 24 hours · WhatsApp for faster response</p>
           </form>
           <script>
+            const SUPA_URL = 'https://vxzsqsbappgeczombnmz.supabase.co';
+            const SUPA_KEY = 'sb_publishable_xOuW_wFXieY0wGe1-8gvcQ_03UvLSGB';
+
+            async function saveToSupabase(table, data) {
+              try {
+                await fetch(`${SUPA_URL}/rest/v1/${table}`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json', 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` },
+                  body: JSON.stringify(data)
+                });
+              } catch(e) { /* fail silently — web3forms still delivers the lead */ }
+            }
+
             document.getElementById('contact-form').addEventListener('submit', async function(e) {
               e.preventDefault();
               const btn = document.getElementById('form-btn');
               btn.textContent = 'Sending...'; btn.disabled = true;
+              const fd = new FormData(this);
+              // Save to Supabase
+              saveToSupabase('leads', {
+                name: fd.get('name'), email: fd.get('email'),
+                phone: fd.get('phone'), service: fd.get('service'),
+                message: fd.get('message')
+              });
               try {
-                const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(this) });
+                const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
                 const data = await res.json();
                 if (data.success) {
                   document.getElementById('form-success').hidden = false;
@@ -1168,6 +1188,40 @@
     <a href="https://wa.me/919989128449?text=Hi%2C%20I%27d%20like%20to%20book%20a%20free%2030-min%20call%20with%20InfraKraft." target="_blank">Book Free Call →</a>
     <button class="scroll-cta-close" onclick="dismissScrollCta()" aria-label="Close">×</button>
   </div>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter" style="background:var(--accent);padding:48px 24px;">
+    <div style="max-width:540px;margin:0 auto;text-align:center;">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(13,27,42,.6);margin-bottom:10px;">Free newsletter</div>
+      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(20px,4vw,28px);font-weight:800;color:#0D1B2A;margin-bottom:10px;">Cloud & DevOps tips, once a week</h2>
+      <p style="font-size:14px;color:rgba(13,27,42,.7);margin-bottom:24px;line-height:1.6;">Short practical tips on AWS, DevOps, AI tools, and freelancing. No spam — unsubscribe anytime.</p>
+      <div id="newsletter-success" hidden style="background:rgba(13,27,42,.12);border-radius:8px;padding:16px;color:#0D1B2A;font-weight:600;">✅ You're in! First issue coming soon.</div>
+      <form id="newsletter-form" style="display:flex;gap:10px;max-width:420px;margin:0 auto;">
+        <input type="email" id="newsletter-email" placeholder="your@email.com" required style="flex:1;padding:11px 14px;border-radius:6px;border:none;font-size:14px;font-family:'Inter',sans-serif;outline:none;background:#fff;color:#0D1B2A;">
+        <button type="submit" id="newsletter-btn" style="background:#0D1B2A;color:#fff;border:none;padding:11px 20px;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;">Subscribe</button>
+      </form>
+    </div>
+  </section>
+  <script>
+    document.getElementById('newsletter-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('newsletter-btn');
+      const email = document.getElementById('newsletter-email').value;
+      btn.textContent = '...'; btn.disabled = true;
+      try {
+        await fetch(`${SUPA_URL}/rest/v1/subscribers`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}`, 'Prefer': 'resolution=ignore-duplicates' },
+          body: JSON.stringify({ email })
+        });
+        document.getElementById('newsletter-success').hidden = false;
+        this.hidden = true;
+      } catch(err) {
+        btn.textContent = 'Subscribe'; btn.disabled = false;
+        alert('Something went wrong. Try again.');
+      }
+    });
+  </script>
 
   <!-- EXIT INTENT POPUP -->
   <div class="exit-overlay" id="exitOverlay">
