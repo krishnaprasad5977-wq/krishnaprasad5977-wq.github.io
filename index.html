@@ -266,6 +266,24 @@
     footer a { color: rgba(255,255,255,0.45); text-decoration: none; }
     footer a:hover { color: white; }
 
+    /* TRUST BAR */
+    .trust-bar { background: var(--text); color: rgba(255,255,255,0.7); padding: 14px 5%; display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; }
+    .trust-bar-item { display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 500; padding: 6px 24px; border-right: 1px solid rgba(255,255,255,0.12); white-space: nowrap; }
+    .trust-bar-item:last-child { border-right: none; }
+    .trust-bar-item span { color: #00C9B8; font-size: 15px; }
+    @media (max-width: 680px) { .trust-bar { gap: 4px; } .trust-bar-item { border-right: none; padding: 4px 12px; font-size: 12px; } }
+
+    /* VALUE PILLARS */
+    .pillars { background: var(--accent-light); border-top: 1px solid var(--accent-border); border-bottom: 1px solid var(--accent-border); padding: 48px 5%; }
+    .pillars-inner { max-width: 1100px; margin: 0 auto; }
+    .pillars-heading { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); text-align: center; margin-bottom: 28px; }
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .pillar { background: var(--surface); border: 1px solid var(--accent-border); border-radius: 10px; padding: 24px 22px; }
+    .pillar-icon { font-size: 26px; margin-bottom: 12px; }
+    .pillar-title { font-weight: 700; font-size: 15px; margin-bottom: 6px; color: var(--text); }
+    .pillar-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+    @media (max-width: 680px) { .pillars-grid { grid-template-columns: 1fr; } }
+
     /* SCROLL CTA BAR */
     .scroll-cta {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 190;
@@ -446,6 +464,7 @@
           <a href="https://wa.me/919989128449?text=Hi%2C%20I%27m%20interested%20in%20InfraKraft%20services." class="btn-wa" target="_blank">💬 WhatsApp</a>
           <a href="#services" class="btn-secondary">See Services</a>
         </div>
+        <p style="font-size:12.5px;color:var(--text-light);margin-top:-28px;margin-bottom:28px;">Free 30-min consultation · No commitment · Pay only when you're happy to proceed</p>
         <div class="hero-stats">
           <div><div class="stat-num" data-count="6" data-suffix="+">6+</div><div class="stat-label">Years experience</div></div>
           <div class="stat-divider"></div>
@@ -469,6 +488,40 @@
       </div>
     </div>
   </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-bar-item"><span>✓</span> AWS Certified Engineer</div>
+    <div class="trust-bar-item"><span>✓</span> 6+ Years Experience</div>
+    <div class="trust-bar-item"><span>✓</span> SSL Secured Projects</div>
+    <div class="trust-bar-item"><span>✓</span> 24h Response Guarantee</div>
+    <div class="trust-bar-item"><span>✓</span> UPI · GPay · PhonePe</div>
+    <div class="trust-bar-item"><span>✓</span> Bangalore / Chennai</div>
+  </div>
+
+  <!-- VALUE PILLARS -->
+  <div class="pillars">
+    <div class="pillars-inner">
+      <div class="pillars-heading">Why clients choose InfraKraft</div>
+      <div class="pillars-grid">
+        <div class="pillar">
+          <div class="pillar-icon">🤝</div>
+          <div class="pillar-title">Direct access, always</div>
+          <div class="pillar-desc">You talk directly to the person doing the work — not a sales rep or a project manager. Faster decisions, no miscommunication.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">⚡</div>
+          <div class="pillar-title">Start in 24 hours</div>
+          <div class="pillar-desc">No lengthy onboarding or contracts. Most projects kick off within 24 hours of our first conversation. Quick turnaround, always.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">💸</div>
+          <div class="pillar-title">Pay as you go</div>
+          <div class="pillar-desc">No monthly retainers. No lock-in. Pay 50% to start, balance on delivery — only when you're happy with the result.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- SERVICES -->
   <section id="services">
