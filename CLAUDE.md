@@ -60,11 +60,21 @@ Logo: SVG K-node icon mark (spine = white rect, arms = teal lines, node dots at 
 
 ---
 
+## Integrations
+
+| Service | Purpose | Key/ID |
+|---|---|---|
+| Web3Forms | Contact form email delivery | `5965f5c5-0c64-4497-82dc-ec00be9b3379` |
+| Supabase | Leads DB + newsletter subscribers | URL: `https://vxzsqsbappgeczombnmz.supabase.co` |
+| Google Analytics | Visitor tracking | `G-10CL2MDDPK` |
+| Google Search Console | Indexing + sitemap | Verified via GA tag, sitemap submitted Sep 2026 |
+| Vercel | Primary hosting (auto-deploy from GitHub) | `theinfrakraft-github-io.vercel.app` |
+
 ## What's Been Done (completed work)
 
 - [x] SVG K-node logo in navbar (Syne font)
 - [x] Google Analytics G-10CL2MDDPK
-- [x] JSON-LD structured data (LocalBusiness schema)
+- [x] JSON-LD structured data (ProfessionalService schema)
 - [x] sitemap.xml + robots.txt
 - [x] Exit intent popup (WhatsApp CTA)
 - [x] Scroll-triggered CTA bar (60% scroll threshold)
@@ -76,17 +86,23 @@ Logo: SVG K-node icon mark (spine = white rect, arms = teal lines, node dots at 
 - [x] Copyright year (auto-updates)
 - [x] .gitignore for .idea/ and .DS_Store
 - [x] Email updated to contact.theinfrakraft@gmail.com
+- [x] Per-service "How It Works" — tabbed UI, 6 services, each with steps + deliverables
+- [x] Resources section — 9 affiliate/free tool cards (Cloud, Learning, Dev Tools)
+- [x] Supabase wired to contact form — every lead saved to `leads` table
+- [x] Newsletter signup section — saves to Supabase `subscribers` table
+- [x] Migrated to Vercel (auto-deploys from same GitHub repo)
+- [x] Google Search Console verified + sitemap submitted + indexing requested
 
 ## Pending / In Progress
 
 - [ ] YouTube channel URL → add icon to footer
 - [ ] Facebook page URL → add icon to footer
-- [ ] Custom domain (infrakraft.in) — on hold
+- [ ] Custom domain (infrakraft.in) — on hold (Namecheap ~₹800/yr)
 - [ ] Zoho email (hello@infrakraft.in) — waiting for domain
+- [ ] Affiliate links — sign up Hostinger/Udemy/DigitalOcean, update Resources hrefs
 - [ ] Testimonials section — need real client quotes
 - [ ] Portfolio case studies — need real project examples
-- [ ] Google Search Console — submit sitemap
-- [ ] Web3Forms notification email — update to contact.theinfrakraft@gmail.com
+- [ ] Web3Forms notification email — update to contact.theinfrakraft@gmail.com in dashboard
 
 ---
 
