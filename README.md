@@ -101,6 +101,13 @@ Everything lives in one file: `index.html`. No framework, no build system, no de
 - Deploy URL: `theinfrakraft-github-io.vercel.app`
 - GitHub Pages also still works as a fallback
 
+### Admin Dashboard
+- URL: `https://theinfrakraft-github-io.vercel.app/admin.html`
+- Password: `infrakraft2026`
+- Shows: visitor footfall, 7-day traffic chart, referrers, leads table, newsletter subscribers, monthly cost breakdown
+- Auto-refreshes every 60 seconds
+- Pageviews logged to Supabase `pageviews` table on every site visit
+
 ---
 
 ## Contact Details
