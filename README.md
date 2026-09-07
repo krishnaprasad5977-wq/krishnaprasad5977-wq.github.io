@@ -203,7 +203,9 @@ These are on the owner's machine, not in the repo:
 - [ ] Facebook page — create, share URL, add icon to footer
 - [ ] Custom domain (infrakraft.in) — Namecheap ~₹800/yr, on hold
 - [ ] Zoho Mail (hello@infrakraft.in) — waiting for domain
-- [ ] Affiliate links — sign up for Hostinger/Udemy/DigitalOcean affiliates, update Resources section hrefs
+- [x] Hostinger affiliate link — `https://www.hostinger.com?REFERRALCODE=JOKCONTAC25B`
+- [ ] Udemy affiliate — sign up at impact.com, update Resources section href
+- [ ] DigitalOcean affiliate — sign up at digitalocean.com/referral, update Resources section href
 - [ ] Testimonials section — need real client quotes
 - [ ] Portfolio case studies — need real project examples
 - [ ] Web3Forms notification email — update to contact.theinfrakraft@gmail.com in web3forms.com dashboard
