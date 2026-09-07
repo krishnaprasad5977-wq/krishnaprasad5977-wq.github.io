@@ -13,8 +13,56 @@
   <meta name="twitter:title" content="InfraKraft — Websites, Apps & Tech Services">
   <meta name="twitter:description" content="Business websites, apps, DevOps, AI and tech tutoring. Bangalore / Chennai.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-10CL2MDDPK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-10CL2MDDPK');
+  </script>
+
+  <!-- Structured Data: LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "InfraKraft",
+    "url": "https://theinfrakraft.github.io",
+    "logo": "https://theinfrakraft.github.io",
+    "description": "Freelance tech services — business websites, mobile apps, cloud & DevOps setup, AI solutions, digital marketing and tech tutoring. Based in Bangalore and Chennai.",
+    "telephone": "+919989128449",
+    "email": "krishnaprasad5977@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bangalore",
+      "addressRegion": "Karnataka",
+      "addressCountry": "IN"
+    },
+    "areaServed": ["Bangalore", "Chennai", "India"],
+    "priceRange": "₹₹",
+    "sameAs": [
+      "https://www.instagram.com/theinfrakraft/",
+      "https://www.linkedin.com/in/krishna-prasad-15b555375/"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Tech Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Business Website" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cloud & DevOps Setup" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Solutions" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile App Development" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tech Tutoring" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Marketing" } }
+      ]
+    }
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap">
   <style>
     :root {
       --bg: #F8F9FA;
@@ -39,8 +87,9 @@
 
     /* NAV */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--divider); padding: 0 5%; height: 60px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text); text-decoration: none; }
-    .nav-logo span { color: var(--accent); }
+    .nav-logo { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+    .nav-logo .ik-wordmark { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; line-height: 1; color: var(--text); letter-spacing: -0.01em; }
+    .nav-logo .ik-wordmark span { color: #008F83; }
     .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
     .nav-links a { font-size: 13.5px; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
@@ -217,6 +266,46 @@
     footer a { color: rgba(255,255,255,0.45); text-decoration: none; }
     footer a:hover { color: white; }
 
+    /* SCROLL CTA BAR */
+    .scroll-cta {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 190;
+      background: var(--accent); color: white;
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      padding: 13px 5%; font-size: 14px; font-weight: 500;
+      transform: translateY(100%); transition: transform 0.35s ease;
+      box-shadow: 0 -2px 16px rgba(27,79,216,0.25);
+    }
+    .scroll-cta.visible { transform: translateY(0); }
+    .scroll-cta a { color: white; font-weight: 700; background: rgba(255,255,255,0.18); padding: 7px 18px; border-radius: 5px; text-decoration: none; font-size: 13.5px; transition: background 0.2s; white-space: nowrap; }
+    .scroll-cta a:hover { background: rgba(255,255,255,0.28); }
+    .scroll-cta-close { margin-left: 8px; cursor: pointer; opacity: 0.65; font-size: 18px; line-height: 1; background: none; border: none; color: white; padding: 0 4px; }
+    .scroll-cta-close:hover { opacity: 1; }
+    @media (max-width: 600px) { .scroll-cta { flex-wrap: wrap; gap: 8px; font-size: 13px; } }
+
+    /* EXIT INTENT POPUP */
+    .exit-overlay {
+      position: fixed; inset: 0; z-index: 300;
+      background: rgba(15,25,35,0.65); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.25s;
+    }
+    .exit-overlay.visible { opacity: 1; pointer-events: all; }
+    .exit-popup {
+      background: var(--surface); border-radius: 16px; padding: 40px 36px;
+      max-width: 420px; width: 90%; text-align: center;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+      transform: translateY(12px); transition: transform 0.25s;
+      position: relative;
+    }
+    .exit-overlay.visible .exit-popup { transform: translateY(0); }
+    .exit-popup-close { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 20px; color: var(--text-light); cursor: pointer; line-height: 1; }
+    .exit-popup-emoji { font-size: 36px; margin-bottom: 12px; }
+    .exit-popup h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .exit-popup p { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 24px; }
+    .exit-popup .btn-primary { display: block; width: 100%; text-align: center; padding: 14px; font-size: 15px; margin-bottom: 10px; }
+    .exit-popup-skip { font-size: 12.5px; color: var(--text-light); cursor: pointer; background: none; border: none; }
+    .exit-popup-skip:hover { color: var(--text-muted); }
+
     .ai-card { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:24px; transition:background 0.2s, transform 0.25s; }
     .ai-card:hover { background:rgba(255,255,255,0.1); transform:translateY(-4px); }
     .ai-tag { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.7); border-radius:4px; font-size:11px; font-weight:500; padding:3px 9px; }
@@ -292,7 +381,19 @@
 <body>
 
   <nav>
-    <a class="nav-logo" href="#">Infra<span>Kraft</span></a>
+    <a class="nav-logo" href="#">
+      <svg width="28" height="28" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="10" y="8" width="6" height="40" rx="2" fill="#0D1B2A"/>
+        <line x1="16" y1="28" x2="42" y2="9" stroke="#008F83" stroke-width="5.5" stroke-linecap="round"/>
+        <line x1="16" y1="28" x2="42" y2="47" stroke="#008F83" stroke-width="5.5" stroke-linecap="round"/>
+        <circle cx="13" cy="8"  r="4.5" fill="#0D1B2A"/>
+        <circle cx="13" cy="48" r="4.5" fill="#0D1B2A"/>
+        <circle cx="43" cy="9"  r="5.5" fill="#008F83"/>
+        <circle cx="43" cy="47" r="5.5" fill="#008F83"/>
+        <circle cx="16" cy="28" r="4"   fill="#008F83"/>
+      </svg>
+      <span class="ik-wordmark">Infra<span>Kraft</span></span>
+    </a>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#portfolio">Work</a></li>
@@ -764,6 +865,9 @@
             <input type="hidden" name="access_key" value="5965f5c5-0c64-4497-82dc-ec00be9b3379">
             <input type="hidden" name="subject" value="New enquiry from InfraKraft">
             <input type="hidden" name="from_name" value="InfraKraft">
+            <input type="hidden" name="replyto" value="">
+            <input type="hidden" name="redirect" value="">
+            <input type="hidden" name="autoresponse" value="Hi there, thanks for reaching out to InfraKraft! I've received your message and will get back to you within 24 hours. For faster response, WhatsApp me at +91 9989128449. — Krishna Prasad, InfraKraft">
             <input type="checkbox" name="botcheck" style="display:none">
             <div class="form-row">
               <div class="form-group"><label>Your Name</label><input type="text" name="name" placeholder="Rajesh Kumar" required></div>
@@ -849,9 +953,35 @@
     </div>
   </section>
 
+  <!-- SCROLL CTA BAR -->
+  <div class="scroll-cta" id="scrollCta">
+    <span>Ready to get started? Free 30-min intro call — no commitment.</span>
+    <a href="https://wa.me/919989128449?text=Hi%2C%20I%27d%20like%20to%20book%20a%20free%2030-min%20call%20with%20InfraKraft." target="_blank">Book Free Call →</a>
+    <button class="scroll-cta-close" onclick="dismissScrollCta()" aria-label="Close">×</button>
+  </div>
+
+  <!-- EXIT INTENT POPUP -->
+  <div class="exit-overlay" id="exitOverlay">
+    <div class="exit-popup">
+      <button class="exit-popup-close" onclick="closeExitPopup()" aria-label="Close">×</button>
+      <div class="exit-popup-emoji">👋</div>
+      <h3>Before you go...</h3>
+      <p>Get a free 30-min consultation call. No pitch, no pressure — just answers to your questions about your project or learning goals.</p>
+      <a href="https://wa.me/919989128449?text=Hi%2C%20I%27d%20like%20a%20free%2030-min%20consultation%20with%20InfraKraft." target="_blank" class="btn-primary" onclick="closeExitPopup()">💬 WhatsApp for Free Call</a>
+      <button class="exit-popup-skip" onclick="closeExitPopup()">No thanks, I'll figure it out myself</button>
+    </div>
+  </div>
+
   <footer>
     <strong>InfraKraft</strong> &nbsp;·&nbsp; Websites · Apps · AI · Marketing · Cloud · Tutoring &nbsp;·&nbsp; Bangalore / Chennai &nbsp;·&nbsp;
     <a href="mailto:krishnaprasad5977@gmail.com">krishnaprasad5977@gmail.com</a>
+    <div style="margin-top:14px;display:flex;align-items:center;justify-content:center;gap:20px;">
+      <a href="https://www.instagram.com/theinfrakraft/" target="_blank" rel="noopener" title="Instagram" style="color:rgba(255,255,255,0.5);transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <!-- Add YouTube URL here once channel is created -->
+      <!-- Add Facebook URL here once page is created -->
+    </div>
   </footer>
 
   <script>
@@ -1096,6 +1226,42 @@
           c.appendChild(b);
         }));
       }
+    }
+  </script>
+
+  <script>
+    /* ── SCROLL CTA BAR ── */
+    const scrollCta = document.getElementById('scrollCta');
+    let ctaDismissed = false;
+    function dismissScrollCta() { ctaDismissed = true; scrollCta.classList.remove('visible'); }
+    window.addEventListener('scroll', () => {
+      if (ctaDismissed) return;
+      const scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      scrollCta.classList.toggle('visible', scrolled > 0.6);
+    }, { passive: true });
+
+    /* ── EXIT INTENT POPUP ── */
+    const exitOverlay = document.getElementById('exitOverlay');
+    let exitShown = false;
+    function closeExitPopup() {
+      exitOverlay.classList.remove('visible');
+      sessionStorage.setItem('exitShown', '1');
+    }
+    if (!sessionStorage.getItem('exitShown')) {
+      document.addEventListener('mouseleave', e => {
+        if (e.clientY <= 0 && !exitShown) {
+          exitShown = true;
+          exitOverlay.classList.add('visible');
+        }
+      });
+    }
+    exitOverlay.addEventListener('click', e => { if (e.target === exitOverlay) closeExitPopup(); });
+
+    /* ── AUTO-REPLY: copy email into replyto field so Web3Forms sends confirmation ── */
+    const emailInput = document.querySelector('#contact-form input[name="email"]');
+    const replytoInput = document.querySelector('#contact-form input[name="replyto"]');
+    if (emailInput && replytoInput) {
+      emailInput.addEventListener('input', () => { replytoInput.value = emailInput.value; });
     }
   </script>
 
