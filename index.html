@@ -1114,6 +1114,13 @@
             const SUPA_URL = 'https://vxzsqsbappgeczombnmz.supabase.co';
             const SUPA_KEY = 'sb_publishable_xOuW_wFXieY0wGe1-8gvcQ_03UvLSGB';
 
+            // Track pageview
+            fetch(`${SUPA_URL}/rest/v1/pageviews`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` },
+              body: JSON.stringify({ referrer: document.referrer || 'Direct' })
+            }).catch(() => {});
+
             async function saveToSupabase(table, data) {
               try {
                 await fetch(`${SUPA_URL}/rest/v1/${table}`, {

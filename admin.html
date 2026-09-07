@@ -1,0 +1,392 @@
+<title>InfraKraft Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --navy:    #0D1B2A;
+    --teal:    #00C9B8;
+    --teal-d:  #008F83;
+    --slate:   #7A92A3;
+    --bg:      #070f19;
+    --surface: #0d1b2a;
+    --surface2:#111f2e;
+    --border:  rgba(0,201,184,.12);
+    --text:    #EEF2F5;
+    --muted:   #7A92A3;
+    --green:   #4caf78;
+    --amber:   #f0a855;
+    --red:     #e05757;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+
+  /* LOGIN */
+  .login-wrap {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: var(--bg);
+  }
+  .login-box {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 40px; width: 340px; text-align: center;
+  }
+  .login-logo { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+  .login-logo span { color: var(--teal); }
+  .login-sub { font-size: 12px; color: var(--muted); margin-bottom: 28px; letter-spacing: .06em; text-transform: uppercase; }
+  .login-box input {
+    width: 100%; background: var(--bg); border: 1.5px solid var(--border);
+    border-radius: 6px; padding: 10px 14px; color: var(--text);
+    font-size: 14px; font-family: 'Inter', sans-serif; outline: none;
+    margin-bottom: 12px; transition: border-color .2s;
+  }
+  .login-box input:focus { border-color: var(--teal); }
+  .login-btn {
+    width: 100%; background: var(--teal); border: none; border-radius: 6px;
+    padding: 11px; color: var(--navy); font-size: 14px; font-weight: 700;
+    cursor: pointer; font-family: 'Inter', sans-serif; transition: opacity .2s;
+  }
+  .login-btn:hover { opacity: .88; }
+  .login-err { font-size: 12px; color: var(--red); margin-top: 10px; display: none; }
+
+  /* DASHBOARD */
+  .dash { display: none; }
+  .topbar {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 0 32px; display: flex; align-items: center; justify-content: space-between;
+    height: 56px; position: sticky; top: 0; z-index: 10;
+  }
+  .topbar-logo { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; }
+  .topbar-logo span { color: var(--teal); }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; display: inline-block; margin-right: 5px; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+  .live-label { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: .06em; }
+  .logout-btn { font-size: 12px; color: var(--muted); background: none; border: none; cursor: pointer; font-family: 'Inter', sans-serif; }
+  .logout-btn:hover { color: var(--text); }
+
+  .dash-body { padding: 28px 32px; max-width: 1200px; margin: 0 auto; }
+
+  /* section header */
+  .section-head { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); font-family: 'DM Mono', monospace; margin-bottom: 14px; margin-top: 32px; }
+  .section-head:first-child { margin-top: 0; }
+
+  /* STAT CARDS */
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .stat-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 20px 22px;
+  }
+  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; margin-bottom: 10px; }
+  .stat-val { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; line-height: 1; margin-bottom: 6px; color: var(--text); }
+  .stat-val.teal { color: var(--teal); }
+  .stat-val.green { color: var(--green); }
+  .stat-sub { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+  /* CHART */
+  .chart-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 22px 24px;
+  }
+  .chart-title { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 18px; }
+  .bar-chart { display: flex; align-items: flex-end; gap: 6px; height: 100px; }
+  .bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; height: 100%; }
+  .bar { width: 100%; background: rgba(0,201,184,.18); border-radius: 3px 3px 0 0; transition: height .5s ease; min-height: 2px; position: relative; }
+  .bar:hover { background: rgba(0,201,184,.4); }
+  .bar-lbl { font-size: 9px; color: var(--muted); font-family: 'DM Mono', monospace; white-space: nowrap; }
+  .bar-val { font-size: 9px; color: var(--teal); font-family: 'DM Mono', monospace; }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* LEADS TABLE */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; }
+  th { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { font-size: 12.5px; padding: 11px 14px; border-bottom: 1px solid rgba(0,201,184,.06); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(0,201,184,.03); }
+  .badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; }
+  .badge-new { background: rgba(0,201,184,.12); color: var(--teal); }
+  .badge-sub { background: rgba(76,175,120,.12); color: var(--green); }
+
+  /* COST TABLE */
+  .cost-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(0,201,184,.06); }
+  .cost-row:last-child { border-bottom: none; }
+  .cost-name { font-size: 13px; font-weight: 500; }
+  .cost-plan { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .cost-amount { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: var(--green); }
+  .cost-total { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+  .cost-total-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .cost-total-val { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: var(--green); }
+
+  /* REFERRERS */
+  .ref-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid rgba(0,201,184,.06); }
+  .ref-row:last-child { border-bottom: none; }
+  .ref-src { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--text); }
+  .ref-bar-wrap { flex: 1; margin: 0 14px; height: 4px; background: rgba(0,201,184,.1); border-radius: 999px; }
+  .ref-bar-fill { height: 100%; background: var(--teal); border-radius: 999px; transition: width .6s ease; }
+  .ref-count { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--muted); }
+
+  .empty-state { color: var(--muted); font-size: 12px; font-family: 'DM Mono', monospace; padding: 24px 0; text-align: center; }
+  .refresh-btn { font-size: 11px; color: var(--teal); background: none; border: none; cursor: pointer; font-family: 'DM Mono', monospace; letter-spacing: .04em; }
+  .refresh-btn:hover { opacity: .7; }
+  .last-updated { font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+  @media (max-width: 900px) { .stat-grid { grid-template-columns: 1fr 1fr; } .two-col { grid-template-columns: 1fr; } }
+  @media (max-width: 500px) { .stat-grid { grid-template-columns: 1fr 1fr; } .dash-body { padding: 16px; } .topbar { padding: 0 16px; } }
+</style>
+
+<!-- LOGIN SCREEN -->
+<div class="login-wrap" id="login-wrap">
+  <div class="login-box">
+    <div class="login-logo">Infra<span>Kraft</span></div>
+    <div class="login-sub">Dashboard · Admin</div>
+    <input type="password" id="pwd-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Sign In</button>
+    <div class="login-err" id="login-err">Wrong password</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dash" id="dash">
+  <div class="topbar">
+    <div class="topbar-logo">Infra<span>Kraft</span> <span style="color:var(--muted);font-size:13px;font-weight:400;font-family:'Inter',sans-serif;">Dashboard</span></div>
+    <div class="topbar-right">
+      <span><span class="live-dot"></span><span class="live-label">LIVE</span></span>
+      <span class="last-updated" id="last-updated">—</span>
+      <button class="refresh-btn" onclick="loadAll()">↺ Refresh</button>
+      <button class="logout-btn" onclick="doLogout()">Sign out</button>
+    </div>
+  </div>
+
+  <div class="dash-body">
+
+    <!-- KPI STATS -->
+    <div class="section-head">Overview</div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Visitors</div>
+        <div class="stat-val teal" id="kpi-visitors">—</div>
+        <div class="stat-sub" id="kpi-visitors-sub">all time</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Today</div>
+        <div class="stat-val" id="kpi-today">—</div>
+        <div class="stat-sub">pageviews today</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Leads</div>
+        <div class="stat-val green" id="kpi-leads">—</div>
+        <div class="stat-sub">contact form submits</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Subscribers</div>
+        <div class="stat-val" id="kpi-subs">—</div>
+        <div class="stat-sub">newsletter signups</div>
+      </div>
+    </div>
+
+    <!-- TRAFFIC CHART + REFERRERS -->
+    <div class="section-head">Traffic</div>
+    <div class="two-col">
+      <div class="chart-card">
+        <div class="chart-title">Visitors — last 7 days</div>
+        <div class="bar-chart" id="bar-chart">
+          <div class="empty-state" style="width:100%">Loading...</div>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Top referrers</div>
+        <div id="referrers"><div class="empty-state">Loading...</div></div>
+      </div>
+    </div>
+
+    <!-- LEADS TABLE -->
+    <div class="section-head" style="margin-top:28px;">
+      Recent Leads
+      <span style="color:var(--muted);font-weight:400;margin-left:8px;font-size:9px;">latest 10</span>
+    </div>
+    <div class="chart-card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Service</th><th>Message</th><th>Date</th></tr></thead>
+          <tbody id="leads-body"><tr><td colspan="6" class="empty-state">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SUBSCRIBERS -->
+    <div class="section-head">Newsletter Subscribers <span style="color:var(--muted);font-weight:400;margin-left:8px;font-size:9px;">latest 10</span></div>
+    <div class="chart-card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Email</th><th>Signed up</th></tr></thead>
+          <tbody id="subs-body"><tr><td colspan="2" class="empty-state">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- COST DASHBOARD -->
+    <div class="section-head">Monthly Infrastructure Cost</div>
+    <div class="chart-card" style="max-width:480px;">
+      <div class="cost-row"><div><div class="cost-name">Vercel</div><div class="cost-plan">Hobby (free)</div></div><div class="cost-amount">₹0</div></div>
+      <div class="cost-row"><div><div class="cost-name">Supabase</div><div class="cost-plan">Free tier · 500MB DB</div></div><div class="cost-amount">₹0</div></div>
+      <div class="cost-row"><div><div class="cost-name">Web3Forms</div><div class="cost-plan">Free · 250 submissions/month</div></div><div class="cost-amount">₹0</div></div>
+      <div class="cost-row"><div><div class="cost-name">Google Analytics</div><div class="cost-plan">Free</div></div><div class="cost-amount">₹0</div></div>
+      <div class="cost-row"><div><div class="cost-name">GitHub Pages</div><div class="cost-plan">Free (fallback)</div></div><div class="cost-amount">₹0</div></div>
+      <div class="cost-row"><div><div class="cost-name">Custom Domain</div><div class="cost-plan">infrakraft.in · not purchased yet</div></div><div class="cost-amount" style="color:var(--amber);">₹800/yr</div></div>
+      <div class="cost-total">
+        <div class="cost-total-label">Total / month</div>
+        <div class="cost-total-val">₹0</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const SUPA_URL = 'https://vxzsqsbappgeczombnmz.supabase.co';
+  const SUPA_KEY = 'sb_publishable_xOuW_wFXieY0wGe1-8gvcQ_03UvLSGB';
+  const DASH_PWD = 'infrakraft2026';
+
+  // ── AUTH ──
+  function doLogin() {
+    const v = document.getElementById('pwd-input').value;
+    if (v === DASH_PWD) {
+      sessionStorage.setItem('ik_auth', '1');
+      document.getElementById('login-wrap').style.display = 'none';
+      document.getElementById('dash').style.display = 'block';
+      loadAll();
+    } else {
+      document.getElementById('login-err').style.display = 'block';
+    }
+  }
+  function doLogout() {
+    sessionStorage.removeItem('ik_auth');
+    location.reload();
+  }
+  if (sessionStorage.getItem('ik_auth') === '1') {
+    document.getElementById('login-wrap').style.display = 'none';
+    document.getElementById('dash').style.display = 'block';
+  }
+
+  // ── FETCH ──
+  async function sb(path) {
+    const r = await fetch(`${SUPA_URL}/rest/v1/${path}`, {
+      headers: { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` }
+    });
+    return r.json();
+  }
+
+  function fmtDate(iso) {
+    if (!iso) return '—';
+    const d = new Date(iso);
+    return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  }
+
+  async function loadAll() {
+    document.getElementById('last-updated').textContent = 'Refreshing...';
+    await Promise.all([loadStats(), loadChart(), loadReferrers(), loadLeads(), loadSubs()]);
+    document.getElementById('last-updated').textContent = 'Updated ' + new Date().toLocaleTimeString('en-IN');
+  }
+
+  async function loadStats() {
+    const [views, leads, subs] = await Promise.all([
+      sb('pageviews?select=created_at'),
+      sb('leads?select=id'),
+      sb('subscribers?select=id')
+    ]);
+    document.getElementById('kpi-visitors').textContent = Array.isArray(views) ? views.length : '—';
+    const today = Array.isArray(views) ? views.filter(v => new Date(v.created_at).toDateString() === new Date().toDateString()).length : 0;
+    document.getElementById('kpi-today').textContent = today;
+    document.getElementById('kpi-leads').textContent = Array.isArray(leads) ? leads.length : '—';
+    document.getElementById('kpi-subs').textContent = Array.isArray(subs) ? subs.length : '—';
+  }
+
+  async function loadChart() {
+    const views = await sb('pageviews?select=created_at&order=created_at.desc&limit=1000');
+    const el = document.getElementById('bar-chart');
+    if (!Array.isArray(views) || views.length === 0) {
+      el.innerHTML = '<div class="empty-state" style="width:100%">No data yet — visitors will appear here once the tracking is live.</div>';
+      return;
+    }
+    const days = {};
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(); d.setDate(d.getDate() - i);
+      const key = d.toISOString().slice(0,10);
+      days[key] = 0;
+    }
+    views.forEach(v => {
+      const key = v.created_at.slice(0,10);
+      if (key in days) days[key]++;
+    });
+    const max = Math.max(...Object.values(days), 1);
+    el.innerHTML = Object.entries(days).map(([date, count]) => {
+      const pct = Math.round((count / max) * 100);
+      const label = new Date(date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'short' });
+      return `<div class="bar-wrap">
+        <div class="bar-val">${count}</div>
+        <div class="bar" style="height:${Math.max(pct,2)}%;"></div>
+        <div class="bar-lbl">${label}</div>
+      </div>`;
+    }).join('');
+  }
+
+  async function loadReferrers() {
+    const views = await sb('pageviews?select=referrer&limit=1000');
+    const el = document.getElementById('referrers');
+    if (!Array.isArray(views) || views.length === 0) {
+      el.innerHTML = '<div class="empty-state">No referrer data yet.</div>'; return;
+    }
+    const counts = {};
+    views.forEach(v => {
+      let src = v.referrer || 'Direct';
+      try { src = src === 'Direct' ? 'Direct' : new URL(src).hostname.replace('www.',''); } catch(e) {}
+      counts[src] = (counts[src] || 0) + 1;
+    });
+    const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1]).slice(0,6);
+    const max = sorted[0][1];
+    el.innerHTML = sorted.map(([src, n]) =>
+      `<div class="ref-row">
+        <div class="ref-src">${src}</div>
+        <div class="ref-bar-wrap"><div class="ref-bar-fill" style="width:${Math.round(n/max*100)}%"></div></div>
+        <div class="ref-count">${n}</div>
+      </div>`
+    ).join('');
+  }
+
+  async function loadLeads() {
+    const rows = await sb('leads?select=*&order=created_at.desc&limit=10');
+    const tbody = document.getElementById('leads-body');
+    if (!Array.isArray(rows) || rows.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No leads yet.</td></tr>'; return;
+    }
+    tbody.innerHTML = rows.map(r => `
+      <tr>
+        <td>${r.name || '—'} <span class="badge badge-new">New</span></td>
+        <td style="font-family:'DM Mono',monospace;font-size:11.5px;">${r.email || '—'}</td>
+        <td style="font-family:'DM Mono',monospace;font-size:11.5px;">${r.phone || '—'}</td>
+        <td><span style="color:var(--teal);font-size:11.5px;">${r.service || '—'}</span></td>
+        <td style="color:var(--muted);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${r.message || '—'}</td>
+        <td style="font-family:'DM Mono',monospace;font-size:10.5px;color:var(--muted);white-space:nowrap;">${fmtDate(r.created_at)}</td>
+      </tr>`).join('');
+  }
+
+  async function loadSubs() {
+    const rows = await sb('subscribers?select=*&order=created_at.desc&limit=10');
+    const tbody = document.getElementById('subs-body');
+    if (!Array.isArray(rows) || rows.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="2" class="empty-state">No subscribers yet.</td></tr>'; return;
+    }
+    tbody.innerHTML = rows.map(r => `
+      <tr>
+        <td style="font-family:'DM Mono',monospace;font-size:12px;">${r.email} <span class="badge badge-sub">Subscriber</span></td>
+        <td style="font-family:'DM Mono',monospace;font-size:10.5px;color:var(--muted);">${fmtDate(r.created_at)}</td>
+      </tr>`).join('');
+  }
+
+  // auto-refresh every 60s
+  setInterval(loadAll, 60000);
+
+  // start loaded if authed
+  if (sessionStorage.getItem('ik_auth') === '1') loadAll();
+</script>
