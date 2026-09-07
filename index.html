@@ -221,6 +221,13 @@
     .step-num { width: 46px; height: 46px; border-radius: 50%; background: var(--accent-light); color: var(--accent); font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
     .step-title { font-weight: 600; font-size: 14.5px; margin-bottom: 7px; }
     .step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+    .how-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+    .how-tab { background: transparent; border: 1.5px solid rgba(0,201,184,.25); color: var(--text-muted); font-size: 13px; font-family: 'Inter', sans-serif; padding: 8px 16px; border-radius: 999px; cursor: pointer; transition: all .2s; }
+    .how-tab:hover { border-color: var(--accent); color: var(--accent); }
+    .how-tab.active { background: var(--accent); border-color: var(--accent); color: #0D1B2A; font-weight: 600; }
+    .how-panel { display: none; }
+    .how-panel.active { display: block; }
+    .how-deliverable { margin-top: 24px; background: rgba(0,201,184,.08); border-left: 3px solid var(--accent); padding: 14px 18px; border-radius: 0 8px 8px 0; font-size: 13.5px; color: var(--text-muted); line-height: 1.65; }
 
     /* EXPERIENCE */
     #experience { background: var(--bg); }
@@ -393,6 +400,8 @@
       .services-grid, .services-grid.three, .portfolio-grid, .tutor-grid, .steps-grid, .faq-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .hero-audiences { display: none; }
+      .how-tabs { gap: 6px; }
+      .how-tab { font-size: 12px; padding: 6px 12px; }
     }
   </style>
 </head>
@@ -817,29 +826,84 @@
     <div class="section-inner">
       <div class="section-eyebrow">Simple process</div>
       <h2 class="section-title">How It Works</h2>
-      <p class="section-sub">From first message to delivered work — four straightforward steps.</p>
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-num">1</div>
-          <div class="step-title">Tell me what you need</div>
-          <div class="step-desc">WhatsApp or fill the contact form. No technical knowledge needed — just describe what you want in plain language.</div>
-        </div>
-        <div class="step-card">
-          <div class="step-num">2</div>
-          <div class="step-title">Get a quote in 24 hours</div>
-          <div class="step-desc">Clear scope, timeline, and cost. No hidden charges. You decide before anything starts.</div>
-        </div>
-        <div class="step-card">
-          <div class="step-num">3</div>
-          <div class="step-title">I build, you review</div>
-          <div class="step-desc">Work starts after 50% advance. Regular updates. Revisions included until you're happy.</div>
-        </div>
-        <div class="step-card">
-          <div class="step-num">4</div>
-          <div class="step-title">Delivered & handed over</div>
-          <div class="step-desc">Full handover with login credentials, documentation, and a walkthrough call. You own everything.</div>
-        </div>
+      <p class="section-sub">Pick your service below — here's exactly what happens from first message to final delivery.</p>
+
+      <!-- Service tabs -->
+      <div class="how-tabs">
+        <button class="how-tab active" onclick="switchHow(this,'how-web')">🌐 Website</button>
+        <button class="how-tab" onclick="switchHow(this,'how-cloud')">☁️ Cloud &amp; DevOps</button>
+        <button class="how-tab" onclick="switchHow(this,'how-ai')">🤖 AI &amp; Automation</button>
+        <button class="how-tab" onclick="switchHow(this,'how-app')">📲 Mobile App</button>
+        <button class="how-tab" onclick="switchHow(this,'how-tutor')">🎓 Tutoring</button>
+        <button class="how-tab" onclick="switchHow(this,'how-marketing')">📣 Marketing</button>
       </div>
+
+      <!-- WEBSITE -->
+      <div class="how-panel active" id="how-web">
+        <div class="steps-grid">
+          <div class="step-card"><div class="step-num">1</div><div class="step-title">Tell me about your business</div><div class="step-desc">WhatsApp or fill the form. Share what your business does, who your customers are, and any sites you like the look of. No tech knowledge needed.</div></div>
+          <div class="step-card"><div class="step-num">2</div><div class="step-title">Scope, cost & timeline</div><div class="step-desc">I send you a clear quote within 24 hours — number of pages, features, timeline, and total cost. No surprises. You approve before anything starts.</div></div>
+          <div class="step-card"><div class="step-num">3</div><div class="step-title">Design & build</div><div class="step-desc">Work starts after 50% advance. I share a preview within 3–5 days. You review, request changes — revisions included until you're happy.</div></div>
+          <div class="step-card"><div class="step-num">4</div><div class="step-title">Go live</div><div class="step-desc">I deploy the site, set up your domain and SSL, and walk you through managing it. You get full ownership — all login credentials, source files, and documentation.</div></div>
+        </div>
+        <div class="how-deliverable"><strong>You get:</strong> Live website · Custom domain setup · SSL certificate · Mobile-responsive design · Contact form · Google Analytics · 1 month free support</div>
+      </div>
+
+      <!-- CLOUD & DEVOPS -->
+      <div class="how-panel" id="how-cloud">
+        <div class="steps-grid">
+          <div class="step-card"><div class="step-num">1</div><div class="step-title">Discovery call</div><div class="step-desc">Free 30-min call to understand your current setup — what you're running, where the pain points are, and what you want to achieve.</div></div>
+          <div class="step-card"><div class="step-num">2</div><div class="step-title">Architecture plan</div><div class="step-desc">I send a written plan: what will be built, which AWS services, estimated cost to run on AWS monthly, and delivery timeline. You approve before work starts.</div></div>
+          <div class="step-card"><div class="step-num">3</div><div class="step-title">Setup & configure</div><div class="step-desc">I provision the infrastructure (EC2, S3, VPC, IAM, CI/CD pipelines etc.) in your AWS account. You can watch progress — I share updates daily.</div></div>
+          <div class="step-card"><div class="step-num">4</div><div class="step-title">Test, document & hand over</div><div class="step-desc">Everything is tested end-to-end. I write runbooks so your team knows how to operate it, and do a walkthrough call with your engineers.</div></div>
+        </div>
+        <div class="how-deliverable"><strong>You get:</strong> Fully working AWS infrastructure · CI/CD pipeline · IAM roles & policies · Monitoring & alerts · Terraform code (IaC) · Runbook documentation · Walkthrough call</div>
+      </div>
+
+      <!-- AI & AUTOMATION -->
+      <div class="how-panel" id="how-ai">
+        <div class="steps-grid">
+          <div class="step-card"><div class="step-num">1</div><div class="step-title">Tell me what's manual today</div><div class="step-desc">Describe a task your team does manually — replying to enquiries, generating reports, posting on social, sending reminders. No tech jargon needed.</div></div>
+          <div class="step-card"><div class="step-num">2</div><div class="step-title">Automation blueprint</div><div class="step-desc">I map out exactly how it will be automated — tools used, data flow, what triggers it, and what it produces. Shared with you for approval before build.</div></div>
+          <div class="step-card"><div class="step-num">3</div><div class="step-title">Build & connect</div><div class="step-desc">I build and wire up the automation — WhatsApp bot, email workflow, dashboard, or AI integration — and test it with real data from your business.</div></div>
+          <div class="step-card"><div class="step-num">4</div><div class="step-title">Train & hand over</div><div class="step-desc">I walk you through using and managing the automation. If it breaks, I fix it free for 30 days after delivery.</div></div>
+        </div>
+        <div class="how-deliverable"><strong>You get:</strong> Working automation · Test results · User guide · 30-day post-delivery support · Source code / workflow config</div>
+      </div>
+
+      <!-- MOBILE APP -->
+      <div class="how-panel" id="how-app">
+        <div class="steps-grid">
+          <div class="step-card"><div class="step-num">1</div><div class="step-title">App brief</div><div class="step-desc">Share your app idea — what it does, who uses it, key screens you have in mind. Sketches or voice notes welcome — no wireframes needed from your side.</div></div>
+          <div class="step-card"><div class="step-num">2</div><div class="step-title">Scope & quote</div><div class="step-desc">I break down the app into screens and features, give you a timeline and fixed quote. We agree on the MVP scope before any code is written.</div></div>
+          <div class="step-card"><div class="step-num">3</div><div class="step-title">Build in sprints</div><div class="step-desc">You get a working preview after each sprint (usually 1–2 weeks). Test it on your phone, give feedback — changes happen in the next sprint.</div></div>
+          <div class="step-card"><div class="step-num">4</div><div class="step-title">Launch on Play Store / App Store</div><div class="step-desc">I handle the store submission, app signing, and release. You get the source code, store credentials, and a guide to push future updates.</div></div>
+        </div>
+        <div class="how-deliverable"><strong>You get:</strong> Android &amp; iOS app · Play Store / App Store listing · Source code · Store credentials · Update guide · 1 month free bug fixes</div>
+      </div>
+
+      <!-- TUTORING -->
+      <div class="how-panel" id="how-tutor">
+        <div class="steps-grid">
+          <div class="step-card"><div class="step-num">1</div><div class="step-title">Free intro call (30 min)</div><div class="step-desc">We talk about your current level, what you want to learn, your timeline, and your goal — job switch, certification, or specific project. No payment yet.</div></div>
+          <div class="step-card"><div class="step-num">2</div><div class="step-title">Custom learning plan</div><div class="step-desc">I send you a personalised plan — topics, order, estimated sessions, and resources. Structured for your goal, not a generic syllabus.</div></div>
+          <div class="step-card"><div class="step-num">3</div><div class="step-title">Live 1-on-1 sessions</div><div class="step-desc">Sessions over Google Meet. Hands-on from day 1 — you work on real tasks, not watch slides. Sessions are recorded so you can review anytime.</div></div>
+          <div class="step-card"><div class="step-num">4</div><div class="step-title">Project + interview prep</div><div class="step-desc">Build a real project for your portfolio. Mock interviews, resume review, and LinkedIn profile optimisation before you start applying.</div></div>
+        </div>
+        <div class="how-deliverable"><strong>You get:</strong> Personalised plan · Session recordings · Real project for portfolio · Resume review · Mock interviews · WhatsApp support between sessions</div>
+      </div>
+
+      <!-- MARKETING -->
+      <div class="how-panel" id="how-marketing">
+        <div class="steps-grid">
+          <div class="step-card"><div class="step-num">1</div><div class="step-title">Understand your business & goals</div><div class="step-desc">Tell me what you sell, who your customers are, and what you want — more foot traffic, online orders, enquiries, or followers. Takes 20 minutes.</div></div>
+          <div class="step-card"><div class="step-num">2</div><div class="step-title">Strategy & content plan</div><div class="step-desc">I put together a monthly content calendar — what to post, when, on which platform, and what each post should achieve. Shared for your approval.</div></div>
+          <div class="step-card"><div class="step-num">3</div><div class="step-title">Create & publish</div><div class="step-desc">I design posts, write captions, and publish on Instagram, Facebook, or Google. For ads, I set up the campaign, targeting, and budget in your account.</div></div>
+          <div class="step-card"><div class="step-num">4</div><div class="step-title">Monthly report & optimise</div><div class="step-desc">End of each month I share a plain-language report — reach, enquiries, what worked, what we're changing next month.</div></div>
+        </div>
+        <div class="how-deliverable"><strong>You get:</strong> Monthly content calendar · Designed posts · Caption copy · Ad campaign setup · Monthly performance report · WhatsApp updates</div>
+      </div>
+
     </div>
   </section>
 
@@ -1308,6 +1372,12 @@
     function closeExitPopup() {
       exitOverlay.classList.remove('visible');
       sessionStorage.setItem('exitShown', '1');
+    }
+    function switchHow(btn, panelId) {
+      document.querySelectorAll('.how-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.how-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(panelId).classList.add('active');
     }
     if (!sessionStorage.getItem('exitShown')) {
       document.addEventListener('mouseleave', e => {
