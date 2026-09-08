@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0D1B2A"/>
+
+  <!-- Teal accent bar left -->
+  <rect x="0" y="0" width="8" height="630" fill="#00C9B8"/>
+
+  <!-- Teal accent bar bottom -->
+  <rect x="0" y="590" width="1200" height="40" fill="#00C9B8" opacity="0.15"/>
+
+  <!-- Logo mark — stylised bracket/code icon -->
+  <g transform="translate(80, 200)">
+    <rect x="0" y="0" width="10" height="80" fill="#00C9B8" rx="4"/>
+    <rect x="0" y="0" width="30" height="10" fill="#00C9B8" rx="4"/>
+    <rect x="0" y="70" width="30" height="10" fill="#00C9B8" rx="4"/>
+  </g>
+
+  <!-- Brand name -->
+  <text x="140" y="265" font-family="'Segoe UI', Arial, sans-serif" font-size="72" font-weight="700" fill="#FFFFFF" letter-spacing="-1">Infra<tspan fill="#00C9B8">Kraft</tspan></text>
+
+  <!-- Tagline -->
+  <text x="140" y="320" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="400" fill="#A8B8C8" letter-spacing="0.5">Websites · Apps · Cloud · DevOps · AI</text>
+
+  <!-- Divider line -->
+  <rect x="140" y="350" width="920" height="2" fill="#1B4FD8" opacity="0.5"/>
+
+  <!-- Service pills -->
+  <g transform="translate(140, 375)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="180" height="44" rx="22" fill="#1B4FD8" opacity="0.3"/>
+    <text x="90" y="28" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#FFFFFF" text-anchor="middle">Website Design</text>
+
+    <!-- Pill 2 -->
+    <rect x="196" y="0" width="160" height="44" rx="22" fill="#00C9B8" opacity="0.2"/>
+    <text x="276" y="28" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#00C9B8" text-anchor="middle">DevOps &amp; Cloud</text>
+
+    <!-- Pill 3 -->
+    <rect x="372" y="0" width="140" height="44" rx="22" fill="#1B4FD8" opacity="0.3"/>
+    <text x="442" y="28" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#FFFFFF" text-anchor="middle">AI Solutions</text>
+
+    <!-- Pill 4 -->
+    <rect x="528" y="0" width="170" height="44" rx="22" fill="#00C9B8" opacity="0.2"/>
+    <text x="613" y="28" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#00C9B8" text-anchor="middle">Digital Marketing</text>
+
+    <!-- Pill 5 -->
+    <rect x="714" y="0" width="130" height="44" rx="22" fill="#1B4FD8" opacity="0.3"/>
+    <text x="779" y="28" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#FFFFFF" text-anchor="middle">1-on-1 Tutoring</text>
+  </g>
+
+  <!-- CTA -->
+  <text x="140" y="490" font-family="'Segoe UI', Arial, sans-serif" font-size="22" fill="#A8B8C8">Starting at ₹5,000 · Free 30-min consultation</text>
+
+  <!-- URL -->
+  <text x="140" y="570" font-family="'Segoe UI', Arial, sans-serif" font-size="20" fill="#00C9B8" font-weight="600">theinfrakraft.github.io</text>
+
+  <!-- Location -->
+  <text x="980" y="570" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#A8B8C8" text-anchor="end">Bangalore / Chennai</text>
+</svg>
