@@ -46,6 +46,7 @@
   }
   .login-btn:hover { opacity: .88; }
   .login-err { font-size: 12px; color: var(--red); margin-top: 10px; display: none; }
+  .login-loading { font-size: 12px; color: var(--muted); margin-top: 10px; display: none; }
 
   /* DASHBOARD */
   .dash { display: none; }
@@ -135,14 +136,19 @@
   @media (max-width: 500px) { .stat-grid { grid-template-columns: 1fr 1fr; } .dash-body { padding: 16px; } .topbar { padding: 0 16px; } }
 </style>
 
+<!-- Supabase JS SDK (ESM via CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
 <!-- LOGIN SCREEN -->
 <div class="login-wrap" id="login-wrap">
   <div class="login-box">
     <div class="login-logo">Infra<span>Kraft</span></div>
     <div class="login-sub">Dashboard · Admin</div>
-    <input type="password" id="pwd-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
+    <input type="email" id="email-input" placeholder="Admin email" autocomplete="email">
+    <input type="password" id="pwd-input" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
     <button class="login-btn" onclick="doLogin()">Sign In</button>
-    <div class="login-err" id="login-err">Wrong password</div>
+    <div class="login-err" id="login-err">Invalid email or password</div>
+    <div class="login-loading" id="login-loading">Signing in...</div>
   </div>
 </div>
 
@@ -245,34 +251,55 @@
 
 <script>
   const SUPA_URL = 'https://vxzsqsbappgeczombnmz.supabase.co';
-  const SUPA_KEY = 'sb_publishable_xOuW_wFXieY0wGe1-8gvcQ_03UvLSGB';
-  const DASH_PWD = 'infrakraft2026';
+  const SUPA_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ4enNxc2JhcHBnZWN6b21ibm16Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjMwMTU0NjUsImV4cCI6MjAzODU5MTQ2NX0.placeholder_replace_with_real_anon_key';
+
+  const { createClient } = supabase;
+  const sb = createClient(SUPA_URL, SUPA_ANON);
 
   // ── AUTH ──
-  function doLogin() {
-    const v = document.getElementById('pwd-input').value;
-    if (v === DASH_PWD) {
-      sessionStorage.setItem('ik_auth', '1');
-      document.getElementById('login-wrap').style.display = 'none';
-      document.getElementById('dash').style.display = 'block';
-      loadAll();
-    } else {
-      document.getElementById('login-err').style.display = 'block';
+  async function doLogin() {
+    const email = document.getElementById('email-input').value.trim();
+    const pwd   = document.getElementById('pwd-input').value;
+    const errEl = document.getElementById('login-err');
+    const loadEl = document.getElementById('login-loading');
+    errEl.style.display = 'none';
+    loadEl.style.display = 'block';
+
+    const { data, error } = await sb.auth.signInWithPassword({ email, password: pwd });
+    loadEl.style.display = 'none';
+
+    if (error || !data.session) {
+      errEl.style.display = 'block';
+      return;
     }
-  }
-  function doLogout() {
-    sessionStorage.removeItem('ik_auth');
-    location.reload();
-  }
-  if (sessionStorage.getItem('ik_auth') === '1') {
-    document.getElementById('login-wrap').style.display = 'none';
-    document.getElementById('dash').style.display = 'block';
+    showDash();
   }
 
-  // ── FETCH ──
-  async function sb(path) {
+  async function doLogout() {
+    await sb.auth.signOut();
+    location.reload();
+  }
+
+  function showDash() {
+    document.getElementById('login-wrap').style.display = 'none';
+    document.getElementById('dash').style.display = 'block';
+    loadAll();
+  }
+
+  // On load — restore session if cookie/token exists
+  sb.auth.getSession().then(({ data }) => {
+    if (data.session) showDash();
+  });
+
+  // ── DATA FETCH (uses session JWT, not anon key) ──
+  async function sbFetch(path) {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) return null;
     const r = await fetch(`${SUPA_URL}/rest/v1/${path}`, {
-      headers: { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` }
+      headers: {
+        'apikey': SUPA_ANON,
+        'Authorization': `Bearer ${session.access_token}`
+      }
     });
     return r.json();
   }
@@ -291,9 +318,9 @@
 
   async function loadStats() {
     const [views, leads, subs] = await Promise.all([
-      sb('pageviews?select=created_at'),
-      sb('leads?select=id'),
-      sb('subscribers?select=id')
+      sbFetch('pageviews?select=created_at'),
+      sbFetch('leads?select=id'),
+      sbFetch('subscribers?select=id')
     ]);
     document.getElementById('kpi-visitors').textContent = Array.isArray(views) ? views.length : '—';
     const today = Array.isArray(views) ? views.filter(v => new Date(v.created_at).toDateString() === new Date().toDateString()).length : 0;
@@ -303,22 +330,18 @@
   }
 
   async function loadChart() {
-    const views = await sb('pageviews?select=created_at&order=created_at.desc&limit=1000');
+    const views = await sbFetch('pageviews?select=created_at&order=created_at.desc&limit=1000');
     const el = document.getElementById('bar-chart');
     if (!Array.isArray(views) || views.length === 0) {
-      el.innerHTML = '<div class="empty-state" style="width:100%">No data yet — visitors will appear here once the tracking is live.</div>';
+      el.innerHTML = '<div class="empty-state" style="width:100%">No data yet — visitors will appear here once tracking is live.</div>';
       return;
     }
     const days = {};
     for (let i = 6; i >= 0; i--) {
       const d = new Date(); d.setDate(d.getDate() - i);
-      const key = d.toISOString().slice(0,10);
-      days[key] = 0;
+      days[d.toISOString().slice(0,10)] = 0;
     }
-    views.forEach(v => {
-      const key = v.created_at.slice(0,10);
-      if (key in days) days[key]++;
-    });
+    views.forEach(v => { const k = v.created_at.slice(0,10); if (k in days) days[k]++; });
     const max = Math.max(...Object.values(days), 1);
     el.innerHTML = Object.entries(days).map(([date, count]) => {
       const pct = Math.round((count / max) * 100);
@@ -332,7 +355,7 @@
   }
 
   async function loadReferrers() {
-    const views = await sb('pageviews?select=referrer&limit=1000');
+    const views = await sbFetch('pageviews?select=referrer&limit=1000');
     const el = document.getElementById('referrers');
     if (!Array.isArray(views) || views.length === 0) {
       el.innerHTML = '<div class="empty-state">No referrer data yet.</div>'; return;
@@ -344,18 +367,18 @@
       counts[src] = (counts[src] || 0) + 1;
     });
     const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1]).slice(0,6);
-    const max = sorted[0][1];
+    const maxN = sorted[0][1];
     el.innerHTML = sorted.map(([src, n]) =>
       `<div class="ref-row">
         <div class="ref-src">${src}</div>
-        <div class="ref-bar-wrap"><div class="ref-bar-fill" style="width:${Math.round(n/max*100)}%"></div></div>
+        <div class="ref-bar-wrap"><div class="ref-bar-fill" style="width:${Math.round(n/maxN*100)}%"></div></div>
         <div class="ref-count">${n}</div>
       </div>`
     ).join('');
   }
 
   async function loadLeads() {
-    const rows = await sb('leads?select=*&order=created_at.desc&limit=10');
+    const rows = await sbFetch('leads?select=*&order=created_at.desc&limit=10');
     const tbody = document.getElementById('leads-body');
     if (!Array.isArray(rows) || rows.length === 0) {
       tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No leads yet.</td></tr>'; return;
@@ -372,7 +395,7 @@
   }
 
   async function loadSubs() {
-    const rows = await sb('subscribers?select=*&order=created_at.desc&limit=10');
+    const rows = await sbFetch('subscribers?select=*&order=created_at.desc&limit=10');
     const tbody = document.getElementById('subs-body');
     if (!Array.isArray(rows) || rows.length === 0) {
       tbody.innerHTML = '<tr><td colspan="2" class="empty-state">No subscribers yet.</td></tr>'; return;
@@ -386,7 +409,4 @@
 
   // auto-refresh every 60s
   setInterval(loadAll, 60000);
-
-  // start loaded if authed
-  if (sessionStorage.getItem('ik_auth') === '1') loadAll();
 </script>
