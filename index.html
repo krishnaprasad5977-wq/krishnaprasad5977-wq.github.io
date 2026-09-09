@@ -1598,38 +1598,47 @@ ul { list-style: none; }
       </div>
     </div>
 
-    <form class="contact-form" onsubmit="handleForm(event)">
+    <form class="contact-form" id="contact-form">
       <div class="form-row">
         <div class="form-field">
           <label for="cf-name">Your name</label>
-          <input id="cf-name" type="text" placeholder="Ravi Kumar" required>
+          <input id="cf-name" name="name" type="text" placeholder="Ravi Kumar" required>
         </div>
         <div class="form-field">
-          <label for="cf-phone">WhatsApp / Phone</label>
-          <input id="cf-phone" type="tel" placeholder="+91 98765 43210">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" name="email" type="email" placeholder="you@example.com" required>
         </div>
       </div>
-      <div class="form-field">
-        <label for="cf-service">What do you need?</label>
-        <select id="cf-service">
-          <option value="">Select a service</option>
-          <option>Business Website</option>
-          <option>E-Commerce Store</option>
-          <option>Android App</option>
-          <option>Cloud & DevOps Setup</option>
-          <option>AI Solution</option>
-          <option>Tutoring / Mentorship</option>
-          <option>Digital Marketing</option>
-          <option>Something else</option>
-        </select>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="cf-phone">WhatsApp / Phone</label>
+          <input id="cf-phone" name="phone" type="tel" placeholder="+91 98765 43210">
+        </div>
+        <div class="form-field">
+          <label for="cf-service">What do you need?</label>
+          <select id="cf-service" name="service">
+            <option value="">Select a service</option>
+            <option>Business Website</option>
+            <option>E-Commerce Store</option>
+            <option>Android App</option>
+            <option>Cloud & DevOps Setup</option>
+            <option>AI Solution</option>
+            <option>Tutoring / Mentorship</option>
+            <option>Digital Marketing</option>
+            <option>Something else</option>
+          </select>
+        </div>
       </div>
       <div class="form-field">
         <label for="cf-msg">Brief description</label>
-        <textarea id="cf-msg" placeholder="Tell me about your business and what you're trying to build or fix."></textarea>
+        <textarea id="cf-msg" name="message" placeholder="Tell me about your business and what you're trying to build or fix."></textarea>
       </div>
-      <button type="submit" class="btn btn-accent form-submit">Send message</button>
+      <button type="submit" id="cf-submit" class="btn btn-accent form-submit">Send message</button>
       <div id="cf-success" hidden style="text-align:center;color:var(--green);font-family:var(--font-head);font-size:0.9rem;font-weight:600;">
         Message sent — I'll reply within 24 hours.
+      </div>
+      <div id="cf-error" hidden style="text-align:center;color:#f87171;font-family:var(--font-head);font-size:0.85rem;font-weight:600;">
+        Something went wrong. Please try WhatsApp or email directly.
       </div>
     </form>
   </div>
@@ -1670,16 +1679,47 @@ function switchTab(btn, id) {
   });
 }
 
-/* Contact form → WhatsApp */
-function handleForm(e) {
+/* Contact form → Formspree + WhatsApp bonus */
+// TODO (Krishna): replace YOUR_FORM_ID below with the ID from formspree.io/forms
+const FORMSPREE_ID = 'YOUR_FORM_ID';
+
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
   e.preventDefault();
+  const btn     = document.getElementById('cf-submit');
+  const success = document.getElementById('cf-success');
+  const errBox  = document.getElementById('cf-error');
   const name    = document.getElementById('cf-name').value.trim();
   const service = document.getElementById('cf-service').value;
   const msg     = document.getElementById('cf-msg').value.trim();
-  const text    = encodeURIComponent(`Hi, I'm ${name}. Interested in: ${service || 'your services'}.\n\n${msg}`);
-  window.open(`https://wa.me/919989128449?text=${text}`, '_blank');
-  document.getElementById('cf-success').hidden = false;
-}
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  success.hidden = true;
+  errBox.hidden = true;
+
+  try {
+    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(this),
+    });
+
+    if (res.ok) {
+      success.hidden = false;
+      this.reset();
+      // Bonus: open WhatsApp so Krishna gets an instant ping too
+      const text = encodeURIComponent(`Hi, I'm ${name}. Interested in: ${service || 'your services'}.\n\n${msg}`);
+      window.open(`https://wa.me/919989128449?text=${text}`, '_blank');
+    } else {
+      errBox.hidden = false;
+    }
+  } catch (_) {
+    errBox.hidden = false;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Send message';
+  }
+});
 
 /* Scroll reveal via IntersectionObserver */
 const revealObserver = new IntersectionObserver((entries) => {
