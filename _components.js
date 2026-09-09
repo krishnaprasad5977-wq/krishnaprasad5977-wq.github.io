@@ -26,9 +26,11 @@
     }).join('');
     return '<nav class="nav"><div class="nav-inner">' +
       '<a href="index.html" class="nav-logo">Infra<span>Kraft</span></a>' +
-      '<ul class="nav-links">' + liHTML + '</ul>' +
+      '<ul class="nav-links" id="nav-menu">' + liHTML + '</ul>' +
       '<a href="https://wa.me/' + WA + '" class="btn btn-whatsapp nav-cta" target="_blank" rel="noopener">' +
       WA_SVG16 + ' Chat on WhatsApp</a>' +
+      '<button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">' +
+      '<span></span><span></span><span></span></button>' +
       '</div></nav>';
   }
 
@@ -85,6 +87,23 @@
     if (fr) fr.outerHTML = renderFooter();
 
     document.body.insertAdjacentHTML('beforeend', renderWAFloat());
+
+    var hbtn = document.getElementById('nav-hamburger');
+    var nmenu = document.getElementById('nav-menu');
+    if (hbtn && nmenu) {
+      hbtn.addEventListener('click', function () {
+        var open = nmenu.classList.toggle('open');
+        hbtn.classList.toggle('open', open);
+        hbtn.setAttribute('aria-expanded', open);
+      });
+      document.addEventListener('click', function (e) {
+        if (!hbtn.contains(e.target) && !nmenu.contains(e.target)) {
+          nmenu.classList.remove('open');
+          hbtn.classList.remove('open');
+          hbtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
 
     initReveal();
   });
