@@ -1179,6 +1179,9 @@ ul { list-style: none; }
 /* Active nav link */
 .nav-links a.nav-active { color: var(--text-hero); }
 
+/* Portfolio mock preview */
+.portfolio-mock { line-height: 0; border-radius: 8px 8px 0 0; overflow: hidden; background: #0a1622; }
+
 /* Scroll offset for sticky nav on anchor deep-links */
 section[id], div[id].cloud-item { scroll-margin-top: 80px; }
 
