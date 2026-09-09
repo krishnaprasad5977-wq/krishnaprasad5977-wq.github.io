@@ -1171,6 +1171,9 @@ ul { list-style: none; }
 /* Active nav link */
 .nav-links a.nav-active { color: var(--text-hero); }
 
+/* Scroll offset for sticky nav on anchor deep-links */
+section[id], div[id].cloud-item { scroll-margin-top: 80px; }
+
 /* Cloud pricing 4-col on pricing page */
 .cloud-pricing { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 900px) { .cloud-pricing { grid-template-columns: 1fr 1fr; } }
