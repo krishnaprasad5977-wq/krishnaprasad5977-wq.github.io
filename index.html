@@ -1,4 +1,61 @@
-<title>InfraKraft</title>
+<!-- ── SEO & Meta ── -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InfraKraft — Freelance Web, Cloud & AI Services | Bangalore & Chennai</title>
+<meta name="description" content="AWS-certified freelancer offering business websites, cloud & DevOps setup, AI solutions, and Android apps. Serving SMBs and startups across India. Free 30-min discovery call.">
+<meta name="keywords" content="freelance web developer Bangalore, AWS DevOps freelancer India, business website Chennai, CI/CD pipeline freelancer, AI chatbot India, Android app developer">
+<meta name="author" content="Krishna Prasad — InfraKraft">
+<link rel="canonical" href="https://theinfrakraft.github.io/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://theinfrakraft.github.io/">
+<meta property="og:title" content="InfraKraft — Web, Cloud & AI for Indian Businesses">
+<meta property="og:description" content="AWS-certified freelancer. Business websites from ₹5,000. Cloud & DevOps, AI solutions, Android apps. Free 30-min call.">
+<meta property="og:image" content="https://theinfrakraft.github.io/og-image.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="InfraKraft — Web, Cloud & AI for Indian Businesses">
+<meta name="twitter:description" content="AWS-certified freelancer. Business websites from ₹5,000. Cloud & DevOps, AI solutions, Android apps.">
+
+<!-- Favicon (emoji fallback until a real .ico is added) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230B1D2E'/><text y='72' x='50' text-anchor='middle' font-size='62' font-family='system-ui'>⚡</text></svg>">
+
+<!-- Google Analytics -->
+<!-- TODO (Krishna): replace G-XXXXXXXXXX with your GA4 Measurement ID from analytics.google.com -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
+<!-- LocalBusiness structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "InfraKraft",
+  "description": "Freelance web, cloud, DevOps, AI, and mobile app services for Indian businesses and startups.",
+  "url": "https://theinfrakraft.github.io/",
+  "telephone": "+919989128449",
+  "email": "contact.theinfrakraft@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Bangalore",
+    "addressRegion": "Karnataka",
+    "addressCountry": "IN"
+  },
+  "areaServed": "IN",
+  "priceRange": "₹₹",
+  "sameAs": [
+    "https://www.linkedin.com/in/krishna-prasad-15b555375"
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap">
 
@@ -954,6 +1011,36 @@ ul { list-style: none; }
   color: var(--text-hero-muted);
 }
 
+/* ── Floating WhatsApp button ── */
+.wa-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 12px 18px 12px 14px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.wa-float:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(37,211,102,0.5);
+}
+.wa-float svg { flex-shrink: 0; }
+@media (max-width: 480px) {
+  .wa-float span { display: none; }
+  .wa-float { padding: 14px; border-radius: 50%; }
+}
+
 /* ── Responsive ── */
 @media (max-width: 820px) {
   .hero-inner { grid-template-columns: 1fr; }
@@ -1658,6 +1745,16 @@ ul { list-style: none; }
     <div class="footer-copy">© InfraKraft · Bangalore / Chennai</div>
   </div>
 </footer>
+
+<!-- Floating WhatsApp CTA -->
+<a href="https://wa.me/919989128449?text=Hi%20Krishna%2C%20I%20found%20InfraKraft%20and%20I%27d%20like%20to%20know%20more%20about%20your%20services."
+   class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.853L0 24l6.303-1.654A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 0 1-5.031-1.388l-.36-.214-3.742.981.999-3.648-.235-.374A9.808 9.808 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+  </svg>
+  <span>Chat on WhatsApp</span>
+</a>
 
 <script>
 /* Tab switching */
