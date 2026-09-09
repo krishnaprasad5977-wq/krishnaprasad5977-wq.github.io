@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <!-- ── SEO & Meta ── -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,7 +59,9 @@
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap"></noscript>
 
 <style>
 /* ── Tokens ── */
@@ -1146,6 +1151,8 @@ ul { list-style: none; }
   .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; }
 }
 </style>
+</head>
+<body>
 
 <!-- NAV -->
 <nav class="nav">
@@ -1165,6 +1172,7 @@ ul { list-style: none; }
   </div>
 </nav>
 
+<main id="main-content">
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
@@ -1730,6 +1738,8 @@ ul { list-style: none; }
   </div>
 </section>
 
+</main>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
@@ -1876,3 +1886,6 @@ const trustObserver = new IntersectionObserver((entries) => {
 const trustBar = document.querySelector('.trust-bar');
 if (trustBar) trustObserver.observe(trustBar);
 </script>
+
+</body>
+</html>
