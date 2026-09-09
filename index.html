@@ -565,6 +565,78 @@ ul { list-style: none; }
   font-style: italic;
 }
 
+/* ── Blog ── */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.blog-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.blog-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+.blog-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-family: var(--font-head);
+}
+.blog-title {
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  line-height: 1.4;
+}
+.blog-excerpt {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  flex: 1;
+}
+.blog-body {
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.72;
+  display: none;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  margin-top: 4px;
+}
+.blog-body.open { display: block; }
+.blog-body h3 { font-family: var(--font-head); font-size: 0.85rem; font-weight: 700; color: var(--text-strong); margin: 14px 0 4px; }
+.blog-body p { margin-bottom: 10px; }
+.blog-body p:last-child { margin-bottom: 0; }
+.blog-read-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-head);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  letter-spacing: 0.03em;
+  transition: opacity 0.15s;
+  align-self: flex-start;
+}
+.blog-read-btn:hover { opacity: 0.75; }
+.blog-read-btn svg { transition: transform 0.2s; }
+.blog-read-btn.open svg { transform: rotate(180deg); }
+
 /* ── Testimonials ── */
 .testimonials-grid {
   display: grid;
@@ -1051,6 +1123,7 @@ ul { list-style: none; }
   .cred-card { display: none; }
   .portfolio-grid { grid-template-columns: 1fr; }
   .testimonials-grid { grid-template-columns: 1fr; }
+  .blog-grid { grid-template-columns: 1fr; }
   .ai-grid { grid-template-columns: 1fr 1fr; }
   .pricing-grid { grid-template-columns: 1fr; }
   .cloud-pricing { grid-template-columns: 1fr 1fr; }
@@ -1163,6 +1236,7 @@ ul { list-style: none; }
       <li><a href="#work">Work</a></li>
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#tutoring">Tutoring</a></li>
+      <li><a href="#blog">Blog</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <a href="https://wa.me/918148656971" class="btn btn-whatsapp nav-cta" target="_blank" rel="noopener">
@@ -1738,6 +1812,93 @@ ul { list-style: none; }
   </div>
 </section>
 
+<!-- BLOG -->
+<section class="section" id="blog">
+  <div class="container">
+    <div class="section-label">From the blog</div>
+    <h2 class="section-title">Practical tech for real businesses</h2>
+    <p class="section-sub">No jargon. Just honest advice on websites, cloud, automation, and making tech work for you.</p>
+
+    <div class="blog-grid reveal-stagger">
+
+      <!-- Post 1 -->
+      <div class="blog-card">
+        <span class="blog-tag">Websites</span>
+        <div class="blog-title">5 Signs Your Small Business Website Is Losing You Customers</div>
+        <div class="blog-excerpt">You built a website. But customers aren't coming — or they're landing and leaving without doing anything. Here are five signs it might be working against you.</div>
+        <div class="blog-body" id="blog-1">
+          <p>You built a website. You paid for it, maybe even spent a weekend getting it just right. But customers aren't coming — or worse, they're landing on it and leaving without doing anything.</p>
+          <h3>1. It takes more than 3 seconds to load</h3>
+          <p>Most people on mobile won't wait. If your site is slow, they're already gone. A fast, lightweight site isn't a luxury anymore — it's the baseline. Tools like Google PageSpeed Insights will tell you exactly where you stand.</p>
+          <h3>2. Your phone number isn't clickable</h3>
+          <p>Sounds basic, but you'd be surprised how many business sites list a phone number as plain text. On mobile, that number should be a tap-to-call link. If it's not, you're adding friction between a potential customer and a booking.</p>
+          <h3>3. There's no clear "next step"</h3>
+          <p>Every page on your site should tell visitors what to do next. Book a call. Fill a form. WhatsApp us. If someone reads through your services and then... nothing, you've lost them. A clear call to action on every page changes this.</p>
+          <h3>4. It doesn't show up on Google</h3>
+          <p>If your business doesn't appear when someone searches "[your service] in [your city]", your website exists only for people who already know you. Basic SEO — the right words on the page, a Google Business profile, and a fast-loading site — makes a real difference.</p>
+          <h3>5. It looks broken on mobile</h3>
+          <p>Over 70% of web traffic in India is on mobile. If your site doesn't resize properly, has buttons that are too small to tap, or text that runs off screen — people assume your business is the same: a bit unprofessional.</p>
+          <p>The good news? All of these are fixable. Most small business sites can be turned around in under two weeks. If any of this sounds familiar, <a href="https://cal.com/infrakraft/30min" target="_blank" rel="noopener" style="color:var(--accent);">let's have a quick chat</a>.</p>
+        </div>
+        <button class="blog-read-btn" onclick="toggleBlog(this,'blog-1')">
+          Read more
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+
+      <!-- Post 2 -->
+      <div class="blog-card">
+        <span class="blog-tag">Cloud &amp; DevOps</span>
+        <div class="blog-title">What Is CI/CD and Why Should Your Startup Care?</div>
+        <div class="blog-excerpt">If you've heard "CI/CD" thrown around and nodded along, here's what it actually means — and why it directly affects how fast your team ships.</div>
+        <div class="blog-body" id="blog-2">
+          <p>If you've been in a few tech conversations lately, you've probably heard "CI/CD" thrown around. It sounds like jargon. It kind of is. But the thing it describes is genuinely important — and if your startup is shipping code, it directly affects how fast you move and how often things break.</p>
+          <h3>CI = Continuous Integration</h3>
+          <p>Every time a developer pushes code, automated tests run immediately. If something breaks, the team knows within minutes — not after it's already in front of users. No more "it worked on my machine."</p>
+          <h3>CD = Continuous Delivery</h3>
+          <p>Once the tests pass, the code can be automatically packaged and pushed to staging or production. No manual steps, no "deploy nights", no one nervously running scripts at midnight.</p>
+          <h3>Why does this matter for an early-stage startup?</h3>
+          <p>Because speed is your advantage. Big companies have processes and layers of approval. You can move faster — but only if your infrastructure supports it.</p>
+          <p>Without CI/CD, every release is a manual event. Someone has to run scripts, check servers, hope nothing breaks. It's slow, risky, and eats engineering time that should go toward building features.</p>
+          <p>With CI/CD, you push code, tests run, and if everything's green, it ships. What used to take 45 minutes becomes 8. (That's not made up — it's what we achieved for one of our clients, a healthcare software startup in Bangalore.)</p>
+          <h3>What does it actually look like?</h3>
+          <p>A typical setup involves GitHub Actions or AWS CodePipeline, a few test scripts, and a deploy hook to your server or cloud environment. For most startups, a working pipeline can be set up in a few days.</p>
+          <p>You don't need a DevOps team. You need the right setup once — and then it runs on its own. If your team is still doing manual deploys, <a href="https://cal.com/infrakraft/30min" target="_blank" rel="noopener" style="color:var(--accent);">that's worth a conversation</a>.</p>
+        </div>
+        <button class="blog-read-btn" onclick="toggleBlog(this,'blog-2')">
+          Read more
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+
+      <!-- Post 3 -->
+      <div class="blog-card">
+        <span class="blog-tag">AI &amp; Automation</span>
+        <div class="blog-title">How a WhatsApp Chatbot Turned Our Client's DMs Into Booked Appointments</div>
+        <div class="blog-excerpt">A home services business in Chennai had decent Instagram traction but chaotic DMs. Here's how an AI assistant changed that — and got them 20+ bookings in month one.</div>
+        <div class="blog-body" id="blog-3">
+          <p>Here's a situation that plays out constantly for small service businesses: you post something on Instagram, people comment asking for prices or availability, you reply manually to each one, some of them ghost, and maybe one or two actually book. It works. But it's exhausting — and it doesn't scale.</p>
+          <p>A home services business in Chennai came to us with exactly this problem. They had decent traction on Instagram, but their DMs were a mess. Leads coming in at all hours, no consistent follow-up, and a lot of interested people falling through the cracks.</p>
+          <h3>What we set up</h3>
+          <p>We built them a WhatsApp AI assistant connected to their Instagram. When someone comments on a post or sends a DM asking about services or pricing, the bot responds instantly — politely, with the right information — and then guides them toward booking a slot.</p>
+          <p>It handles the basics: what services are available, approximate pricing, how to book. If someone asks something it can't answer, it flags it for the owner to pick up manually. No app. No new platform to learn. Just WhatsApp — where their customers already are.</p>
+          <h3>What happened</h3>
+          <p>Within the first month, they had 20+ confirmed bookings that came directly through the automated flow. The owner wasn't waking up to 40 unread DMs anymore. Responses were going out instantly, even at 11pm when someone saw an ad.</p>
+          <p>More importantly, they started looking more professional. A fast, helpful response — even from a bot — builds trust.</p>
+          <h3>Is this only for big businesses?</h3>
+          <p>Not at all. This kind of setup is actually more impactful for solo operators and small teams, because you genuinely don't have the bandwidth to respond to every message manually. The bot handles volume; you handle the conversations that matter.</p>
+          <p>If you're running a service business and your DMs are sitting unanswered for hours, <a href="https://wa.me/919989128449?text=Hi, I'd like to know more about the WhatsApp AI assistant" target="_blank" rel="noopener" style="color:var(--accent);">this is worth a conversation</a>.</p>
+        </div>
+        <button class="blog-read-btn" onclick="toggleBlog(this,'blog-3')">
+          Read more
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 </main>
 
 <!-- FOOTER -->
@@ -1747,6 +1908,7 @@ ul { list-style: none; }
     <div class="footer-links">
       <a href="#services">Services</a>
       <a href="#pricing">Pricing</a>
+      <a href="#blog">Blog</a>
       <a href="#tutoring">Tutoring</a>
       <a href="https://wa.me/918148656971" target="_blank" rel="noopener">WhatsApp</a>
       <a href="https://www.linkedin.com/in/krishna-prasad-15b555375" target="_blank" rel="noopener">LinkedIn</a>
@@ -1767,6 +1929,13 @@ ul { list-style: none; }
 
 <script>
 /* Tab switching */
+function toggleBlog(btn, id) {
+  const body = document.getElementById(id);
+  const open = body.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  btn.firstChild.textContent = open ? 'Read less' : 'Read more';
+}
+
 function switchTab(btn, id) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
